@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Conjugate Prior for Univariate - Normal Model - Hun Learning</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="Example article description">
+		<meta property="og:title" content="Conjugate Prior for Univariate - Normal Model" />
+<meta property="og:description" content="Example article description" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/bayesian-ml/week2/02-conjugate-prior-for-univariate-normal-model/" />
+<meta property="article:published_time" content="2020-07-20T06:05:00+09:00" />
+<meta property="article:modified_time" content="2020-07-20T06:05:00+09:00" />
+
+		<meta itemprop="name" content="Conjugate Prior for Univariate - Normal Model">
+<meta itemprop="description" content="Example article description">
+<meta itemprop="datePublished" content="2020-07-20T06:05:00+09:00" />
+<meta itemprop="dateModified" content="2020-07-20T06:05:00+09:00" />
+<meta itemprop="wordCount" content="2268">
+
+
+
+<meta itemprop="keywords" content="Bayesian,Conjugacy," />
+
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="Hun Learning" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/mypic2.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Hun Learning</div>
+					<div class="logo__tagline">In Search Of The Truth Projected Onto A Finite Dimension</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/about/">
+				
+				<span class="menu__text">Author</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+	<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+</script>
+<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "all" } }
+  });
+</script>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Conjugate Prior for Univariate - Normal Model</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-20T06:05:00&#43;09:00">2020-07-20</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/bayesian-machine-learning/" rel="category">Bayesian Machine Learning</a>
+	</span>
+</div></div>
+		</header>
+		<figure class="post__thumbnail">
+			<img src="/cover/conjugate_prior.jpg" alt="Conjugate Prior for Univariate - Normal Model">
+		</figure>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#brinference-for-normal-model"><!-- raw HTML omitted -->Inference for Normal Model</a>
+      <ul>
+        <li><a href="#brnormal-model-known-variance"><!-- raw HTML omitted -->Normal Model (known variance)</a></li>
+      </ul>
+    </li>
+    <li><a href="#brnormal-model-unknown-variance-conditional-prior"><!-- raw HTML omitted -->Normal Model (unknown variance, conditional prior)</a>
+      <ul>
+        <li><a href="#brimproper-prior-for-objective-bayesian-inference"><!-- raw HTML omitted -->Improper prior for &ldquo;objective&rdquo; Bayesian inference</a></li>
+      </ul>
+    </li>
+    <li><a href="#brnormal-model-independent-prior"><!-- raw HTML omitted -->Normal Model (Independent prior)</a></li>
+    <li><a href="#brremark-is-normal-sampling-assumption-appropriate"><!-- raw HTML omitted -->Remark: Is normal sampling assumption appropriate?</a>
+      <ul>
+        <li><a href="#brreferences"><!-- raw HTML omitted -->References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<h2 id="brinference-for-normal-model"><!-- raw HTML omitted -->Inference for Normal Model</h2>
+<p>Normal likelihood model has two parameters</p>
+<!-- raw HTML omitted -->
+<p>$$
+p(x|\theta, \sigma^2) = \dfrac{1}{\sigma\sqrt{2\pi}}\exp(-\dfrac{1}{2}(\dfrac{x-\theta}{\sigma})^2)
+$$
+<!-- raw HTML omitted --></p>
+<p>which requires a joint prior $p(\theta, \sigma^2)$. As for a single parameter case, we have joint posterior updated as</p>
+<!-- raw HTML omitted -->
+<p>$$
+p(\theta, \sigma^2|\mathbf{D}) \propto p(\theta, \sigma^2)p(\mathbf{D}|\theta, \sigma^2)
+$$
+<!-- raw HTML omitted --></p>
+<p>When our interest is in $\theta$, $\sigma^2$ is a <em>nuisance</em> parameter. Given the data $\mathbf{D}$ and the normal likelihood, we have three ways to deal with $\sigma^2$;</p>
+<ol>
+<li>Assume $\sigma^2$ is known; $p(\theta, \sigma^2) = p(\theta|\sigma^2)$</li>
+<li>Give prior on $\theta$ conditional on $\sigma^2$, and give prior to $\sigma^2$ also; $p(\theta, \sigma^2)=p(\theta|\sigma^2)p(\sigma^2)$</li>
+<li>Give independent prior for both $\theta, \sigma^2$; $p(\theta, \sigma^2) = p(\theta)p(\sigma^2)$</li>
+</ol>
+<p>The bottom line is, 1 and 2 still has conjuagte prior-posterior but deriving posterior for 3 is analytically impossible and requires numerical approximation.</p>
+<h3 id="brnormal-model-known-variance"><!-- raw HTML omitted -->Normal Model (known variance)</h3>
+<p>First note that the normal distribution takes the form</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+p(x|\theta, \sigma^2) &amp;\propto \exp({-\frac{1}{2}(ax^2+bx+c)})\\\<br>
+\text{where}\quad &amp;a = 1/\sigma^2 \rightarrow \sigma^2=1/a\\\<br>
+\text{and}\quad &amp;b = -2\theta/\sigma^2 \rightarrow \theta = -b\sigma^2/2
+\end{align}
+$$
+This skill is known as &ldquo;completing the square&rdquo;, and is useful in multiplying two distribtuion in form (38).</p>
+<p>Now given the joint likelihood</p>
+<!-- raw HTML omitted -->
+<p>$$
+p(\mathbf{D}|\theta, \sigma^2) = (2\pi\sigma^2)^{-n/2}\exp(-\dfrac{1}{2}\sum(\dfrac{x_i-\theta}{\sigma})^2)
+$$
+<!-- raw HTML omitted --></p>
+<p>we have a posterior update for $\theta$ given as</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+p(\theta|\mathbf{D}, \sigma^2) &amp;\propto p(\theta|\sigma^2)p(\mathbf{D}|\theta, \sigma^2)\\\<br>
+&amp; \propto p(\theta|\sigma^2)\exp(c_1(\theta-c_2)^2)
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
+<p>This means that the prior must contain a term similiar $\exp(c_1(\theta-c_2)^2)$, so the normal prior for $\theta$ becomes a natural choice. Let $\theta|\sigma^2 \sim N(\mu_0, \tau_0^2)$ and we have</p>
+<!-- raw HTML omitted -->
+<p>Since $\theta|\mathbf{D}, \sigma^2$ is also a normal distribution, we only need to figure out the posterior mean and variance. By expanding the exponential term in quadratic form and using the completing the square skill, we can see that</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\theta|\sigma^2, \mathbf{D} &amp; \sim N(\mu_n, \tau_n^2)\\\<br>
+\mu_n&amp;= \dfrac{1/\tau_0^2}{1/\tau_0^2 + n/\sigma^2}\mu_0 + \dfrac{n/\sigma^2}{1/\tau_0^2 + n/\sigma^2}\bar{x}\\\<br>
+\tau_n^2 &amp;= \dfrac{1}{1/\tau_0^2 + n/\sigma^2}
+\end{align}
+$$</p>
+<!-- raw HTML omitted -->
+<p>In Bayesian context, an inverse of variance is often referred to as a <strong>precision</strong>. In this sense, $1/\tau_0^2$ is a precision of prior belief on $\mu_0$, and $n/\sigma^2$ is a precision on $\bar{x}$ based on the data.</p>
+<p>For the sake of interpretability, we might set prior precision as $1/\tau_0^2 = \sigma^2/k_0$. In that case, the prior $\theta|\sigma^2 \sim N(\mu_0, \sigma^2/k_0)$ implies a belief that mean of the likelihood $\mathbf{D}|\theta,\sigma^2 \sim N(\theta, \sigma^2)$ is $\mu_0^2$ where $k_0$ essentially takes on a meaning of a prior sample size, and we have</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\mu_n&amp;= \dfrac{k_0}{k_0+n}\mu_0+\dfrac{n}{k_0+n}\bar{x}\\\<br>
+\tau_n^2 &amp;= \dfrac{\sigma^2}{k_0+n}
+\end{align}
+$$</p>
+<!-- raw HTML omitted -->
+<p>The posterior predictive $\tilde{x}|\mathbf{D}, \sigma^2$ is</p>
+<!-- raw HTML omitted -->
+<p>$$
+p(\tilde{x}|\mathbf{D}, \sigma^2) = \int p(\tilde{x}|\theta, \sigma^2)p(\theta|\mathbf{D}, \sigma^2) d\theta
+$$</p>
+<!-- raw HTML omitted -->
+<p>Since the likelihood $\tilde{x}|\theta, \sigma^2$ and the posterior $\theta|\mathbf{D}, \sigma^2$ are both normal, its product which is in the integrand is a bivariate normal distribution, and therefore $p(\tilde{x}|\mathbf{D}, \sigma^2)$ is also normal. We can easily compute its mean and variance with a little trick and get full posterior predictive distribution as follows without having to solve the above integral.</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+E[\tilde{x}|\mathbf{D}, \sigma^2]&amp;= E[E[\tilde{x}|\theta, \sigma^2, \mathbf{D}]|\sigma^2, \mathbf{D}] = E[\theta|\sigma^2, \mathbf{D}]=\mu_n\\\<br>
+V[\tilde{x}|\mathbf{D}, \sigma^2]&amp;= E[V[\tilde{x}|\theta, \sigma^2, \mathbf{D}]|\sigma^2, \mathbf{D}] + V[E[\tilde{x}|\theta, \sigma^2, \mathbf{D}]|\sigma^2, \mathbf{D}]\\\<br>
+&amp;= E[\sigma^2|\sigma^2, \mathbf{D}]+ V[\theta|\sigma^2, \mathbf{D}]\\\<br>
+&amp;= \sigma^2 + \tau_n^2\\\<br>
+\therefore \tilde{x}|\mathbf{D},\sigma^2&amp;\sim N(\mu_n, \sigma^2+\tau_n^2)
+\end{align}
+$$</p>
+<!-- raw HTML omitted -->
+<p>A few points worth noted;</p>
+<ol>
+<li>The frequentist estimator for $\theta$ is $\bar{x}$, whereas the Bayesian estimator is $E[\theta|\sigma^2, \mathbf{D}] = w\mu_0 + (1-w)\bar{x}$. This is clearly a biased estimator, but since $\mu_0$ is a constant prior parameter and $1-w&lt;1$, the variance is actually smaller then the frequentist estimator. Since $MSE=Bias^2+Variance$, if the bais induced by the prior mena $\mu_0$ is not so severe, than the Bayesian estimator for the population mean can acutally have less MSE than the sample mean.</li>
+<li>As in the Gamma-Poisson Model, the posterior predictive variance $V[\tilde{x}|\mathbf{D}, \sigma^2]$ consists of two parts; uncertainty in the center of the population $\tau_n^2$ and the sampling variability inherent in the normal likelihood $\sigma^2$. As $n \to \infty$, we get more certain on $\theta$ so $\tau_n^2\to 0$, and only left with $\sigma^2$.</li>
+</ol>
+<h4 id="brexample-midge-wing-length-known-variance"><!-- raw HTML omitted -->Example: Midge wing length (known variance)</h4>
+<pre><code class="language-{r}" data-lang="{r}">D = c(1.64, 1.70, 1.72, 1.74, 1.82, 1.82, 1.82, 1.90, 2.08)
+mean(D)
+var(D)
+</code></pre><p>Our prior is $\theta \sim N(1.9, 0.95)$ based on previous research. Let $\sigma^2 = s^2$. Then the posterior of $\theta$ is normal with mean and variance</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\mu_n &amp;= \dfrac{1/0.95^2(1.9)+9/0.017(1.804)}{1/0.95^2 + 9/0.017}\\\<br>
+\tau_n^2 &amp;= \dfrac{1}{1/0.95^2+9/0.017}
+\end{align}
+$$</p>
+<!-- raw HTML omitted -->
+<p>When plotted,</p>
+<pre><code class="language-{r}" data-lang="{r}"># prior
+mu0=1.9; tau0=0.95
+
+# data
+N = length(D)
+xbar = mean(D)
+sigma = sd(D)
+
+# posterior
+mu1 = (mu0*1/tau0^2 + (length(D)/sigma^2)*xbar) / (1/tau0^2+length(D)/sigma^2)
+tau1 = sqrt(1/(1/tau0^2+length(D)/sigma^2))
+
+theta= seq(0,4, by=0.01)
+df=data.frame(
+  theta = theta,
+  prior = dnorm(theta, mu0, tau0),
+  post = dnorm(theta, mu1, tau1)
+)
+
+df_long = melt(df, id.vars='theta', variable_name='dist')
+ggplot(df_long, aes(x=theta, y=value, group=dist, color=dist))+
+  geom_line()+
+  ylab('probability')
+
+</code></pre><p><img src="%5Cimage%5CRplot04.png" alt="Rplot04"></p>
+<h2 id="brnormal-model-unknown-variance-conditional-prior"><!-- raw HTML omitted -->Normal Model (unknown variance, conditional prior)</h2>
+<p>Let us consider a prior where mean is conditional on the variance, as in the normal model with known variance, but there exists a prior for variance also. For the sake of simplicity let the prior on mean as $\theta|\sigma^2 \sim N(\mu_0, \sigma/\tau_0)$. Then we have</p>
+<!-- raw HTML omitted -->
+<p>$$
+p(\theta, \sigma^2) = dnorm(\theta|\mu_0, \sigma/\sqrt{k_0})p(\sigma^2)
+$$</p>
+<!-- raw HTML omitted -->
+<p>We would seek a probaility density on $\sigma^2$ with a support on $\mathbb{R}_{+}$ and $\sigma^2|\mathbf{D}$ has $\sigma^2$ retains conjugacy. It turns out that the inverse gamma distribution for the variance $\sigma^2$ satisfies these requirements, which is equivalent to saying the precision has a gamma distribution.</p>
+<!-- raw HTML omitted -->
+<p><strong>Note: derivation of inverse-gamma density</strong>
+<!-- raw HTML omitted -->Let $x\sim \Gamma(a,b)$ with a density</p>
+<!-- raw HTML omitted -->
+<p>$$
+p(x) = \dfrac{b^a}{\Gamma(a)}x^{a-1}e^{-bx}
+$$
+<!-- raw HTML omitted --></p>
+<p>Let $y=1/x$ with $dx/dy = -1/y^2$ and we have</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+p(y) &amp;= \dfrac{b^a}{\Gamma(a)}(\dfrac{1}{y})^{a-1}e^{-\frac{b}{y}}\mid\dfrac{1}{y^2}\mid\\\<br>
+&amp;= \dfrac{b^a}{\Gamma(a)}(\dfrac{1}{y})^{a+1}e^{-\frac{b}{y}}
+\end{align}
+$$</p>
+<p><!-- raw HTML omitted -->For interpretability, let us consider a prior</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\sigma^2 &amp;\sim inv\Gamma(v_0/2, v_0\sigma^2_0/2)\\\<br>
+p(\sigma^2)&amp;=\dfrac{(v_0\sigma^2_0/2)^{v_0/2}}{\Gamma(v_0/2)}(\dfrac{1}{\sigma^2})^{v_0/2+1}e^{-\frac{v_0\sigma^2_0/2}{\sigma^2}}
+\end{align}
+$$</p>
+<!-- raw HTML omitted -->
+<p>In summary, we have</p>
+<!-- raw HTML omitted -->
+<p><!-- raw HTML omitted -->The conditional posterior for the mean $\theta|\sigma^2, \mathbf{D}$ is already given in (49), (50). The posterior for $\sigma^2$ requires some calculus.</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+p(\sigma^2|\mathbf{D})
+&amp;\propto p(\sigma^2) p(\mathbf{D}|\sigma^2)\\\<br>
+&amp;= p(\sigma^2) \int p(\mathbf{D}|\theta,\sigma^2)p(\theta|\sigma^2) d\theta\\\<br>
+&amp;=dinv\Gamma(\sigma^2, v_0/2, v_0\sigma_0^2/2)
+\int \prod_{i} dnorm(x_i,\theta, \sigma^2)
+dnorm(\theta, \mu_0, \sigma^2/k_0) d\theta\\\<br>
+&amp;\propto (\dfrac{1}{\sigma^2})^{v_0/2+1}\exp(-\frac{v_0\sigma^2_0}{2\sigma^2})
+(\dfrac{1}{\sigma^2})^{n/2}\exp(-\frac{1}{2}(\dfrac{\theta-\frac{k_0\mu_0+n\bar{x}}{k_0+n}}{(\frac{\sigma^2}{k_0+n})^2})^2)
+\end{align}
+$$</p>
+<p><!-- raw HTML omitted -->By the look of the formula we can see that $\sigma^2|\mathbf{D}$ is also an inverse gamma density with parameters</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\sigma^2|\mathbf{D} &amp;\sim inv\Gamma(v_n/2, \sigma^2v_n/2)\\\<br>
+v_n &amp;= v_0 +n\\\<br>
+\sigma_n^2 &amp;= \frac{1}{v_n}[v_0\sigma^2_0 + (n-1)s^2+\frac{k_0n}{k_n}(\bar{y}-\mu_0^2)]
+\end{align}
+$$</p>
+<!-- raw HTML omitted -->
+<p>Mighty daunting formula but we can attempt to interpret the result as follows</p>
+<ol>
+<li>Consider $v_0$ as a prior sample size, and $\sigma_0^2$ as a prior variance of each prior sample. This is reasonable because with $\sigma^2 \sim inv\Gamma(v_0/2, v_0\sigma^2_0/2)$, we have $mode(\sigma^2)&lt;\sigma^2_0&lt;E(\sigma^2)$.</li>
+<li>After the data, we have prior + data sample size $v_n = v_0 +n$</li>
+<li>$\sigma^2$ can be interpreted as a variance of each sample, prior and data combined. $\sigma_0^2$ is a variance of each prior sample and $s^2$ is a variance of each data sample. So variance for the entire sample would be $v_0\sigma^2_0 + (n-1)s^2$, and the last term $\frac{k_0n}{k_n}(\bar{y}-\mu_0^2)$ increases as the sample mean gets further away from the prior mean $\mu_0$.</li>
+</ol>
+<p>In summary,</p>
+<!-- raw HTML omitted -->
+<h3 id="brimproper-prior-for-objective-bayesian-inference"><!-- raw HTML omitted -->Improper prior for &ldquo;objective&rdquo; Bayesian inference</h3>
+<p>Some suggested that we use an objective prior for Bayesian inference, so that our prior has minimal impact on the posterior. For the joint infernce on normal model with conditional prior, the prior belief is reflected on the posterior distribution with the weight $k_0, v_0$, which we interpreted as a prior sample size for prior mean and prior variance. If we let $k_0,v_0 \to 0$, we would eventually get a posterior</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\sigma^2|\mathbf{D} &amp;\sim inv\Gamma(\dfrac{n}{2},\dfrac{1}{2} \sum({x_i-\bar{x}})^2)\\\<br>
+\theta|\sigma^2, \mathbf{D} &amp;\sim N(\bar{x}, \sigma^2/n)
+\end{align}
+$$</p>
+<!-- raw HTML omitted -->
+<p>but the prior with $k_0,v_0 \to 0$ is nonsense (i.e. not integrated to 1) so the above is often called a posterior with an &ldquo;improper&rdquo; prior. More formally, if we let $p(\theta,\sigma^2)\propto 1/\sigma^2$, we get a posterior a lot similar to the one above. In this fashion, Bayesian often allows a prior that is not a proper density as long as the resulting posterior is proper.</p>
+<p>One more point worth taken is a Bayesian interpretation of a normal sampling theory. Recall that if the population is normal then the sample mean with sample variance has t-distribution</p>
+<!-- raw HTML omitted -->
+<p>$$
+\dfrac{\bar{x}-\theta}{s/\sqrt{n}}|\theta \sim t_{n-1}
+$$</p>
+<!-- raw HTML omitted -->
+<p>Wite the improper prior $p(\theta,\sigma^2)\propto 1/\sigma^2$, we have a posterior for mean as
+$$
+\begin{align}
+p(\theta|\mathbf{D})&amp;=\int p(\theta, \sigma^2|\mathbf{D})d\sigma^2\\\<br>
+&amp;=\int p(\theta|\sigma^2,\mathbf{D})p(\sigma^2|\mathbf{D}) d\sigma^2\\\<br>
+&amp;=\int dnorm(\theta, \bar{x}, \sigma^2/n)
+dinv\Gamma(\sigma^2, \dfrac{n-1}{2},\dfrac{1}{2} \sum({x_i-\bar{x}})^2) d\sigma^2\\\<br>
+&amp;\propto A^{-n/2}\int z^{(n-2)/2}\exp(-z)dz\\\<br>
+&amp;(A=(n-1)s^2+n(\theta-\bar{x})^2), z=A/2\sigma^2)\\\<br>
+&amp;\propto [(n-1)s^2 + n(\mu-\bar{x})^2]^{-n/2}\\\<br>
+&amp;\propto [1+\dfrac{n(\mu-\bar{x})^2}{(n-1)s^2}]^{-n/2}\\\<br>
+\end{align}
+$$</p>
+<!-- raw HTML omitted -->
+<p>Therefore, if $p(\theta, \sigma^2)\propto 1/sigma^2$, then $\theta|\mathbf{D} \sim t_{n-1}(\bar{x}, s^2/n)$.  To put it another way, we have</p>
+<!-- raw HTML omitted -->
+<p>$$
+\dfrac{\theta-\bar{x}}{s/\sqrt{n}}|\mathbf{D} \sim t_{n-1}
+$$</p>
+<p><!-- raw HTML omitted -->(88) states that before sampling, the uncertainty about the (scaled) deviation of sample mean follows t-distribution. (96) means that after the sampling, the uncertainty still follows the same distribution. The difference is that in (88), both $\bar{x}, \theta$ are unknown but in (96) the sample is known so we can use (96) to make inference on $\theta$.</p>
+<p>There are more discussions on the use of improper prior in the context of uninformative, or as some says vague priors for so-called &ldquo;objective&rdquo; Bayesian. But those discussions are rather bogged down in technical detail and the usuability of the vague prior is questionable in multiparameter environment. Most importantly, as long as we give modest weight for the prior, say $1, 2$, then the posterior mainly is affected by the likelihood. In small size sample, we can conduct sensitivity analysis to figure out how prior affects the inference on the parameters.</p>
+<h4 id="brexample-midge-wing-length-conditional-prior"><!-- raw HTML omitted -->Example: Midge wing length (conditional prior)</h4>
+<p>Nwe we construct a conditional prior for a midge wing length data. Suppose our prior belief on mean and variance is $\mu_0 = 1.9, \sigma_0^2=0.01$, with a degree of condidence $k_0=v_0=1$. Then our prior is</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\sigma^2 &amp;\sim inv\Gamma(1/2, 0.01^2/2)\\\<br>
+\theta|\sigma^2 &amp;\sim N(1.9, \sigma^2/1)
+\end{align}
+$$</p>
+<!-- raw HTML omitted -->
+<p>Then our posterior is, given the updated parameter</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+k_n &amp;= 1 + 9 =10\\\<br>
+v_n &amp;=1+9=10\\\<br>
+\mu_n &amp;= \dfrac{1\cdot 1.9+9\cdot 1.804}{10} = 1.814\\\<br>
+\sigma_n &amp;= \dfrac{1}{10}[1\cdot 0.01+8\cdot 0.0168+\dfrac{9}{10}(1.804-1.9)^2] = 0.015
+\end{align}
+$$</p>
+<p>we have</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\sigma^2|\mathbf{D} &amp;\sim inv\Gamma(10/2=5, 10(0.015/2)=0.075)\\\<br>
+\theta|\sigma^2, \mathbf{D} &amp;\sim N(1.814, \sigma^2/10)
+\end{align}
+$$</p>
+<!-- raw HTML omitted -->
+<p>Then we can plot the posterior $p(\theta, \sigma^2|\mathbf{D})=p(\sigma^2|\mathbf{D})p(\theta|\sigma^2,\mathbf{D})$ as below.</p>
+<pre><code class="language-{r," data-lang="{r,"># prior
+mu0 = 1.9; kappa0 = 1
+s20 = 0.01; nu0 = 1
+
+# data
+n = length(D)
+xbar = mean(D)
+s2 = var(D)
+
+# posterior
+kappa1 = kappa0 + n
+nu1 = nu0 + n
+mu1 = (kappa0 * mu0 + n * xbar) / kappa1
+s21 = (1/ nu1) * (nu0*s20 + (n-1)*s2 + (kappa0*n/kappa1)*(xbar-mu0)^2 ) 
+
+Theta = seq(1.6, 2.0, by = 0.005)
+Sigma2 = seq(0, 0.04, by=0.0001)
+
+library(invgamma)
+posterior = function(theta, sigma2){
+  dnorm(theta, mu1, sqrt(sigma2/kappa1)) * dinvgamma(sigma2, nu1/2, s21*nu1/2)
+}
+
+grid = outer(Theta, Sigma2, posterior)
+rownames(grid) = Theta
+colnames(grid) = Sigma2
+
+df = melt(grid)
+colnames(df) = c('theta','sigma2','density')
+
+ggplot(df, aes(x=theta, y=sigma2, z=density))+
+  geom_contour(aes(color=..level..))+
+  guides(color=F)
+
+</code></pre><p><img src="%5Cimage%5CRplot05.png" alt="Rplot05"></p>
+<h2 id="brnormal-model-independent-prior"><!-- raw HTML omitted -->Normal Model (Independent prior)</h2>
+<p><!-- raw HTML omitted -->In some cases the dependence of $\theta$ on $\sigma^2$ might seem unreasonable. We consider independent prior $p(\theta, \sigma^2) =p(\theta)p(\sigma^2)$ as follows</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\sigma^2 &amp;\sim inv\Gamma(v_0/2, v_0\sigma^2_0/2)\\\<br>
+\theta &amp;\sim N(\mu_0, \tau_0^2)
+\end{align}
+$$
+<!-- raw HTML omitted -->In this case we can derive $p(\theta,\sigma^2|\mathbf{D})$ analytically, but we can compute</p>
+<!-- raw HTML omitted -->
+<ol>
+<li>
+<p>Joint Distribution of $\mathbf{D}, \sigma^2, \theta$</p>
+<!-- raw HTML omitted -->
+</li>
+</ol>
+<p>$$
+p(\theta, \sigma^2, \mathbf{D})=p(\theta)p(\sigma^2)p(\mathbf{D}|\theta, \sigma^2)
+$$</p>
+<ol start="2">
+<li>
+<p>Full conditional posterior of $\theta, \sigma^2$, in which case the prior is &ldquo;semi&rdquo; conjugate - prior and posterior is conjugate for one parameter only  if all the other parameters are known.</p>
+<!-- raw HTML omitted -->
+</li>
+</ol>
+<p>$$
+\begin{align}
+p(\theta|\sigma^2, \mathbf{D}) &amp;= dnorm(\theta, \mu_n, \tau_n^2)\\\<br>
+p(\sigma^2|\theta, \mathbf{D}) &amp;= dinv\Gamma(\sigma^2, v_n, \dfrac{1}{v_n}[v_0\sigma_0^2+\sum (y_i-\theta)^2])
+\end{align}
+$$</p>
+<p>We can numerically approximate $p(\theta,\sigma^2|\mathbf{D})$ by 1) compute $p(\theta, \sigma^2, \mathbf{D})$ for each possible pair of $(\theta, \sigma^2)$ (Grid Approximation) or sequentially generate sample pairs by using the full conditional posterior given above (Gibbs Sampler). Since grid approxmiation is nearly computationally infeasible in higher dimensions, so we consider Gibbs Sampler method, without justifying its usage just yet.</p>
+<p>For any given pair ${\theta_s, \sigma^2_s}$, we generate the next sample ${\theta_{s+1}, \sigma^2_{s+1}}$ as</p>
+<ol>
+<li>sample $\theta_{s+1} \sim p(\theta|\sigma^2_s, \mathbf{D})$</li>
+<li>sample $\sigma^2_{s+1} \sim p(\sigma^2|\theta_{s+1}, \mathbf{D})$</li>
+</ol>
+<p>For any initial pair (usually sample estimates) ${\theta_0, \sigma^2_0}$, it can be shown that a sequence of pairs generated from this iterative steps follows the joint posterior distribution $p(\theta, \sigma^2|\mathbf{D})$.</p>
+<pre><code class="language-{r}" data-lang="{r}"># prior 
+mu0 = 1.9; t20 = 0.95^2
+s20 = 0.1; nu0 = 1
+
+# data
+n = length(D)
+xbar = mean(D)
+s2 = var(D)
+
+# Gibbs sampler for posterior approximation
+S = 1000
+PHI = matrix(nrow = S, ncol = 2)
+PHI[1,] = phi = c(xbar, s2) # sample estimate for initial value
+
+set.seed(101)
+for(s in 2:S){
+  # sample theta (phi[2] = \sigma^2)
+  mu1 = (mu0/t20 + n * xbar/ phi[2]) / (1/t20 + n / phi[2])
+  t21 = 1/ (1/t20 + n/phi[2])
+  phi[1] = rnorm(1, mu1, sqrt(t21))
+  
+  # sample sigma (phi[1] = \theta)
+  nu1 = nu0 + n
+  s21 = (nu0*s20 + (n-1)*s2 + n*(xbar - phi[1])^2)/nu1
+  phi[2] = 1/rgamma(1, nu1/2, s21*nu1/2)
+  
+  PHI[s, ] = phi
+}
+
+PHI[,2] = sqrt(PHI[,2])
+PHI_df = data.frame(PHI)
+colnames(PHI_df) = c('theta','sigma')
+ggplot(PHI_df, aes(x=theta, y=sigma))+
+  geom_point()
+
+</code></pre><p><img src="%5Cimage%5CRplot06.png" alt="Rplot06"></p>
+<p>What happened under the hood is</p>
+<pre><code class="language-{r}" data-lang="{r}">PHI_df$n = 1:nrow(PHI_df)
+
+one = head(PHI_df, n=5)
+one$steps = '5'
+
+two = head(PHI_df, n=15)
+two$steps = '15'
+
+thr = head(PHI_df, n=100)
+thr$steps = '100'
+
+phase = rbind(one, two, thr)
+phase$steps = factor(phase$steps, levels=c('5','15','100'))
+ggplot(phase, aes(x= theta, y= sigma))+
+  geom_text(aes(label=n))+
+  geom_path(alpha=0.4)+
+  facet_wrap(~steps)
+</code></pre><p><img src="%5Cimage%5CRplot07.png" alt="Rplot07"></p>
+<h2 id="brremark-is-normal-sampling-assumption-appropriate"><!-- raw HTML omitted -->Remark: Is normal sampling assumption appropriate?</h2>
+<p>Apparently yes, if we assume that the data $x_i$ is an outcome of a large number of factors $\in {0,1}$ with additive effects $\beta_i$. For example,</p>
+<p>$$
+height = \beta_0 + \beta_1 gender + \beta_2 parent;tall + \beta_3 malnourished+&hellip;
+$$
+With a simple simulation, we can see bell-shaped curve distribution for the height.</p>
+<pre><code class="language-{r}" data-lang="{r}">d = 50 # number of factors (variables)
+N = 2^17 # number of observation
+p = runif(d) # different distribution for each factor
+
+factor = function(p){return(rbinom(N, 1, p))}
+output = sapply(p, factor) # generate distribution of factors
+beta = runif(d)*2-1 # generate beta for each factor
+
+df = data.frame(height = output %*% beta)
+
+ggplot(df, aes(x=height)) + geom_histogram(color='black',fill='grey', bins=30)
+</code></pre><p><img src="%5Cimage%5CRplot08.png" alt="Rplot08"></p>
+<h3 id="brreferences"><!-- raw HTML omitted -->References</h3>
+<ol>
+<li>First Course into Bayesian Statistical Analysis (Hoff, 2009)</li>
+<li><a href="https://github.com/jayelm/hoff-bayesian-statistics">https://github.com/jayelm/hoff-bayesian-statistics</a></li>
+</ol>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/bayesian/" rel="tag">Bayesian</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/conjugacy/" rel="tag">Conjugacy</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Kang Gyeonghun avatar" src="/mypic1.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Kang Gyeonghun</span>
+	</div>
+	<div class="authorbox__description">
+		I study statistics, machine learning, data science or whatever that concerns making inference on infinitie dimension from a limited sample in fintie dimension. This blog is an archive of my journey of study.
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/posts/bayesian-ml/week2/01-conjugate-prior-univariate-poisson/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Conjugate Prior for Univariate - Poisson Model</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/posts/bayesian-ml/week2/03-conjugate-prior-for-multivariate-model/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">Conjugate Prior for Multivariate Model</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q" aria-label="SEARCH...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/04-note-on-kullback-leibler-divergence/">Note on Kullback-Leibler Divergence</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/03-em-algorithm-for-latent-variable-models/">EM Algorithm for Latent Variable Models</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/02-mixtures-of-gaussians-and-em/">Mixtures of Gaussians and EM algorithm</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/01-k-means-clustering/">K-means clustering</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week3/03-bayesian-hierarchical-modeling-and-applications/">Bayesian Hierarchical Modeling and its Applications</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week3/02-mcmc-approximation-for-bayesian-posterior/">(MCMC) 베이지안 사후분포 근사를 위한 MCMC 방법론</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/adaboost/" title="ADABOOST">ADABOOST</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/adaptive-basis-model/" title="Adaptive Basis Model">Adaptive Basis Model</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayeisan/" title="Bayeisan">Bayeisan</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian/" title="Bayesian">Bayesian</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian-hierarchical/" title="Bayesian Hierarchical">Bayesian Hierarchical</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bootstrap/" title="Bootstrap">Bootstrap</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cart/" title="CART">CART</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/clustering/" title="Clustering">Clustering</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/conjugacy/" title="Conjugacy">Conjugacy</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/determinant/" title="Determinant">Determinant</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/diagonalization/" title="Diagonalization">Diagonalization</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/em-algorithm/" title="EM algorithm">EM algorithm</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ensemble-learning/" title="Ensemble Learning">Ensemble Learning</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/frequentist/" title="Frequentist">Frequentist</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/gaussian-mixtures/" title="Gaussian Mixtures">Gaussian Mixtures</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/generalized-additive-models/" title="Generalized Additive Models">Generalized Additive Models</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/intro-to-statistical-learning/" title="Intro to Statistical Learning">Intro to Statistical Learning</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jacobian/" title="Jacobian">Jacobian</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/k-cv/" title="k-CV">k-CV</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/k-means/" title="K-means">K-means</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kernel/" title="Kernel">Kernel</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kullback-leibler-divergence/" title="Kullback-Leibler Divergence">Kullback-Leibler Divergence</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lagrangian-duality/" title="Lagrangian Duality">Lagrangian Duality</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lasso/" title="Lasso">Lasso</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/latent-variable/" title="Latent Variable">Latent Variable</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lda/" title="LDA">LDA</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linear-adjoint/" title="Linear Adjoint">Linear Adjoint</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/logistic-regression/" title="Logistic Regression">Logistic Regression</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/markov-chain/" title="Markov Chain">Markov Chain</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/matrix-derivatives/" title="Matrix Derivatives">Matrix Derivatives</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mcmc/" title="MCMC">MCMC</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mse/" title="MSE">MSE</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/multivariate-normal/" title="Multivariate Normal">Multivariate Normal</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/naive-bayes-classifier/" title="Naive Bayes Classifier">Naive Bayes Classifier</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ols/" title="OLS">OLS</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pattern-recognition-and-machine-learning/" title="Pattern Recognition and Machine Learning">Pattern Recognition and Machine Learning</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pca/" title="PCA">PCA</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/probability/" title="Probability">Probability</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/regression-splines/" title="Regression Splines">Regression Splines</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ridge/" title="Ridge">Ridge</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/self-adjoint/" title="Self Adjoint">Self Adjoint</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/similar-matrices/" title="Similar Matrices">Similar Matrices</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/singular-value-decomposition/" title="Singular Value Decomposition">Singular Value Decomposition</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/statistics/" title="Statistics">Statistics</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/svm/" title="SVM">SVM</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vector-derivatives/" title="vector derivatives">vector derivatives</a>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Kang Gyeonghun.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

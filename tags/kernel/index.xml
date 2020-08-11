@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kernel on Hun Learning</title>
+    <link>/tags/kernel/</link>
+    <description>Recent content in Kernel on Hun Learning</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 26 Jan 2020 11:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="/tags/kernel/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ISL 09 Support Vector Machine</title>
+      <link>/posts/isl/isl-09/</link>
+      <pubDate>Sun, 26 Jan 2020 11:00:00 +0900</pubDate>
+      
+      <guid>/posts/isl/isl-09/</guid>
+      <description>훈러닝 채널에 ISL 전 범위 유투브 강의 있습니다!</description>
+    </item>
+    
+  </channel>
+</rss>

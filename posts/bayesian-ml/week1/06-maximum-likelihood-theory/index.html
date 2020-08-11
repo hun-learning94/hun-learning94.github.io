@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>06 Maximum Likelihood Theory - Hun Learning</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="Example article description">
+		<meta property="og:title" content="06 Maximum Likelihood Theory" />
+<meta property="og:description" content="Example article description" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/bayesian-ml/week1/06-maximum-likelihood-theory/" />
+<meta property="article:published_time" content="2020-07-20T05:10:00+09:00" />
+<meta property="article:modified_time" content="2020-07-20T05:10:00+09:00" />
+
+		<meta itemprop="name" content="06 Maximum Likelihood Theory">
+<meta itemprop="description" content="Example article description">
+<meta itemprop="datePublished" content="2020-07-20T05:10:00+09:00" />
+<meta itemprop="dateModified" content="2020-07-20T05:10:00+09:00" />
+<meta itemprop="wordCount" content="1114">
+
+
+
+<meta itemprop="keywords" content="Statistics,Probability,Frequentist," />
+
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="Hun Learning" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/mypic2.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Hun Learning</div>
+					<div class="logo__tagline">In Search Of The Truth Projected Onto A Finite Dimension</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/about/">
+				
+				<span class="menu__text">Author</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+	<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+</script>
+<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "all" } }
+  });
+</script>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">06 Maximum Likelihood Theory</h1>
+			<p class="post__lead">Likelihood에 대해 말할 수 있는 (거의) 모든 것</p>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-20T05:10:00&#43;09:00">2020-07-20</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/statistics/" rel="category">Statistics</a>
+	</span>
+</div></div>
+		</header>
+		<figure class="post__thumbnail">
+			<img src="/cover/classical.jpg" alt="06 Maximum Likelihood Theory">
+		</figure><div class="content post__content clearfix">
+			<p><!-- raw HTML omitted -->지금까지의 논의를 종합해보면 다음과 같습니다.</p>
+<ol>
+<li>
+<p>빈도통계학 추론은 평행우주 데이터 ${D^{(s)}}_{s=1}^{\infty}$에서의 Sampling Distrubtion $\delta(D^{(s)}) \sim p(.\mid \theta^*)$에 달렸다.</p>
+</li>
+<li>
+<p>모수 $\theta$에 대한 추정량 $\hat{\theta} = \delta(D^{(s)})$의 결정은 다음의 사항을 고려해야 한다.</p>
+<ol>
+<li>
+<p>일단 $\delta$의 sampling distribtion을 근사적으로나마 알아야 한다.</p>
+</li>
+<li>
+<p>가급적이면 $\delta$의 평행우주 데이터 ${D^{(s)}}_{s=1}^{\infty}$에서의 행태가 &ldquo;이쁘면&rdquo; 좋겠다. (Consistent, Unbiased, Efficient)</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Sampling distribution $\delta(D^{(s)}) \sim p(.\mid\theta^*)$만 알면 점 추정, 구간 추정, 가설 검정 다 할 수 있다!</p>
+</li>
+</ol>
+<p><!-- raw HTML omitted -->빈도통계학 추론에서 제일 &ldquo;빡센&rdquo; 부분은 바로 2-1. 입니다. 데이터에 대한 Likelihood 모형을 세우고 이를 바탕으로 모수에 대한 추정량 $\delta$을 결정했는데, 여기서 $\delta$의 극한 분포를 유도하는 과정이 여간 힘든게 아니라고 합니다. (해석학이 필수인 이유 중 하나입니다.) 이를 구하는 방법은 크게 다음과 같습니다.</p>
+<!-- raw HTML omitted -->
+<ol>
+<li>
+<p><strong>Plug-in Principle</strong>: 우리가 매일 처음 봤던 예시가 중심극한정리와 슬러츠키 정리인데, 이처럼 추정량 안에 있는 nuisance parameter를 표본에서 계산한 값으로 떄려넣는 것을 plug-in한다고 합니다.</p>
+<!-- raw HTML omitted -->
+</li>
+<li>
+<p><strong>Taylor-series Approximation</strong>: 수통1에서 배운 delta-method입니다. 어떤 모수 $\theta$의 추정량 $\hat{\delta}$의 극한분포를 이미 알고 있을 때, 그 모수의 함수 $g(\theta)$의 극한분포를 구하는 방법입니다. 함수 $g$를 $\hat{\theta}$ 근처에서 선형근사 (테일러 1계 근사)하여 다음과 같이 나타냅니다.</p>
+<!-- raw HTML omitted -->
+</li>
+</ol>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<ol start="3">
+<li>
+<p><strong>Maximum Likelihood Theory</strong>: 이제 얘기할 내용입니다. 결론부터 스포하자면 모수가 있는 분포함수족에 대해서 Likelihood를 최대화하는 모수를 $\hat{\theta}_{mle}$라고 할건데, 다음과 같은 극한분포를 가집니다.</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+</li>
+<li>
+<p><strong>(Non-parameteric) Bootstrap</strong>: 컴퓨터 연산력도 썩어나겠다 내가 그냥 $D_{s=1}^{\infty}$를 손수 만들어서 추정량 $\delta$의 분포를 직접 보겠다는 방법입니다. 쉽게 말하면 데이터의 크기가 충분히 크면 데이터의 경험분포 (그러니까 히스토그램)이 실제 분포 $f(D\mid\theta)$를 잘 근사할 것이니, 데이터에서 표본 크기만큼 다시 **복원추출**하여 $S$개 만큼의 인위적인 데이터의 앙상블 $D_{s=1}^{\infty}$을 만들겠다는 이야기입니다. 극한분포를 진짜 죽어도 못 구해서 어쩔 수 없을 때 울며 겨자먹기로 논문에 쓰는 방법이라고 들었습니다.</p>
+</li>
+</ol>
+<p><!-- raw HTML omitted -->그럼 지금부터 3번 Maximum Likelihood Theory에 대해 알아보겠습니다.</p>
+<h2 id="brmaximum-likelihood-theory-수식으로-보이기"><!-- raw HTML omitted -->Maximum Likelihood Theory 수식으로 보이기</h2>
+<p><!-- raw HTML omitted -->자 먼저 빈도론자들 세계관부터 다시 써봅시다.</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\text{Ensemble of Data:}\quad &amp; D_{s=1}^{\infty} = [x_1^{(s)}, x_2^{(s)}, &hellip;, x_n^{(s)}]_{s=1}^{\infty}\\\<br>
+\text{Sampling Density of $D^{(s)}$ (iid):}\quad&amp; f(D^{(s)}|\theta) = \prod_{i=1}^nf(x_i^{(s)}|\theta) \quad (x_i^{(s)}\in \mathcal{X}, \theta \in \Omega)\\\<br>
+\text{Likelihood of $\theta$ given $D^{(s)}$:}\quad&amp; L(\theta|D^{(s)})
+\end{align}
+$$
+<!-- raw HTML omitted -->여기서 모수의 추정량을 결정할 때 다음과 같은 추정량을 생각할 수 있습니다.</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\text{True (fixed) Parameter}:&amp;\quad \theta\\\<br>
+\text{Estimator of $\theta$ given $D^{(s)}$:}&amp; \quad \delta(D^{(s)})= \arg\max_{\theta}  L(\theta|D^{(s)})
+\end{align}
+$$
+<!-- raw HTML omitted -->즉 데이터로 결정되는 $\theta$의 함수인 Likelihood에서, 함수의 값 $L(\theta \mid D^{(s)})$이 가장 큰 지점을 $\delta$로 정하는 것입니다. 이 추정량을 $\hat{\theta}$이라고 합니다. 뭔가 직관적으로 크게 이상하지는 않아요. 비록 $p(D^{(s)}\mid\theta)$는 모르지만, 적어도 우리가 가진 데이터에서는 $\theta=\hat{\theta}$일 때 $p(D^{(s)}\mid\theta)$의 값이 가장 크니까, 데이터에 가장 잘 들어맞는 값이라고 생각할 수 있으니까요. Maximum Likelihood Theory는 현대통계학의 천재 (그러나 본인이 애연가시라 흡연과 폐암의 관계는 한사코 부정하신(사실 Randomized된 실험 결과가 없으니까)) 로날드 피셔께서 그냥 혼자서 뚝딱 다 만들었는데, 피셔 이전에도 대충 이런 생각으로 MLE를 쓰자고 제안한 사람은 많았지만, MLE의 극한분포를 제시한 분이 바로 피셔입니다.</p>
+<p><!-- raw HTML omitted -->사실 MLE는 Likelihood를 최대화하는 값이므로 단조변환인 로그변환을 하면 log-likelihood를 써도 됩니다. 그렇게 되면 최대화 문제가 훨씬 더 쉬워집니다.</p>
+<!-- raw HTML omitted -->
+<p>$$
+\theta_{mle}=\arg\max_{\theta}  L(\theta\mid D^{(s)}) = \arg\max_{\theta}  l(\theta\mid D^{(s)}) = \arg\max_{\theta}\sum_{i=1}^n \log f(x_i^{(s)}\mid\theta)
+$$
+<!-- raw HTML omitted --></p>
+<p>이제 MLE의 행태를 살펴보면서 MLE 사용에 대한 정당화 근거를 간단히 알아보겠습니다. 그 전에 몇 가지 개념을 짚고 넘어갈게요.</p>
+<!-- raw HTML omitted -->
+<ul>
+<li><strong>Log Likelihood:</strong> 말 그대로 Likelihood에 로그를 취한 함수입니다. (로그 우도)</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+l(\theta | x_i) = \log f(x_i|\theta)
+\end{align}
+$$</p>
+<!-- raw HTML omitted -->
+<ul>
+<li>
+<p><strong>Score Function:</strong> Log likelihood을 모수 $\theta$에 대해 미분한 함수입니다. 모수가 벡터일 경우 로그 우도의 gradient로 정의합니다. score function이 말하는 바는 &ldquo;로그 우도의 기울기&quot;입니다.</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+s(\theta|x_i) &amp;= \dfrac{d}{d\theta};l(\theta|x_i) \quad (\theta \in \mathbb{R})\<br>
+&amp;= \nabla_{\theta}; l(\theta|x_i) = [\dfrac{\partial ;l(\theta|x_i)}{\partial \theta_1}, \dfrac{\partial ;l(\theta|x_i)}{\partial ;\theta_2}, &hellip;, \dfrac{\partial; l(\theta|x_i)}{\partial \theta_d}] \quad (\theta\in \mathbb{R}^d)
+\end{align}
+$$
+<!-- raw HTML omitted -->n개의 iid 데이터로 이뤄진 $D^{(s)}$의 로그 우도는 개별 데이터의 로그 우도의 합으로 이뤄짐을 보았습니다. 때문에 $D^{(s)}$의 score function은 다음과 같습니다.</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+s(\theta|D^{(s)}) = ns(\theta|x_i)
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
+</li>
+<li>
+<p><strong>Fisher Information</strong>: Score function도 또한 데이터의 함수 $s(\theta \mid x_i)$입니다. 때문에 모수값이 어떤 $\theta$로 주어지면  $x_i \sim f(x_i\mid\theta) $의 분포를 따르며, 데이터의 통계량인 $s(\theta \mid x_i)$의 평균과 분산을 계산할 수 있습니다. 이때 score function의 평균은 0이며, 분산을 Fisher Information $I(\theta)$이라고 합니다. 데이터가 n개인 경우도 위와 마찬가지로 쓸 수 있습니다.</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+E_{x_i|\theta}[s(\theta|x_i)] &amp;= E_{x_i|\theta}[\dfrac{d;l(\theta|x_i)}{d \theta}] = \int \dfrac{f&rsquo;}{f}fdx=\dfrac{d}{d\theta}\int f dx=0 \quad (\theta \in \mathbb{R}^1)\\\<br>
+E_{x_i|\theta}[s(\theta|x_i)] &amp;= \mathbf{0} \in \mathbb{R}^d \quad (\theta \in \mathbb{R}^d)
+\end{align}
+$$</p>
+</li>
+</ul>
+<p><!-- raw HTML omitted -->Fisher Information은 다음과 같이 score function으로 나타낼 수 있음을 어렵지 보일 수 있습니다. (이런 걸 다 수통 2때 합니다)</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+I(\theta)&amp;=V_{x_i|\theta}[s(\theta|x_i)] = -E_{x_i|\theta}[s(\theta|x_i)^2] = -E_{x_i|\theta}[s&rsquo;(\theta|x_i)] \\\<br>
+I_n(\theta)&amp;=V_{D^{(s)}|\theta}[s(\theta|D^{(s)})] = nV_{x_i|\theta}[s(\theta|x_i)] = nI(\theta)
+\end{align}
+$$</p>
+<p><!-- raw HTML omitted -->Fisher Information이 말하는 바는 &ldquo;어떤 지점 $\theta$에서 로그 우도의 peak한 정도&quot;입니다. 로그 우도 함수가 뾰족하다는 것은 그만큼 데이터가 $\theta_{mle}$에 많이 쏠려있다는 것이고, 여기에서 즉 모수의 추정량으로서 MLE의 분산이 작을 것을 기대할 수 있습니다.</p>
+<p><!-- raw HTML omitted -->(모수가 벡터인 경우 Fisher Information Matrix을 다음과 같이 정의할 수 있으며, 아래의 등호가 성립함을 어렵지 않게 보일 수 있습니다.)</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+I(\theta)_{k,j} = Cov(\dfrac{\partial l(\theta|x_i)}{\partial \theta_k}, \dfrac{\partial l(\theta|x_i)}{\partial \theta_j}) = E[-\dfrac{\partial^2 l(\theta|x_i)}{\partial\theta_k\partial\theta_j}]
+\end{align}
+$$</p>
+<!-- raw HTML omitted -->
+<p>이제 단일 모수인 경우에 대해 간단하게 MLE의 극한분포를 증명해보겠습니다. 우선 score function에 대하여 다음과 같이 테일러 1계 근사 식을 쓸 수 있습니다.</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+0 = s(\theta_{mle}|x_i) \approx s(\theta^*|x_i) + s&rsquo;(\theta^*|x_i)(\hat{\theta}_{mle} - \theta^*)
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
+<p>score function은 정의상 MLE에서 0입니다. 이때 score function을 MLE에 대한 함수로 보고, MLE 근처에 있을 것만 같은 참 모수값 $\theta^*$에서 이 함수 $s(\hat{\theta}_{mle}|x_i)$를 선형근사해본 것입니다. 그러면 위 식을 다시 아래처럼 쓸 수 있습니다.</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\hat{\theta}_{mle} \approx \theta^* + \dfrac{s(\theta^*|x_i)/n}{-s&rsquo;(\theta^*|x_i)/n}
+\end{align}
+$$</p>
+<!-- raw HTML omitted -->
+<ul>
+<li>$s(\theta \mid x_i)/n$ 이 식은 score function의 평균입니다. score function의 평균은 0이며, 분산은 $I(\theta)$입니다. 때문에 중심극한정리에 의해 $s(\theta\mid x_i)/n \sim^A N(0, I(\theta)/n)$으로 쓸 수 있습니다.</li>
+<li>위에서 이미  $I(\theta)= -\mathbb{E}_{x_i\mid\theta}[s&rsquo;(\theta\mid x_i)]$임을 보였습니다. 때문에 대수의 법칙에 의해 $-s&rsquo;(\theta\mid x_i)/n$은 $I(\theta)$으로 확률 수렴합니다.</li>
+</ul>
+<p><!-- raw HTML omitted -->이걸 다 종합해보면, 그리고 슬러츠키 정리를 사용해 모르는 참모수 $\theta$을 $\hat{\theta}_{mle}$으로 plug-in 하면,  우리는 다음과 같은 MLE의 극한 분포를 얻을 수 있습니다.</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\text{Single parameter}&amp;\quad \hat{\theta}_{mle} \sim^A N(\theta^*, \dfrac{1}{nI_{\hat{\theta}_{mle}}})\\\<br>
+\text{Multi-parameter}&amp;\quad \hat{\theta}_{mle} \sim^A N(\theta^*, \dfrac{1}{n}\mathbf{I}^{-1}(\hat{\theta}_{mle}))
+\end{align}
+$$
+<!-- raw HTML omitted -->즉 모든 Likelihood 모델에 대하여, 여기에서 말하지는 않았지만 이 함수들이 어떤 정규성 가정들을 만족한다면 (지수분포족이면 충분히 만족하는), 우리는 Likelihood를 최대로 하는 추정량의 극한분포가 정규분포라는 것을 알 수 있습니다. 이 놀라운 결과를 바탕으로 아까 봤던 빈도통계학의 추론을 똑같이 다 할 수 있는 것입니다. (Likelihood를 이용한 검정 방법은 따로 소개하지 않겠습니다. <a href="https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqhow-are-the-likelihood-ratio-wald-and-lagrange-multiplier-score-tests-different-andor-similar/">링크</a> 참조)</p>
+<p><!-- raw HTML omitted --> 간단하게 말하면 Likelihood에서 귀무가설 $\theta_0$와 데이터의 추정량, 예컨대 MLE $\hat{\theta}_{mle}$ 간의 scaled된 거리를 보는 것이 Wald Test, 두 지점에서의 높이의 차이를 보는 것이 Likelihood Ratio Test, 그리고 귀무가설 지점에서의 기울기를 보는 것이 Score Test입니다. 귀무가설 지점의 위치에 따라서 다소 차이가 있어도 결국은 똑같은 Likelihood 함수에서 $x$축에서의 차이를 볼거냐, $y$축에서의 차이를 볼거냐, 아니면 기울기를 보느냐의 차이기 때문에 결과는 크게 다르지 않습니다. 위 링크에 있는 그림을 보면 이해가 될 거 같아요.</p>
+<!-- raw HTML omitted -->
+<p><img src="https://stats.idre.ucla.edu/wp-content/uploads/2016/02/nested_tests.gif" alt="image"></p>
+<p>(출처: <a href="https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqhow-are-the-likelihood-ratio-wald-and-lagrange-multiplier-score-tests-different-andor-similar/">링크</a>)</p>
+<p><!-- raw HTML omitted -->MLE는 점근적으로 Minimum Variance인 Unbiased Estimator입니다. MLE 극한분포의 분산은 Rao-Cramer lower bound에 의하면 모든 불편추정량이 가질 수 있는 분산의 하한입니다. 또한 MLE는 항상 평균이 모수와 일치하지는 않지만, 그 편차가 점근적으로 0이 되므로 점근적으로 Unbiased라고 볼 수 있습니다. 이처럼 MLE는 굉장히 훌륭한 빈도통계 추정량 성질을 가지고 있으며, Likelihood만 있으면 Test를 위한 검정통계량의 극한분포도 알려져 있기에, 사실상 거의 모든 빈도통계 추론은 MLE와 LRT로 이뤄진다고 봐도 과언이 아니겠습니다.</p>
+<h2 id="brreferences"><!-- raw HTML omitted -->References</h2>
+<ol>
+<li>Probability Theory and Statistical Inference: Econometric Modeling with Observational Data (Spanos, 1999)</li>
+<li>Machine Learning: a Probabilistic Perspective (Murphy, 2012)</li>
+<li>Computer Age Statistical Inference (Efron, Hastie, 2016)</li>
+<li>Calibration of p Values for Testing Precise Null Hypotheses (Sellke et al, 2001)</li>
+<li><a href="https://ocw.mit.edu/courses/mathematics/18-05-introduction-to-probability-and-statistics-spring-2014/readings/MIT18_05S14_Reading20.pdf">https://ocw.mit.edu/courses/mathematics/18-05-introduction-to-probability-and-statistics-spring-2014/readings/MIT18_05S14_Reading20.pdf</a></li>
+</ol>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/statistics/" rel="tag">Statistics</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/probability/" rel="tag">Probability</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/frequentist/" rel="tag">Frequentist</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Kang Gyeonghun avatar" src="/mypic1.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Kang Gyeonghun</span>
+	</div>
+	<div class="authorbox__description">
+		I study statistics, machine learning, data science or whatever that concerns making inference on infinitie dimension from a limited sample in fintie dimension. This blog is an archive of my journey of study.
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/posts/bayesian-ml/week1/05-frequentist-optimality-%EC%96%B4%EB%96%A4-%EC%B6%94%EC%A0%95%EB%9F%89%EC%9D%84-%EC%93%B8-%EA%B2%83%EC%9D%B8%EA%B0%80/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">05 Frequentist Optimality: 어떤 추정량을 쓸 것인가?</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/posts/bayesian-ml/week1/07-%EB%B9%88%EB%8F%84%EB%A1%A0%EC%A0%81-%EA%B7%80%EB%AC%B4%EA%B0%80%EC%84%A4%EC%9C%A0%EC%9D%98%EC%88%98%EC%A4%80%EA%B2%80%EC%A0%95nhst%EC%9D%98-%EB%AC%B8%EC%A0%9C%EC%A0%90/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">07 빈도론적 귀무가설유의수준검정(NHST)의 문제점</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q" aria-label="SEARCH...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/04-note-on-kullback-leibler-divergence/">Note on Kullback-Leibler Divergence</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/03-em-algorithm-for-latent-variable-models/">EM Algorithm for Latent Variable Models</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/02-mixtures-of-gaussians-and-em/">Mixtures of Gaussians and EM algorithm</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/01-k-means-clustering/">K-means clustering</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week3/03-bayesian-hierarchical-modeling-and-applications/">Bayesian Hierarchical Modeling and its Applications</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week3/02-mcmc-approximation-for-bayesian-posterior/">(MCMC) 베이지안 사후분포 근사를 위한 MCMC 방법론</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/adaboost/" title="ADABOOST">ADABOOST</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/adaptive-basis-model/" title="Adaptive Basis Model">Adaptive Basis Model</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayeisan/" title="Bayeisan">Bayeisan</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian/" title="Bayesian">Bayesian</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian-hierarchical/" title="Bayesian Hierarchical">Bayesian Hierarchical</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bootstrap/" title="Bootstrap">Bootstrap</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cart/" title="CART">CART</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/clustering/" title="Clustering">Clustering</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/conjugacy/" title="Conjugacy">Conjugacy</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/determinant/" title="Determinant">Determinant</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/diagonalization/" title="Diagonalization">Diagonalization</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/em-algorithm/" title="EM algorithm">EM algorithm</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ensemble-learning/" title="Ensemble Learning">Ensemble Learning</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/frequentist/" title="Frequentist">Frequentist</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/gaussian-mixtures/" title="Gaussian Mixtures">Gaussian Mixtures</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/generalized-additive-models/" title="Generalized Additive Models">Generalized Additive Models</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/intro-to-statistical-learning/" title="Intro to Statistical Learning">Intro to Statistical Learning</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jacobian/" title="Jacobian">Jacobian</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/k-cv/" title="k-CV">k-CV</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/k-means/" title="K-means">K-means</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kernel/" title="Kernel">Kernel</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kullback-leibler-divergence/" title="Kullback-Leibler Divergence">Kullback-Leibler Divergence</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lagrangian-duality/" title="Lagrangian Duality">Lagrangian Duality</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lasso/" title="Lasso">Lasso</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/latent-variable/" title="Latent Variable">Latent Variable</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lda/" title="LDA">LDA</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linear-adjoint/" title="Linear Adjoint">Linear Adjoint</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/logistic-regression/" title="Logistic Regression">Logistic Regression</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/markov-chain/" title="Markov Chain">Markov Chain</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/matrix-derivatives/" title="Matrix Derivatives">Matrix Derivatives</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mcmc/" title="MCMC">MCMC</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mse/" title="MSE">MSE</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/multivariate-normal/" title="Multivariate Normal">Multivariate Normal</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/naive-bayes-classifier/" title="Naive Bayes Classifier">Naive Bayes Classifier</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ols/" title="OLS">OLS</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pattern-recognition-and-machine-learning/" title="Pattern Recognition and Machine Learning">Pattern Recognition and Machine Learning</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pca/" title="PCA">PCA</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/probability/" title="Probability">Probability</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/regression-splines/" title="Regression Splines">Regression Splines</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ridge/" title="Ridge">Ridge</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/self-adjoint/" title="Self Adjoint">Self Adjoint</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/similar-matrices/" title="Similar Matrices">Similar Matrices</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/singular-value-decomposition/" title="Singular Value Decomposition">Singular Value Decomposition</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/statistics/" title="Statistics">Statistics</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/svm/" title="SVM">SVM</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vector-derivatives/" title="vector derivatives">vector derivatives</a>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Kang Gyeonghun.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

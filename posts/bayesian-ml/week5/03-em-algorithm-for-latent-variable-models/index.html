@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>EM Algorithm for Latent Variable Models - Hun Learning</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="Example article description">
+		<meta property="og:title" content="EM Algorithm for Latent Variable Models" />
+<meta property="og:description" content="Example article description" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/bayesian-ml/week5/03-em-algorithm-for-latent-variable-models/" />
+<meta property="article:published_time" content="2020-08-10T10:00:00+09:00" />
+<meta property="article:modified_time" content="2020-08-10T10:00:00+09:00" />
+
+		<meta itemprop="name" content="EM Algorithm for Latent Variable Models">
+<meta itemprop="description" content="Example article description">
+<meta itemprop="datePublished" content="2020-08-10T10:00:00+09:00" />
+<meta itemprop="dateModified" content="2020-08-10T10:00:00+09:00" />
+<meta itemprop="wordCount" content="729">
+
+
+
+<meta itemprop="keywords" content="Clustering,EM algorithm,Latent Variable,Pattern Recognition and Machine Learning," />
+
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="Hun Learning" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/mypic2.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Hun Learning</div>
+					<div class="logo__tagline">In Search Of The Truth Projected Onto A Finite Dimension</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/about/">
+				
+				<span class="menu__text">Author</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+	<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+</script>
+<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "all" } }
+  });
+</script>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">EM Algorithm for Latent Variable Models</h1>
+			<p class="post__lead">At least you get a pretty tight lower bound</p>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-08-10T10:00:00&#43;09:00">2020-08-10</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/bayesian-machine-learning/" rel="category">Bayesian Machine Learning</a>
+	</span>
+</div></div>
+		</header>
+		<figure class="post__thumbnail">
+			<img src="/cover/EM.jpg" alt="EM Algorithm for Latent Variable Models">
+		</figure><div class="content post__content clearfix">
+			<p>For an observed data $\mathbf{x}$, we might posit the existence of an unobserved data $\mathbf{z}$ and include it in model $p(\mathbf{x,z}\mid \theta)$. This is called a latent variable model. The question is, why bother? It turns out that in many cases, learning $\theta$ with the marginal log likelihood $p(\mathbf{x}\mid \theta)$ is hard, whereas learning with the joint likelihood with a complete data set $p(\mathbf{x,z}\mid \theta)$ is relatively easy. GMM is one such case. With all the labels, fitting GMM relegates to fitting QDA with a nice and neat closed form solution. Even if $\mathbf{z}$ is unobserved, with an appropriate distribution for $\mathbf{z}$, can still obtain a reasonably satisfiable lower bound of $p(\mathbf{x}\mid \theta)$.</p>
+<p>Suppose we want $\max_{\theta} \log p(\mathbf{x}\mid\theta)$. Let $q(\mathbf{z})$ be any distribution for the latent variable. Then we have</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\log p(\mathbf{x}\mid \theta) &amp;= \log \Bigg[\sum_z p(\mathbf{x,z}\mid \theta)\Bigg]
+=\log \Bigg[\sum_z q(\mathbf{z})\dfrac{p(\mathbf{x,z}\mid \theta)}{q(\mathbf{z})}\Bigg]\\\<br>
+&amp;=\log E_q\Bigg[ \dfrac{p(\mathbf{x,z}\mid \theta)}{q(\mathbf{z})}\Bigg]\\\<br>
+&amp;\geq E_q\Bigg[\log \dfrac{p(\mathbf{x,z}\mid \theta)}{q(\mathbf{z})} \Bigg] = \sum_z q(\mathbf{z})\log\dfrac{p(\mathbf{x,z}\mid \theta)}{q(\mathbf{z})} := L(q, \theta) \quad \text{ELBO}
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
+<p>That is, for any $q$ and $\theta$, we have ELBO, a lower bound for the evidence function $p(\mathbf{x}\mid \theta)$ (the name &ldquo;evidence&rdquo; comes from Bayesian context)</p>
+<!-- raw HTML omitted -->
+<p>$$
+\log p(\mathbf{x}\mid \theta)\geq \sum_z q(\mathbf{z})\log\dfrac{p(\mathbf{x,z}\mid \theta)}{q(\mathbf{z})} = L(q, \theta)
+$$
+<!-- raw HTML omitted --></p>
+<p>Then instead of one shot maximization of the marginal log likelihood ($\theta_{MLE}=\arg\max_{\theta}\log p(\mathbf{x}\mid \theta)$), we can maximize its lower bound $L(q,\theta)$ iteratively until it reaches some local maximum;</p>
+<!-- raw HTML omitted -->
+<p>$$
+\theta^t_{EM} = \arg\max_{\theta}\Big[ \max_{q} L(q, \theta) \Big]\quad \text{for t=1:n iterations}
+$$</p>
+<!-- raw HTML omitted -->
+<p>Perhaps this plot from PRML might understand what is going on here. $L(q, \theta)$ is a lower bound for the red graph $\log p(\mathbf{x}\mid \theta)$.</p>
+<ul>
+<li>For any given $\theta^{old}$, find a distribution of a latent variable $q(\mathbf{z})$ so that $\sum_z q(\mathbf{z})\log\dfrac{p(\mathbf{x,z}\mid \theta)}{q(\mathbf{z})} = L(q, \theta)$ is maximized. When drawn with respect to $\theta$, this corresponds to the blue curve. Note that at $\theta^{old}$ the blue curve touches the red one.</li>
+<li>Along the blue curve (for a fixed $q$), find the value of $\theta^{new}$ with a maximum $L(q, \theta)$, which is the mode of the blue curve.</li>
+<li>Again, at $\theta^{new}$, jump to the green curve (update $q$).</li>
+</ul>
+<p><img src="/image/BayesMLweek5/fig01.PNG" alt=""></p>
+<p>(source: PRML)</p>
+<p>We can see that with this &lsquo;coordinate ascent&rsquo;, EM algorithm gives a sequence of $\theta$ that is monotonically increasing. To see why, note that $\log p(\mathbf{x}\mid \theta^{new}) \geq L(q, \theta^{new}) \geq L(q, \theta^{old} ) =\log p(\mathbf{x}\mid \theta^{old})$</p>
+<h2 id="brhow-to-update-q-theta"><!-- raw HTML omitted -->How to update $q, \theta$?</h2>
+<p><strong>How to update $q$ at a fixed $\theta$?</strong></p>
+<p>We can interpret ELBO in terms of KL divergence.</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+L(q, \theta)&amp;= \sum_z q(\mathbf{z})\log\dfrac{p(\mathbf{x,z}\mid \theta)}{q(\mathbf{z})}\\\<br>
+&amp;= \sum_z q(\mathbf{z})\log\dfrac{p(\mathbf{z}\mid \mathbf{x}, \theta)p(\mathbf{x}\mid \theta)}{q(\mathbf{z})} \\\<br>
+&amp;= \sum_z q(\mathbf{z})\log\dfrac{p(\mathbf{z}\mid \mathbf{x}, \theta)}{q(\mathbf{z})}+
+\sum_z q(\mathbf{z})\log p(\mathbf{x}\mid\theta)\\\<br>
+&amp;=-KL(q(\mathbf{z}) | p(\mathbf{z} \mid \mathbf{x},\theta))+\log p(\mathbf{x}\mid\theta)
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
+<p>where the last line follows from $\sum_z q(z)\log p(x\mid \theta) = E_z(\log p(x\mid \theta))=\log p(x\mid \theta)$.</p>
+<p>For a fixed $\theta$, the difference between the evidence $\log p(\mathbf{x}\mid \theta)$ and the ELBO $L(q, \theta)$ is KL divergence $KL(q(\mathbf{z}) | p(\mathbf{z} \mid \mathbf{x},\theta))$, so the choice of $q$ must be $p(\mathbf{z} \mid \mathbf{x},\theta)$ for a fixed parameter $\theta$. In other words, for any $\theta$, the choice of $p(\mathbf{z} \mid \mathbf{x},\theta)$ as $q$ guarantees that ELBO would be &ldquo;touching&rdquo; the evidence $\log p(\mathbf{x}\mid \theta)$, as we see in the figure above where the blue and the green curve touch the red one at $\theta^{old}$ and $\theta^{old}$ respectively.</p>
+<!-- raw HTML omitted -->
+<p><strong>How to update $\theta$ at a fixed $q$?</strong></p>
+<p>Again, we have</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+L(q, \theta) &amp;= \sum_z q(\mathbf{z})\log\dfrac{p(\mathbf{x,z}\mid \theta)}{q(\mathbf{z})}\\\<br>
+&amp;= \sum_z q(\mathbf{z})\log p(\mathbf{x,z}\mid \theta)
+-\sum_z q(\mathbf{z})\log q(\mathbf{z})
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
+<p>So for a fixed $q$ maximizing $L(q, \theta)$ is to maximize the expectation of the complete log likelihood $E_q[\log p(\mathbf{x,z}\mid\theta)]$ given that $\mathbf{z} \sim q$.</p>
+<p>In summary,</p>
+<p><strong>General EM Algorithm</strong></p>
+<ol>
+<li>Choose initial $\theta^{old}$</li>
+<li><strong>Expectation step:</strong>
+<ol>
+<li>Let $q = p(\mathbf{z} \mid \mathbf{x}, \theta^{old})$</li>
+<li>Let $J(\theta):= L(q, \theta^{old}) = E_z[\log \dfrac{p(\mathbf{x,z}\mid \theta)}{q(\mathbf{z})}]$</li>
+</ol>
+</li>
+<li><strong>Maximization step</strong>: let $\theta^{old} = \arg\max_{\theta}J(\theta)=\arg\max_{\theta} E_q[\log p(\mathbf{x,z}\mid\theta)]$</li>
+<li>Repeat 2~3 until convergence</li>
+</ol>
+<h3 id="br-more-mathematical-details"><!-- raw HTML omitted --> More Mathematical Details</h3>
+<ol>
+<li>We can say for certain that once we found the global maximum of $L(q, \theta)$ (if it exists, of course), then $\theta$ is a global maximum of $\log p(\mathbf{x}\mid\theta)$. For any other $\theta_t \not = \theta$, $\log p(\mathbf{x} \mid \theta_t) = L(q_t,\theta_t)+KL(q_t |p(\mathbf{z}\mid \mathbf{x}, \theta_t))=L(q_t,\theta_t)\leq L(q, \theta) = \log p(\mathbf{x} \mid \theta)$, where $q_t = p(\mathbf{z}\mid \mathbf{x}, \theta_t)$.</li>
+<li>Under some regularity condition on the likelihood $p(\mathbf{x}\mid \theta)$, EM algorithm reaches some stationary point of $p(\mathbf{x}\mid \theta)$ which is a fixed point of EM.</li>
+</ol>
+<h3 id="br-references"><!-- raw HTML omitted --> References</h3>
+<ol>
+<li>Pattern Recognition and Machine Learning, Bishop, 2006</li>
+<li><a href="https://bloomberg.github.io/foml/#lectures">https://bloomberg.github.io/foml/#lectures</a></li>
+</ol>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/clustering/" rel="tag">Clustering</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/em-algorithm/" rel="tag">EM algorithm</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/latent-variable/" rel="tag">Latent Variable</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/pattern-recognition-and-machine-learning/" rel="tag">Pattern Recognition and Machine Learning</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Kang Gyeonghun avatar" src="/mypic1.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Kang Gyeonghun</span>
+	</div>
+	<div class="authorbox__description">
+		I study statistics, machine learning, data science or whatever that concerns making inference on infinitie dimension from a limited sample in fintie dimension. This blog is an archive of my journey of study.
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/posts/bayesian-ml/week5/02-mixtures-of-gaussians-and-em/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Mixtures of Gaussians and EM algorithm</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/posts/bayesian-ml/week5/04-note-on-kullback-leibler-divergence/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">Note on Kullback-Leibler Divergence</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q" aria-label="SEARCH...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/04-note-on-kullback-leibler-divergence/">Note on Kullback-Leibler Divergence</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/03-em-algorithm-for-latent-variable-models/">EM Algorithm for Latent Variable Models</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/02-mixtures-of-gaussians-and-em/">Mixtures of Gaussians and EM algorithm</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/01-k-means-clustering/">K-means clustering</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week3/03-bayesian-hierarchical-modeling-and-applications/">Bayesian Hierarchical Modeling and its Applications</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week3/02-mcmc-approximation-for-bayesian-posterior/">(MCMC) 베이지안 사후분포 근사를 위한 MCMC 방법론</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/adaboost/" title="ADABOOST">ADABOOST</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/adaptive-basis-model/" title="Adaptive Basis Model">Adaptive Basis Model</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayeisan/" title="Bayeisan">Bayeisan</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian/" title="Bayesian">Bayesian</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian-hierarchical/" title="Bayesian Hierarchical">Bayesian Hierarchical</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bootstrap/" title="Bootstrap">Bootstrap</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cart/" title="CART">CART</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/clustering/" title="Clustering">Clustering</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/conjugacy/" title="Conjugacy">Conjugacy</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/determinant/" title="Determinant">Determinant</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/diagonalization/" title="Diagonalization">Diagonalization</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/em-algorithm/" title="EM algorithm">EM algorithm</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ensemble-learning/" title="Ensemble Learning">Ensemble Learning</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/frequentist/" title="Frequentist">Frequentist</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/gaussian-mixtures/" title="Gaussian Mixtures">Gaussian Mixtures</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/generalized-additive-models/" title="Generalized Additive Models">Generalized Additive Models</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/intro-to-statistical-learning/" title="Intro to Statistical Learning">Intro to Statistical Learning</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jacobian/" title="Jacobian">Jacobian</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/k-cv/" title="k-CV">k-CV</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/k-means/" title="K-means">K-means</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kernel/" title="Kernel">Kernel</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kullback-leibler-divergence/" title="Kullback-Leibler Divergence">Kullback-Leibler Divergence</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lagrangian-duality/" title="Lagrangian Duality">Lagrangian Duality</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lasso/" title="Lasso">Lasso</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/latent-variable/" title="Latent Variable">Latent Variable</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lda/" title="LDA">LDA</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linear-adjoint/" title="Linear Adjoint">Linear Adjoint</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/logistic-regression/" title="Logistic Regression">Logistic Regression</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/markov-chain/" title="Markov Chain">Markov Chain</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/matrix-derivatives/" title="Matrix Derivatives">Matrix Derivatives</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mcmc/" title="MCMC">MCMC</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mse/" title="MSE">MSE</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/multivariate-normal/" title="Multivariate Normal">Multivariate Normal</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/naive-bayes-classifier/" title="Naive Bayes Classifier">Naive Bayes Classifier</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ols/" title="OLS">OLS</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pattern-recognition-and-machine-learning/" title="Pattern Recognition and Machine Learning">Pattern Recognition and Machine Learning</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pca/" title="PCA">PCA</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/probability/" title="Probability">Probability</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/regression-splines/" title="Regression Splines">Regression Splines</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ridge/" title="Ridge">Ridge</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/self-adjoint/" title="Self Adjoint">Self Adjoint</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/similar-matrices/" title="Similar Matrices">Similar Matrices</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/singular-value-decomposition/" title="Singular Value Decomposition">Singular Value Decomposition</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/statistics/" title="Statistics">Statistics</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/svm/" title="SVM">SVM</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vector-derivatives/" title="vector derivatives">vector derivatives</a>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Kang Gyeonghun.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

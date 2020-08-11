@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Hun Learning</title>
+    <link>/categories/</link>
+    <description>Recent content in Categories on Hun Learning</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 10 Aug 2020 11:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Bayesian Machine Learning</title>
+      <link>/categories/bayesian-machine-learning/</link>
+      <pubDate>Mon, 10 Aug 2020 11:00:00 +0900</pubDate>
+      
+      <guid>/categories/bayesian-machine-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Statistics</title>
+      <link>/categories/statistics/</link>
+      <pubDate>Mon, 20 Jul 2020 05:20:00 +0900</pubDate>
+      
+      <guid>/categories/statistics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Optimization</title>
+      <link>/categories/optimization/</link>
+      <pubDate>Fri, 17 Apr 2020 11:00:00 +0900</pubDate>
+      
+      <guid>/categories/optimization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Intro to Statistical Learning</title>
+      <link>/categories/intro-to-statistical-learning/</link>
+      <pubDate>Tue, 07 Apr 2020 12:00:00 +0900</pubDate>
+      
+      <guid>/categories/intro-to-statistical-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vector, Matrix Derivatives</title>
+      <link>/categories/vector-matrix-derivatives/</link>
+      <pubDate>Sun, 29 Mar 2020 09:20:00 +0900</pubDate>
+      
+      <guid>/categories/vector-matrix-derivatives/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linear Algebra</title>
+      <link>/categories/linear-algebra/</link>
+      <pubDate>Wed, 25 Mar 2020 09:50:00 +0900</pubDate>
+      
+      <guid>/categories/linear-algebra/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

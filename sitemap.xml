@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/categories/bayesian-machine-learning/</loc>
+    <lastmod>2020-08-10T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2020-08-10T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-08-10T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/kullback-leibler-divergence/</loc>
+    <lastmod>2020-08-10T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bayesian-ml/week5/04-note-on-kullback-leibler-divergence/</loc>
+    <lastmod>2020-08-10T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/pattern-recognition-and-machine-learning/</loc>
+    <lastmod>2020-08-10T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2020-08-10T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-08-10T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/clustering/</loc>
+    <lastmod>2020-08-10T10:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/em-algorithm/</loc>
+    <lastmod>2020-08-10T10:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bayesian-ml/week5/03-em-algorithm-for-latent-variable-models/</loc>
+    <lastmod>2020-08-10T10:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/latent-variable/</loc>
+    <lastmod>2020-08-10T10:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/gaussian-mixtures/</loc>
+    <lastmod>2020-08-10T07:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bayesian-ml/week5/02-mixtures-of-gaussians-and-em/</loc>
+    <lastmod>2020-08-10T07:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/k-means/</loc>
+    <lastmod>2020-08-10T06:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bayesian-ml/week5/01-k-means-clustering/</loc>
+    <lastmod>2020-08-10T06:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/bayesian/</loc>
+    <lastmod>2020-08-03T08:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/bayesian-hierarchical/</loc>
+    <lastmod>2020-08-03T08:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bayesian-ml/week3/03-bayesian-hierarchical-modeling-and-applications/</loc>
+    <lastmod>2020-08-03T08:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/probability/</loc>
+    <lastmod>2020-08-03T08:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/statistics/</loc>
+    <lastmod>2020-08-03T08:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bayesian-ml/week3/02-mcmc-approximation-for-bayesian-posterior/</loc>
+    <lastmod>2020-08-03T07:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/mcmc/</loc>
+    <lastmod>2020-08-03T07:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bayesian-ml/week3/01-discrete-time-markov-chaine-with-finite-state-space/</loc>
+    <lastmod>2020-08-03T06:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/markov-chain/</loc>
+    <lastmod>2020-08-03T06:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/conjugacy/</loc>
+    <lastmod>2020-07-20T06:10:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bayesian-ml/week2/03-conjugate-prior-for-multivariate-model/</loc>
+    <lastmod>2020-07-20T06:10:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/multivariate-normal/</loc>
+    <lastmod>2020-07-20T06:10:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bayesian-ml/week2/02-conjugate-prior-for-univariate-normal-model/</loc>
+    <lastmod>2020-07-20T06:05:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bayesian-ml/week2/01-conjugate-prior-univariate-poisson/</loc>
+    <lastmod>2020-07-20T06:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bayesian-ml/week1/08-bayesian-approach-%ED%95%98%EB%82%98%EC%9D%98-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%97%AC%EB%9F%AC-%EA%B0%9C%EC%9D%98-%EB%AA%A8%EC%88%98/</loc>
+    <lastmod>2020-07-20T05:30:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bayesian-ml/week1/07-%EB%B9%88%EB%8F%84%EB%A1%A0%EC%A0%81-%EA%B7%80%EB%AC%B4%EA%B0%80%EC%84%A4%EC%9C%A0%EC%9D%98%EC%88%98%EC%A4%80%EA%B2%80%EC%A0%95nhst%EC%9D%98-%EB%AC%B8%EC%A0%9C%EC%A0%90/</loc>
+    <lastmod>2020-07-20T05:20:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/frequentist/</loc>
+    <lastmod>2020-07-20T05:20:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/statistics/</loc>
+    <lastmod>2020-07-20T05:20:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bayesian-ml/week1/06-maximum-likelihood-theory/</loc>
+    <lastmod>2020-07-20T05:10:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bayesian-ml/week1/05-frequentist-optimality-%EC%96%B4%EB%96%A4-%EC%B6%94%EC%A0%95%EB%9F%89%EC%9D%84-%EC%93%B8-%EA%B2%83%EC%9D%B8%EA%B0%80/</loc>
+    <lastmod>2020-07-20T05:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bayesian-ml/week1/04-frequentist-approach-%ED%95%98%EB%82%98%EC%9D%98-%EB%AA%A8%EC%88%98-%EC%97%AC%EB%9F%AC-%EA%B0%9C%EC%9D%98-%EB%8D%B0%EC%9D%B4%ED%84%B0/</loc>
+    <lastmod>2020-07-20T04:50:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bayesian-ml/week1/03-%EB%B9%88%EB%8F%84%ED%86%B5%EA%B3%84%ED%95%99%EA%B3%BC-%EB%B2%A0%EC%9D%B4%EC%A6%88%ED%86%B5%EA%B3%84%ED%95%99-%EC%B2%A0%ED%95%99%EC%9D%98-%EC%B0%A8%EC%9D%B4/</loc>
+    <lastmod>2020-07-20T04:40:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bayesian-ml/week1/02-%ED%86%B5%EA%B3%84%ED%95%99%EC%9D%98-%EB%AA%A9%EC%A0%81-inference%EC%99%80-prediction/</loc>
+    <lastmod>2020-07-20T04:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bayesian-ml/week1/01-probability-densities%EC%99%80-likelihood/</loc>
+    <lastmod>2020-07-20T03:43:58+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/logistic-regression/</loc>
+    <lastmod>2020-06-15T09:10:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2020-06-15-logit-svm/</loc>
+    <lastmod>2020-06-15T09:10:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/svm/</loc>
+    <lastmod>2020-06-15T09:10:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/lagrangian-duality/</loc>
+    <lastmod>2020-04-17T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/optimization/</loc>
+    <lastmod>2020-04-17T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2020-04-17-support-vector-machine-%EC%9D%B4%ED%95%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-lagrangian-dual-problem/</loc>
+    <lastmod>2020-04-17T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/linear-methods-for-classification/</loc>
+    <lastmod>2020-04-10T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/lda/</loc>
+    <lastmod>2020-04-10T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/naive-bayes-classifier/</loc>
+    <lastmod>2020-04-10T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/bayeisan/</loc>
+    <lastmod>2020-04-07T12:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/intro-to-statistical-learning/</loc>
+    <lastmod>2020-04-07T12:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/lasso/</loc>
+    <lastmod>2020-04-07T12:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ridge/</loc>
+    <lastmod>2020-04-07T12:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/isl/2020-04-07-ridge%EC%99%80-lasso-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EB%B2%A0%EC%9D%B4%EC%A7%80%EC%95%88-%ED%95%B4%EC%84%9D/</loc>
+    <lastmod>2020-04-07T12:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/mse/</loc>
+    <lastmod>2020-04-07T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/isl/2020-04-07-test-mse/</loc>
+    <lastmod>2020-04-07T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/vectormatrixderiv/2020-03-29-03-matrix-derivatives/</loc>
+    <lastmod>2020-03-29T09:20:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/matrix-derivatives/</loc>
+    <lastmod>2020-03-29T09:20:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/vector-matrix-derivatives/</loc>
+    <lastmod>2020-03-29T09:20:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/vectormatrixderiv/2020-03-29-02-example-change-of-variables/</loc>
+    <lastmod>2020-03-29T09:10:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/jacobian/</loc>
+    <lastmod>2020-03-29T09:10:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/vectormatrixderiv/2020-03-29-01-vector-derivatives/</loc>
+    <lastmod>2020-03-29T09:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/vector-derivatives/</loc>
+    <lastmod>2020-03-29T09:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/linearalgebra/linear04/</loc>
+    <lastmod>2020-03-25T09:50:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/linear-algebra/</loc>
+    <lastmod>2020-03-25T09:50:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ols/</loc>
+    <lastmod>2020-03-25T09:50:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/linearalgebra/linear03/</loc>
+    <lastmod>2020-03-25T09:40:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/singular-value-decomposition/</loc>
+    <lastmod>2020-03-25T09:40:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/linearalgebra/linear02/</loc>
+    <lastmod>2020-03-25T09:30:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/diagonalization/</loc>
+    <lastmod>2020-03-25T09:30:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/linear-adjoint/</loc>
+    <lastmod>2020-03-25T09:30:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/self-adjoint/</loc>
+    <lastmod>2020-03-25T09:30:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/similar-matrices/</loc>
+    <lastmod>2020-03-25T09:30:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/linearalgebra/linear01/</loc>
+    <lastmod>2020-03-25T09:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/determinant/</loc>
+    <lastmod>2020-03-25T09:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/intro-to-statistical-learning/</loc>
+    <lastmod>2020-01-26T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/isl/isl-09/</loc>
+    <lastmod>2020-01-26T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/kernel/</loc>
+    <lastmod>2020-01-26T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/adaboost/</loc>
+    <lastmod>2020-01-25T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/adaptive-basis-model/</loc>
+    <lastmod>2020-01-25T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/cart/</loc>
+    <lastmod>2020-01-25T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ensemble-learning/</loc>
+    <lastmod>2020-01-25T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/isl/isl-08/</loc>
+    <lastmod>2020-01-25T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/generalized-additive-models/</loc>
+    <lastmod>2020-01-24T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/isl/isl-07/</loc>
+    <lastmod>2020-01-24T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/regression-splines/</loc>
+    <lastmod>2020-01-24T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/isl/isl-06/</loc>
+    <lastmod>2020-01-23T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/pca/</loc>
+    <lastmod>2020-01-23T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/bootstrap/</loc>
+    <lastmod>2020-01-22T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/isl/isl-05/</loc>
+    <lastmod>2020-01-22T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/k-cv/</loc>
+    <lastmod>2020-01-22T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/isl/isl-04/</loc>
+    <lastmod>2020-01-21T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/isl/isl-02/</loc>
+    <lastmod>2020-01-20T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/about/</loc>
+    <lastmod>2020-01-01T09:10:00+09:00</lastmod>
+  </url>
+  
+</urlset>

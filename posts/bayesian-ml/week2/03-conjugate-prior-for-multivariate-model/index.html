@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Conjugate Prior for Multivariate Model - Hun Learning</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="Example article description">
+		<meta property="og:title" content="Conjugate Prior for Multivariate Model" />
+<meta property="og:description" content="Example article description" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/bayesian-ml/week2/03-conjugate-prior-for-multivariate-model/" />
+<meta property="article:published_time" content="2020-07-20T06:10:00+09:00" />
+<meta property="article:modified_time" content="2020-07-20T06:10:00+09:00" />
+
+		<meta itemprop="name" content="Conjugate Prior for Multivariate Model">
+<meta itemprop="description" content="Example article description">
+<meta itemprop="datePublished" content="2020-07-20T06:10:00+09:00" />
+<meta itemprop="dateModified" content="2020-07-20T06:10:00+09:00" />
+<meta itemprop="wordCount" content="953">
+
+
+
+<meta itemprop="keywords" content="Bayesian,Multivariate Normal,Conjugacy," />
+
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="Hun Learning" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/mypic2.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Hun Learning</div>
+					<div class="logo__tagline">In Search Of The Truth Projected Onto A Finite Dimension</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/about/">
+				
+				<span class="menu__text">Author</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+	<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+</script>
+<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "all" } }
+  });
+</script>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Conjugate Prior for Multivariate Model</h1>
+			<p class="post__lead">The intuitions for posterior parameters we studied from the univariate normal pretty much carry over to the multivariate case.</p>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-20T06:10:00&#43;09:00">2020-07-20</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/bayesian-machine-learning/" rel="category">Bayesian Machine Learning</a>
+	</span>
+</div></div>
+		</header>
+		<figure class="post__thumbnail">
+			<img src="/cover/conjugate_prior.jpg" alt="Conjugate Prior for Multivariate Model">
+		</figure>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#brmultivariate-normal-model"><!-- raw HTML omitted -->Multivariate Normal Model</a></li>
+    <li><a href="#brsemiconjugate-prior-for-the-mean"><!-- raw HTML omitted -->Semiconjugate prior for the mean</a></li>
+    <li><a href="#brthe-inverse-wishart-distribution-for-sigma-prior"><!-- raw HTML omitted -->The inverse Wishart distribution for $\Sigma$ prior</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#brmultinomial-model-for-categorical-data"><!-- raw HTML omitted -->Multinomial Model for categorical data</a>
+      <ul>
+        <li><a href="#brexample-pre-election-polling"><!-- raw HTML omitted -->Example: pre-election polling</a></li>
+        <li><a href="#brreferences"><!-- raw HTML omitted -->References</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#a6e22e">library</span>(ggplot2)
+<span style="color:#a6e22e">library</span>(cowplot)
+<span style="color:#a6e22e">library</span>(reshape)
+</code></pre></div><h2 id="brmultivariate-normal-model"><!-- raw HTML omitted -->Multivariate Normal Model</h2>
+<p>Consider a bivariate normal random variable $[y_1, y_2]^T$. The density is written as ($p=2$)</p>
+<!-- raw HTML omitted -->
+<p>$$
+p(\mathbf{y}|\theta, \Sigma) = (\dfrac{1}{2\pi})^{-p/2}|\Sigma|^{-1/2}
+\exp{-\dfrac{1}{2}(\mathbf{y}-\theta)^T\Sigma^{-1}(\mathbf{y}-\theta)}
+$$</p>
+<!-- raw HTML omitted -->
+<p>where the parameter is $\theta =
+\begin{pmatrix}
+E[y_1]\\\ E[y_2]
+\end{pmatrix}$ and $\Sigma = 
+\begin{pmatrix}
+E[y_1^2]-E[y_1]^2 &amp; E[y_1y_2]-E[y_1]E[y_2]\\\<br>
+E[y_2y_1]-E[y_2]E[y_1] &amp; E[y_2^2]-E[y_2]^2
+\end{pmatrix}$ $=\begin{pmatrix}
+\sigma_1^2 &amp; \sigma_{12}\\\<br>
+\sigma_{21} &amp; \sigma_2^1
+\end{pmatrix}$.</p>
+<p>Few things worth mentioning for multivariate normal model</p>
+<ol>
+<li>
+<p>the term in the exponent $(\mathbf{y}-\theta)^T\Sigma^{-1}(\mathbf{y}-\theta)$ is somewhat a measure of distance between mean and the data. Refer to <a href="https://en.wikipedia.org/wiki/Mahalanobis_distance">https://en.wikipedia.org/wiki/Mahalanobis_distance</a></p>
+</li>
+<li>
+<p>Geometrically, MVN density is spread along the eigenvectors of $\Sigma$, a symmetric postive definite matrix, with width determined by the corresponding eigenvalues. Refer to <a href="https://youtu.be/qvNhgkbzKmY?t=358">https://youtu.be/qvNhgkbzKmY?t=358</a></p>
+<p><img src="/image/bayesmlweek2_01.jpg" alt="bayesmlweek2_01">
+<img src="/image/bayesmlweek2_02.jpg" alt="bayesmlweek2_02"></p>
+</li>
+<li>
+<p>A bit of algebra shows that the MVN density can be written as</p>
+<p>$p(\mathbf{y}|\theta, \Sigma) = (\dfrac{1}{2\pi})^{-p/2}|\Sigma|^{-1/2}
+\exp(-\dfrac{1}{2}(\mathbf{y}-\theta)^T\Sigma^{-1}(\mathbf{y}-\theta))$
+$\propto \exp(-\dfrac{1}{2}\mathbf{y}^T \Sigma^{-1}\mathbf{y} + \mathbf{y}^T\Sigma^{-1}\theta
+-\dfrac{1}{2}\theta^T \Sigma^{-1}\theta )$
+$\propto\exp(-\dfrac{1}{2}\mathbf{y}^T \mathbf{A}\mathbf{y} 
++\mathbf{y}^T\mathbf{b})$
+$(\theta = \mathbf{A^{-1}b},\quad \Sigma = \mathbf{A^{-1}})$</p>
+<p><!-- raw HTML omitted -->This is useful in doing a multivariate version of &ldquo;matching the exponents&rdquo;.</p>
+</li>
+</ol>
+<h2 id="brsemiconjugate-prior-for-the-mean"><!-- raw HTML omitted -->Semiconjugate prior for the mean</h2>
+<p>For $\mathbf{D} = {\mathbf{y_1}, \mathbf{y_2}, &hellip;, \mathbf{y_n}}$ with $p$ variables, the joint likelihood density is</p>
+<!-- raw HTML omitted -->
+<p>$$
+p(\mathbf{D}|\theta, \Sigma) = (\dfrac{1}{2\pi})^{-np/2}|\Sigma|^{-n/2}
+\exp{-\dfrac{1}{2}\sum_{i=1}^n(\mathbf{y_i}-\theta)^T\Sigma^{-1}(\mathbf{y_i}-\theta)}
+$$</p>
+<p><!-- raw HTML omitted -->It seems natural to consider MVN as a prior for $\theta$ of MVN likelihood.</p>
+<!-- raw HTML omitted -->
+<p>$$
+\theta \sim MVN(\mu_0, \Lambda_0)
+$$</p>
+<p><!-- raw HTML omitted -->Then by (6), we see that</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+p(\theta) &amp;\propto \exp{ -\dfrac{1}{2}\theta^T\mathbf{A_0}\theta + \theta^T\mathbf{b_0}}\\\<br>
+\text{where}\quad &amp; \mathbf{A_0} = \Lambda_0^{-1},\quad \mathbf{b_0}=\Lambda_0^{-1}\mu_0\\\<br>
+p(\mathbf{D}|\theta, \Sigma) &amp;\propto  \exp{ -\dfrac{1}{2}\theta^T\mathbf{A_1}\theta + \theta^T\mathbf{b_1}}\\\<br>
+\text{where}\quad &amp; \mathbf{A_1} = n\Sigma^{-1},\quad \mathbf{b_1}=n\Sigma^{-1}\mathbf{\bar{y}}\\\<br>
+\therefore p(\theta|\mathbf{D},\Sigma) &amp;\propto
+\exp{ -\dfrac{1}{2}\theta^T(\mathbf{A_0}+\mathbf{A_1})\theta + \theta^T(\mathbf{b_0}+\mathbf{b_1})}\\\<br>
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
+<p>Hence the posterior for $\theta$ given $\mathbf{D}, \Sigma$ is</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\theta|\mathbf{D},\Sigma &amp;\sim MVN(\mu_n, \Lambda_n)\\\<br>
+\mu_n &amp;= (\Lambda_0^{-1}+n\Sigma^{-1})^{-1}(\Lambda_0^{-1}\mu_0+n\Sigma^{-1}\mathbf{\bar{y}})\\\<br>
+\Lambda_n &amp;= (\Lambda_0^{-1}+n\Sigma^{-1})^{-1}
+\end{align}
+$$</p>
+<p><!-- raw HTML omitted -->which is reminiscent of the univariate normal case.</p>
+<h2 id="brthe-inverse-wishart-distribution-for-sigma-prior"><!-- raw HTML omitted -->The inverse Wishart distribution for $\Sigma$ prior</h2>
+<p>When $y_i \sim N(\theta, \sigma^2)$, the sample variance follows chi-square (gamma) distribution. More generally, since $\frac{(n-1)s^2}{\sigma^2}\sim \Gamma(\frac{n-1}{2}, 2)$ we can write</p>
+<!-- raw HTML omitted -->
+<p>$$
+{(n-1)s^2} \sim \Gamma(\dfrac{n-1}{2}, \dfrac{1}{2\sigma^2})
+$$</p>
+<!-- raw HTML omitted -->
+<p>In univariate normal, the formula $(n-1)s^2=\sum_{i=1}^n (y_i - \bar{y})^2$ is called &ldquo;the sum of squares&rdquo;. We can come up with a similar formula for multivariate case as follows.</p>
+<!-- raw HTML omitted -->
+<p>$$
+\sum_{i=1}^n \mathbf{y_i}\mathbf{y_i^T} = \mathbf{Y^TY} \quad (\mathbf{Y}\in\mathbb{R}^{n\times p})
+$$</p>
+<!-- raw HTML omitted -->
+<p>If $\mathbf{y_i} \sim MVN(\mathbf{0}, \Phi_0)$, then $\mathbf{Y^TY}$ follows a Wishart distribution with parameters $(n, \Phi_0)$, which is analogous to the univariate case.</p>
+<!-- raw HTML omitted -->
+<p>$\mathbf{Y^TY}$ is symmetric obviously, and also postive definite (as long as $n&gt;p$) with probability 1. Using this result, we can construct an inverse Wishart prior for $\Sigma$ that is semi-conjugate.</p>
+<p><strong><!-- raw HTML omitted -->Inverse Wishart Distribution</strong></p>
+<ol>
+<li>sample $\mathbf{y_i}\sim MVN(\mathbf{0}, \mathbf{S_0^{-1}})$</li>
+<li>Calculate $\sum_{i=1}^{v_0} \mathbf{y_i}\mathbf{y_i^T} = \mathbf{Y^TY}$</li>
+<li>set $\Sigma = \mathbf{Y^TY}^{-1}$.</li>
+<li>$\Sigma \sim invW(v_0, \mathbf{S_0^{-1}})$, with $E[\Sigma]=\dfrac{\mathbf{S_0}}{v_0-p-1}$</li>
+</ol>
+<p><!-- raw HTML omitted -->Let $\Sigma_0$ be our prior guess on the true covariance matrix. Then we set $\mathbf{S_0}=(v_0+p+1)\Sigma_0$, and express our certainty with $v_0$. $v_0=p+2$ is only loosely centered on $\Sigma_0$.</p>
+<p><!-- raw HTML omitted -->It can be shown that the posterior is $\Sigma|\mathbf{D}, \theta \sim invW(v_0+n, (\mathbf{S_0}+\mathbf{S_\theta})^{-1})$ where $S_\theta = \sum_{i=1}^n(\mathbf{y_i}-\theta)(\mathbf{y_i}-\theta)^T$. The mean of the posterior is wegithed average of prior mean and sample covariance matrix, which is also comparable to single variable case.</p>
+<!-- raw HTML omitted -->
+<p>$$
+E[\Sigma|\mathbf{D}, \theta] = \dfrac{v_0-p-1}{v_0-p-1+n}\dfrac{\mathbf{S_0}}{v_0-p-1}
++\dfrac{n}{v_0-p-1+n}\dfrac{\mathbf{S_\theta}}{n}
+$$</p>
+<!-- raw HTML omitted -->
+<p>In summary, for MVN model, we have full conditional posteriors as follows, and we can use Gibbs Sampler to approximate the posterior.</p>
+<!-- raw HTML omitted -->
+<h1 id="brbayesian-linear-regression-fixed-variance"><!-- raw HTML omitted -->Bayesian Linear Regression (fixed variance)</h1>
+<p>In linear regression with gaussian normal assumption we can write the likelihood of $\mathbf{y}$ as MVN with a mean which is a linear combination of coloumns of $\mathbf{X}$.</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\mathbf{y}|\mathbf{X}, \beta, \sigma^2 &amp;\sim MVN(\mathbf{X\beta}, \sigma^2\mathbf{I})\\\<br>
+p(\mathbf{y}|\mathbf{X}, \beta, \sigma^2) &amp;\propto \exp (-\dfrac{1}{2}\mathbf{(y-X\beta)^T(y-X\beta)})
+\end{align}
+$$</p>
+<!-- raw HTML omitted -->
+<p>With MVN prior on $\beta \sim MVN(\mathbf{\beta_0}, \Sigma_0)$, we see that</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+p(\beta|\mathbf{y}, \mathbf{X}, \sigma^2) &amp;\propto
+p(\mathbf{y}|\mathbf{X}, \beta, \sigma^2)p(\beta)\\\<br>
+&amp;\propto \exp(-\dfrac{1}{2}\mathbf{(y-X\beta)^T(y-X\beta)})
+\exp( -\dfrac{1}{2} \mathbf{(\beta-\beta_0)^T\Sigma_0^{-1}(\beta-\beta_0)} )\\\<br>
+&amp;=\exp ( -\dfrac{1}{2}\beta^T(\Sigma_0^{-1}+\mathbf{X^TX}/\sigma^2)\beta+\beta^T(\Sigma_0^{-1}\beta_0 + \mathbf{X^Ty}/\sigma^2))
+\end{align}
+$$</p>
+<!-- raw HTML omitted -->
+<p>Again by (6), we see that the posterior for $\beta$ is also normal with</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+V[\beta|\mathbf{y}, \mathbf{X}, \sigma^2] &amp;= (\Sigma_0^{-1}+\mathbf{X^TX}/\sigma^2)^{-1}\\\<br>
+E[\beta|\mathbf{y}, \mathbf{X}, \sigma^2] &amp;= (\Sigma_0^{-1}+\mathbf{X^TX}/\sigma^2)^{-1}
+(\Sigma_0^{-1}\beta_0 + \mathbf{X^Ty}/\sigma^2)
+\end{align}
+$$
+<!-- raw HTML omitted -->The book <a href="https://www.springer.com/gp/book/9780387310732">PRML</a> provides a great visualization of Bayesian linear regression. In the plot below, we have likelihood and prior/posterior drawn in a parameter space, and the set of parameters (slope and coefficient) is represented in the data space as a straight line. As more and more data are observed, from the corresponding likelihood for each newly arriving data, we get a posterior update which makes the belief more peaked at certain region, and this centralizing behavior is reflected as more and more coherent straight lines drawn in the data space.</p>
+<p><img src="/image/bayesmlweek2_03.jpg" alt="bayesmlweek2_03"></p>
+<h2 id="brmultinomial-model-for-categorical-data"><!-- raw HTML omitted -->Multinomial Model for categorical data</h2>
+<p>We can model a data with $k$ possible states as a multinomial model, and give a conjugate Dirichlet prior for the parameter $\theta_j$. Bayesian inference for this model is fairly simple, as the posterior is also Dirichlet with $\alpha_j$ added by the data count $y_j$. The example provides some details.</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\text{Likelihood}&amp;\quad p(\mathbf{y}|\theta) \propto \prod_{j=1}^k \theta_j^{y_j}
+\quad (\mathbf{y}=[y_1, y_2, &hellip;, y_k]^T)\\\<br>
+\text{Prior}&amp;\quad p(\theta) \propto \prod_{j=1}^k \theta_j^{\alpha_j-1} \quad (\text{parameters } \alpha_1, \alpha_2, &hellip;, \alpha_k)\\\<br>
+\text{Posterior}&amp;\quad p(\theta|\mathbf{y}) \propto \prod_{j=1}^k \theta_j^{\alpha_j+y_j-1}
+\end{align}
+$$</p>
+<!-- raw HTML omitted -->
+<h3 id="brexample-pre-election-polling"><!-- raw HTML omitted -->Example: pre-election polling</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#a6e22e">library</span>(DirichletReg)
+<span style="color:#75715e"># prior</span>
+a1 <span style="color:#f92672">=</span> a2 <span style="color:#f92672">=</span> a3 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e"># weak prior</span>
+
+<span style="color:#75715e"># data</span>
+y <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">727</span>, <span style="color:#ae81ff">583</span>, <span style="color:#ae81ff">137</span>)
+
+<span style="color:#75715e"># posterior </span>
+a1 <span style="color:#f92672">=</span> a1 <span style="color:#f92672">+</span> y[1]
+a2 <span style="color:#f92672">=</span> a2 <span style="color:#f92672">+</span> y[2]
+a3 <span style="color:#f92672">=</span> a3 <span style="color:#f92672">+</span> y[3]
+
+<span style="color:#75715e"># generate samples</span>
+<span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">101</span>)
+df <span style="color:#f92672">=</span> <span style="color:#a6e22e">rdirichlet</span>(<span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">c</span>(a1, a2, a3))
+df <span style="color:#f92672">=</span> <span style="color:#a6e22e">data.frame</span>(df)
+<span style="color:#a6e22e">colnames</span>(df) <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;A&#39;</span>,<span style="color:#e6db74">&#39;B&#39;</span>,<span style="color:#e6db74">&#39;C&#39;</span>)
+
+df_long <span style="color:#f92672">=</span> <span style="color:#a6e22e">melt</span>(df, variable_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;candidate&#39;</span>)
+df_diff <span style="color:#f92672">=</span> <span style="color:#a6e22e">data.frame</span>(diff<span style="color:#f92672">=</span>df<span style="color:#f92672">$</span>A<span style="color:#f92672">-</span>df<span style="color:#f92672">$</span>B)
+
+<span style="color:#a6e22e">ggplot</span>(df_long, <span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>value, fill<span style="color:#f92672">=</span>candidate))<span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_histogram</span>(bins<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>)
+<span style="color:#a6e22e">ggplot</span>(df_diff, <span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>diff)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_histogram</span>(bins<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>)
+
+</code></pre></div><p><img src="/image/Rplot09.png" alt="Rplot09"></p>
+<p><img src="/image/Rplot10.png" alt="Rplot10"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#75715e"># new data</span>
+y <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">300</span>, <span style="color:#ae81ff">500</span>, <span style="color:#ae81ff">100</span>)
+a1 <span style="color:#f92672">=</span> a1 <span style="color:#f92672">+</span> y[1]
+a2 <span style="color:#f92672">=</span> a2 <span style="color:#f92672">+</span> y[2]
+a3 <span style="color:#f92672">=</span> a3 <span style="color:#f92672">+</span> y[3]
+
+<span style="color:#75715e"># generate samples</span>
+df <span style="color:#f92672">=</span> <span style="color:#a6e22e">rdirichlet</span>(<span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">c</span>(a1, a2, a3))
+df <span style="color:#f92672">=</span> <span style="color:#a6e22e">data.frame</span>(df)
+<span style="color:#a6e22e">colnames</span>(df) <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;A&#39;</span>,<span style="color:#e6db74">&#39;B&#39;</span>,<span style="color:#e6db74">&#39;C&#39;</span>)
+
+df_long <span style="color:#f92672">=</span> <span style="color:#a6e22e">melt</span>(df, variable_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;candidate&#39;</span>)
+df_diff <span style="color:#f92672">=</span> <span style="color:#a6e22e">data.frame</span>(diff<span style="color:#f92672">=</span>df<span style="color:#f92672">$</span>A<span style="color:#f92672">-</span>df<span style="color:#f92672">$</span>B)
+
+<span style="color:#a6e22e">ggplot</span>(df_long, <span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>value, fill<span style="color:#f92672">=</span>candidate))<span style="color:#f92672">+</span><span style="color:#a6e22e">geom_histogram</span>(bins<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>)
+<span style="color:#a6e22e">ggplot</span>(df_diff, <span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>diff)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_histogram</span>(bins<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>)
+
+</code></pre></div><p><img src="/image/Rplot11.png" alt="Rplot11"></p>
+<p><img src="/image/Rplot12.png" alt="Rplot12"></p>
+<h3 id="brreferences"><!-- raw HTML omitted -->References</h3>
+<ol>
+<li>First Course into Bayesian Statistical Methods (Hoff, 2009)</li>
+<li><a href="https://github.com/jayelm/hoff-bayesian-statistics">https://github.com/jayelm/hoff-bayesian-statistics</a></li>
+<li>Pattern Recognition and Machine Learning (Bishop, 2006) (figures)</li>
+</ol>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/bayesian/" rel="tag">Bayesian</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/multivariate-normal/" rel="tag">Multivariate Normal</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/conjugacy/" rel="tag">Conjugacy</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Kang Gyeonghun avatar" src="/mypic1.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Kang Gyeonghun</span>
+	</div>
+	<div class="authorbox__description">
+		I study statistics, machine learning, data science or whatever that concerns making inference on infinitie dimension from a limited sample in fintie dimension. This blog is an archive of my journey of study.
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/posts/bayesian-ml/week2/02-conjugate-prior-for-univariate-normal-model/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Conjugate Prior for Univariate - Normal Model</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/posts/bayesian-ml/week3/01-discrete-time-markov-chaine-with-finite-state-space/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">(MCMC) Discrete-Time Markov Chain with Finite State Space</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q" aria-label="SEARCH...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/04-note-on-kullback-leibler-divergence/">Note on Kullback-Leibler Divergence</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/03-em-algorithm-for-latent-variable-models/">EM Algorithm for Latent Variable Models</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/02-mixtures-of-gaussians-and-em/">Mixtures of Gaussians and EM algorithm</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/01-k-means-clustering/">K-means clustering</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week3/03-bayesian-hierarchical-modeling-and-applications/">Bayesian Hierarchical Modeling and its Applications</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week3/02-mcmc-approximation-for-bayesian-posterior/">(MCMC) 베이지안 사후분포 근사를 위한 MCMC 방법론</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/adaboost/" title="ADABOOST">ADABOOST</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/adaptive-basis-model/" title="Adaptive Basis Model">Adaptive Basis Model</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayeisan/" title="Bayeisan">Bayeisan</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian/" title="Bayesian">Bayesian</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian-hierarchical/" title="Bayesian Hierarchical">Bayesian Hierarchical</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bootstrap/" title="Bootstrap">Bootstrap</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cart/" title="CART">CART</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/clustering/" title="Clustering">Clustering</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/conjugacy/" title="Conjugacy">Conjugacy</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/determinant/" title="Determinant">Determinant</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/diagonalization/" title="Diagonalization">Diagonalization</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/em-algorithm/" title="EM algorithm">EM algorithm</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ensemble-learning/" title="Ensemble Learning">Ensemble Learning</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/frequentist/" title="Frequentist">Frequentist</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/gaussian-mixtures/" title="Gaussian Mixtures">Gaussian Mixtures</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/generalized-additive-models/" title="Generalized Additive Models">Generalized Additive Models</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/intro-to-statistical-learning/" title="Intro to Statistical Learning">Intro to Statistical Learning</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jacobian/" title="Jacobian">Jacobian</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/k-cv/" title="k-CV">k-CV</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/k-means/" title="K-means">K-means</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kernel/" title="Kernel">Kernel</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kullback-leibler-divergence/" title="Kullback-Leibler Divergence">Kullback-Leibler Divergence</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lagrangian-duality/" title="Lagrangian Duality">Lagrangian Duality</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lasso/" title="Lasso">Lasso</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/latent-variable/" title="Latent Variable">Latent Variable</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lda/" title="LDA">LDA</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linear-adjoint/" title="Linear Adjoint">Linear Adjoint</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/logistic-regression/" title="Logistic Regression">Logistic Regression</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/markov-chain/" title="Markov Chain">Markov Chain</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/matrix-derivatives/" title="Matrix Derivatives">Matrix Derivatives</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mcmc/" title="MCMC">MCMC</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mse/" title="MSE">MSE</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/multivariate-normal/" title="Multivariate Normal">Multivariate Normal</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/naive-bayes-classifier/" title="Naive Bayes Classifier">Naive Bayes Classifier</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ols/" title="OLS">OLS</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pattern-recognition-and-machine-learning/" title="Pattern Recognition and Machine Learning">Pattern Recognition and Machine Learning</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pca/" title="PCA">PCA</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/probability/" title="Probability">Probability</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/regression-splines/" title="Regression Splines">Regression Splines</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ridge/" title="Ridge">Ridge</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/self-adjoint/" title="Self Adjoint">Self Adjoint</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/similar-matrices/" title="Similar Matrices">Similar Matrices</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/singular-value-decomposition/" title="Singular Value Decomposition">Singular Value Decomposition</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/statistics/" title="Statistics">Statistics</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/svm/" title="SVM">SVM</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vector-derivatives/" title="vector derivatives">vector derivatives</a>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Kang Gyeonghun.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

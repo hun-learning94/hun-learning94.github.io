@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Mixtures of Gaussians and EM algorithm - Hun Learning</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="Example article description">
+		<meta property="og:title" content="Mixtures of Gaussians and EM algorithm" />
+<meta property="og:description" content="Example article description" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/bayesian-ml/week5/02-mixtures-of-gaussians-and-em/" />
+<meta property="article:published_time" content="2020-08-10T07:00:00+09:00" />
+<meta property="article:modified_time" content="2020-08-10T07:00:00+09:00" />
+
+		<meta itemprop="name" content="Mixtures of Gaussians and EM algorithm">
+<meta itemprop="description" content="Example article description">
+<meta itemprop="datePublished" content="2020-08-10T07:00:00+09:00" />
+<meta itemprop="dateModified" content="2020-08-10T07:00:00+09:00" />
+<meta itemprop="wordCount" content="1715">
+
+
+
+<meta itemprop="keywords" content="Clustering,Gaussian Mixtures,EM algorithm,Pattern Recognition and Machine Learning," />
+
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="Hun Learning" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/mypic2.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Hun Learning</div>
+					<div class="logo__tagline">In Search Of The Truth Projected Onto A Finite Dimension</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/about/">
+				
+				<span class="menu__text">Author</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+	<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+</script>
+<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "all" } }
+  });
+</script>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Mixtures of Gaussians and EM algorithm</h1>
+			<p class="post__lead">When the typical Maximum-Likelihood approach leads you astray</p>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-08-10T07:00:00&#43;09:00">2020-08-10</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/bayesian-machine-learning/" rel="category">Bayesian Machine Learning</a>
+	</span>
+</div></div>
+		</header>
+		<figure class="post__thumbnail">
+			<img src="/cover/clustering.jpg" alt="Mixtures of Gaussians and EM algorithm">
+		</figure><div class="content post__content clearfix">
+			<h2 id="mixtures-of-gaussians-gmm">Mixtures of Gaussians (GMM)</h2>
+<h3 id="gmm-as-a-joint-distribution">GMM as a joint distribution</h3>
+<p>Suppose a random vector $\mathbf{x}$ follows a $K$ Gaussian mixture distribution,</p>
+<!-- raw HTML omitted -->
+<p>$$
+p(\mathbf{x}) = \sum_{k=1}^K \pi_k N(\mathbf{x}\mid \boldsymbol{\mu_k, \Sigma_k})
+$$
+<!-- raw HTML omitted --></p>
+<p>Knowing the distribution means we have complete information about the set of parameters $\pi_k, \boldsymbol{\mu_k, \Sigma_k}$ for all $k$. Let us say that the parameter $\pi_k$ is shrouded, and instead we have a random variable $\mathbf{z}$ with $1-to-K$ coding where exactly one of $K$ elements (say $z_k$) be $1$ while all else are $0$. Say it follows a multinomial distribution with $\pi_k$ under the constraint $\sum_{k}\pi_k=1$. Then its density can be written as</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\text{Latent variable}\quad \mathbf{z}&amp;=[z_1, &hellip;,z_K] \sim multinomial(\pi_k)\\\<br>
+p(\mathbf{z})&amp;= \prod_{k=1}^K \pi_k^{z_k}
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
+<p>Similarly, given that $z=k$, we can think of $N(\mathbf{x}\mid \boldsymbol{\mu_k, \Sigma_k})$ as $p(\mathbf{x} \mid z_k=1)$. Then we have another formulation of $K$ Gaussian mixture as</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+p(\mathbf{x,z})&amp;= p(\mathbf{z})p(\mathbf{x\mid z}) = \prod_{k=1}^K\pi_k^{z_k}N(\mathbf{x}\mid \boldsymbol{\mu_k, \Sigma_k})^{z_k}=\pi_kN(\mathbf{x}\mid \boldsymbol{\mu_k, \Sigma_k})\\\<br>
+p(\mathbf{x})&amp;= \sum_{z}p(\mathbf{x,z})=\sum_{k=1}^K\pi_kN(\mathbf{x}\mid \boldsymbol{\mu_k, \Sigma_k})
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
+<p>Does not seem to have changed at all, but we in fact introduced a latent variable $z$, and the above formula makes it explicit the fact that $p(\mathbf{x})$ is actually a marginal of the joint distribution; $p(\mathbf{x})=\sum_z p(\mathbf{z,x})$. With the joint $p(\mathbf{z,x})$, we can go further to discuss $\gamma(z_k)=p(z_k=1\mid \mathbf{x})$, which can be obtained with Bayes rule;</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+p(\mathbf{z\mid x})=p(z_k=1\mid \mathbf{x})&amp;= \dfrac{p(k)p(\mathbf{x}\mid k)}{\sum_j^Kp(j)p(\mathbf{x}\mid j)}=\dfrac{\pi_k N(\mathbf{x}\mid \boldsymbol{\mu_k, \Sigma_k})}{\sum_j^K\pi_j N(\mathbf{x}\mid \boldsymbol{\mu_j, \Sigma_j})}=\gamma(z_k)
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
+<p>Note that $z$ indicates an assignment of the data vector $\mathbf{x}$ to one of $1,2,&hellip;,K$ Gaussians. In a sense, $\pi_k$ is the probability that $\mathbf{x}$ is in $k$th Gaussian regardless of (prior to) the data $\mathbf{x}$, and $\gamma(z_k)=p(z_k=1\mid \mathbf{x})$ is the probability that $\mathbf{x}$ is in $k$th Gaussian after observing the value $\mathbf{x}$.</p>
+<p>The following plots illustrate the difference between $p(\mathbf{z,x})$, $p(\mathbf{z}\mid \mathbf{x})$ and $p(\mathbf{x})$. Complete knowledge of the distribution $p(\mathbf{z,x})$ means that not only $\boldsymbol{\mu_k, \Sigma_k}$ bus also $\pi_k$ is also given, which enables us to color each dot correctly according to $k$th Gaussians. We can sample from $p(\mathbf{z,x})$ by first generating $z\sim multi(\pi_k)$, and then sampling from $N(\boldsymbol{\mu_k, \Sigma_k})$. Since we know $p(\mathbf{z,x})$, we can also plot as in the second graph $p(\mathbf{z}\mid \mathbf{x})$ for each data by using (7). Lastly, without any knowledge of all the parameters, we have $p(\mathbf{x})$.</p>
+<p><img src="/image/BayesMLweek5/Rplot07.png" alt=""></p>
+<h3 id="brinference-on-gmm-ill-posed-mle-problem"><!-- raw HTML omitted -->Inference on GMM: ill-posed MLE problem</h3>
+<p>For $N\times D$ data set $\mathbf{X}$ where each row is an observation $\mathbf{x_n^T}$, we introduce a latent variable $z_{nk}\sim multinomial(\pi_k)$ which indicates an assignment of data $\mathbf{x_n}$ to $k$th Gaussian. The likelihood for the entire data set is</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+p(\mathbf{X}\mid \boldsymbol{\pi, \mu, \Sigma})=\prod_{n=1}^N\Bigg(\sum_{k=1}^K \pi_k N(\mathbf{x_n}\mid \boldsymbol{\mu_k, \Sigma_k})\Bigg)
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
+<p>where $\boldsymbol{\pi, \mu, \Sigma}$ is a complete set of parameters to specify Mixtures of Gaussians. Taking a log, we have</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\ln p(\mathbf{X}\mid \boldsymbol{\pi, \mu, \Sigma})=\sum_{n=1}^N\ln\Bigg(\sum_{k=1}^K \pi_k N(\mathbf{x_n}\mid \boldsymbol{\mu_k, \Sigma_k})\Bigg)
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
+<p>Our goal is to find $\boldsymbol{\pi, \mu, \Sigma}$ that maximize this likelihood, but there are several problems associated with MLE framework in GMM. Unlike in a single Gaussian case, the likelihood for GMM can go to infinity, so the maximum likelihood framework is not necessarily appropriate approach. To see why, consider the following example.</p>
+<p><img src="/image/BayesMLweek5/gmm01.png" alt=""></p>
+<p>For a single Gaussian, if the density falls on one single point, then the density at that particular region gets infinitely large, but this effect is countered by decreasing density in other data points as $\sigma^2 \to 0$. However, for a mixture of Gaussians, even as $\sigma^2_2 \to 0$, variance (width) of other Gaussians does not decrease accordingly.</p>
+<p>Furthermore, since there is no ordering for $K$ set of parameters, there can be a total of $K!$ equivalent solutions for MLE, which makes the likelihood for GMM &ldquo;unidentifiable&rdquo;. This could be trivial as any of the $K!$ is as good as others for clustering purpose. Even so, taking a derivative of the log likelihood yields an unholy mass because unlike in a single Gaussian case, in GMM normal densities are all clumped together inside the logarithm.</p>
+<h3 id="br-numerical-solution-em-for-gmm"><!-- raw HTML omitted --> Numerical solution: EM for GMM</h3>
+<p>For reasons detailed above, we cannot get a closed form solution for GMM. Instead, we can use three partial derivative conditions that MLE should satisfy. But since the solution is all implicit in its form, the algorithm must be iterative, and the convergence might not be either unique or globally optimal.</p>
+<p>Suppose the assignment probability $\pi_k$ are all given. The MLE of the likelihood of GMM must suffice the following first derivative conditions</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\dfrac{\partial logL}{\partial \boldsymbol{\mu_k}} = -\sum_{n=1}^N\dfrac{\pi_k N(\mathbf{x_n}\mid \boldsymbol{\mu_k, \Sigma_k})}{\sum_j^K\pi_j N(\mathbf{x_n}\mid \boldsymbol{\mu_j, \Sigma_j})} \boldsymbol{\Sigma_k}(\mathbf{x_n}-\boldsymbol{\mu_k})=0, \quad
+\dfrac{\partial logL}{\partial \boldsymbol{\Sigma_k}} =0
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
+<p>which leads to a solution</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\boldsymbol{\mu_k} &amp;= \dfrac{1}{N_k}\sum_{n=1}^N \gamma(z_{nk})\mathbf{x_n}\\\<br>
+\boldsymbol{\Sigma_k} &amp;= \dfrac{1}{N_k}\sum_{n=1}^N\gamma(z_{nk})(\mathbf{x_n}-\boldsymbol{\mu_k})(\mathbf{x_n}-\boldsymbol{\mu_k})^T
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
+<p>where we defined $\gamma(z_{nk})=\frac{\pi_k N(\mathbf{x_n}\mid \boldsymbol{\mu_k, \Sigma_k})}{\sum_j^K\pi_j N(\mathbf{x_n}\mid \boldsymbol{\mu_j, \Sigma_j})}$  and $N_k=\sum_{n=1}^N \gamma(z_{nk})$. Note that the above solution is almost identical to MLE for a single multivariate normal density, except that we get a weighted average for sample mean and covariance for each $k$. For each data vector, $\gamma(z_{nk})=p(z_{nk}\mid \mathbf{x_n})$ is a probability that $\mathbf{x_n}$ belongs to $k$th Gaussian, so for each data vector we have a cluster-assignment distribution. In this sense, the sum of $\gamma(z_{nk})$ for $k$th class can be interpreted as an effective number of observations in $k$th class. Since $\gamma(z_{nk})$ also contains $\boldsymbol{\mu_k, \Sigma_k}$, the above solution is implicit, not in a closed form.</p>
+<p>Next, for a given $\boldsymbol{\mu_k, \Sigma_k}$, obtaining the MLE solution of $\pi_k$ is to solve a Lagrange multiplier problem where the objective function to maximize is the likelihood function and the equality constraint is $\sum_{k=1}^K \pi_k=1$.</p>
+<!-- raw HTML omitted -->
+<p>$$
+L = \sum_{n=1}^N\log p(\mathbf{x_n}\mid \boldsymbol{\pi, \mu, \Sigma})+\lambda \Big( \sum_{k=1}^K\pi_k-1\Big)\\\<br>
+\dfrac{\partial L}{\partial \pi_k} = \sum_{n=1}^N\dfrac{N(\mathbf{x_n}\mid \boldsymbol{\mu_k, \Sigma_k})}{\sum_j \pi_j N(\mathbf{x_n}\mid \boldsymbol{\mu_j, \Sigma_j})}+\lambda =^{let}0
+$$
+<!-- raw HTML omitted --></p>
+<p>This yields a solution</p>
+<!-- raw HTML omitted -->
+<p>$$
+\pi_k = \dfrac{\sum_{n=1}^N \frac{\pi_k N(\mathbf{x_n}\mid \boldsymbol{\mu_k, \Sigma_k})}{\sum_j^K\pi_j N(\mathbf{x_n}\mid \boldsymbol{\mu_j, \Sigma_j})}}{N} = \dfrac{N_k}{N}
+$$
+<!-- raw HTML omitted --></p>
+<p>which is also in an implicit form. Now we have an iterative algorithm:</p>
+<p><strong><!-- raw HTML omitted -->EM Algorithm for GMM</strong></p>
+<ol>
+<li>Initialize $\boldsymbol{\mu_k, \Sigma_k, \pi_k}$ (usually by K-means for computational convenience)</li>
+<li><strong>E-step:</strong> update the cluster-assignment distribution $\gamma(z_{nk})$</li>
+<li><strong>M-step:</strong> update $\boldsymbol{\mu_k, \Sigma_k, \pi_k}$</li>
+<li>Evaluate the log likelihood and check for convergence. If not, repeat 2~4.</li>
+</ol>
+<!-- raw HTML omitted -->
+<p>To recap, in GMM, our objective is to maximize the likelihood function w.r.t. $\boldsymbol{\pi, \mu, \Sigma}$, ($\mathbf{X}$: $N\times D$ matrix)</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\arg\max p(\mathbf{X} \mid \boldsymbol{\pi, \mu, \Sigma})&amp;=\prod_{n=1}^N\Bigg(\sum_{k=1}^K \pi_k N(\mathbf{x_n}\mid \boldsymbol{\mu_k, \Sigma_k})\Bigg)\\\</p>
+<p>\arg\max \log p(\mathbf{X} \mid \boldsymbol{\pi, \mu, \Sigma})&amp;=\sum_{n=1}^N\ln\Bigg(\sum_{k=1}^K \pi_k N(\mathbf{x_n}\mid \boldsymbol{\mu_k, \Sigma_k})\Bigg)
+\end{align}
+$$
+<!-- raw HTML omitted -->But this likelihood is intractable. Suppose instead that we are given a $N \times K$ matrix of hidden variables $\mathbf{Z}$ where $z_{nk}=1$ indicates $\mathbf{x_n}$ belongs to $k$th Gaussian. That is, we have a complete data $\mathbf{X,Z}$. Then finding MLE of the joint distribution is fairly straightforward for GMM.</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\arg\max p(\mathbf{X}, \mathbf{Z} \mid \boldsymbol{\pi, \mu, \Sigma}) &amp;= \prod_{n=1}^N \prod_{k=1}^K
+\pi_k^{z_{nk}}N(\mathbf{x_n}\mid \boldsymbol{\mu_k,\Sigma_k})^{z_{nk}}\\\<br>
+\arg\max \log p(\mathbf{X}, \mathbf{Z} \mid \boldsymbol{\pi, \mu, \Sigma}) &amp;= \sum_n \sum_k z_{nk}(\log \pi_k + \log N(\mathbf{x_n}\mid \boldsymbol{\mu_k,\Sigma_k}))
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
+<p>Unlike $\log p(\mathbf{X} \mid \boldsymbol{\pi, \mu, \Sigma})$, every term in $\log p(\mathbf{X}, \mathbf{Z} \mid \boldsymbol{\pi, \mu, \Sigma})$ has been separated after log transformation. In fact, with $\mathbf{Z}$, we have a classification problem where class conditional density is multivariate normal, which is an assumption of QDA. Thus MLE for $\boldsymbol{\pi, \mu, \Sigma}$ is equal to that of QDA; sample proportion of class $k$, sample mean and covariance of data vectors in class $k$ respectively.</p>
+<p>The only problem is that we do not have the label $z_{nk}$ in GMM clustering problem, so we cannot calculate the complete data log likelihood $\log p(\mathbf{X}, \mathbf{Z} \mid \boldsymbol{\pi, \mu, \Sigma})$. Instead, in the EM algorithm suggested above we have calculated</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+J=\sum_n \sum_k &amp;\gamma(z_{nk})(\log \pi_k + \log N(\mathbf{x_n}\mid \boldsymbol{\mu_k,\Sigma_k}))
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
+<p>In fact, this is an expectation of the complete data log likelihood, provided that $z_{nk}$ follows the distribution $z_{nk}\sim p(z_{nk}=1 \mid \mathbf{x_n})= \gamma(z_{nk})$.</p>
+<!-- raw HTML omitted -->
+<p>$$
+J=E_{\mathbf{Z\mid X}}[\log p(\mathbf{X}, \mathbf{Z} \mid \boldsymbol{\pi, \mu, \Sigma})]
+$$
+<!-- raw HTML omitted --></p>
+<p>Given an initial value $\boldsymbol{\mu_k, \Sigma_k, \pi_k}$, the algorithm calculates $\gamma(z_{nk})$ which is to get an expectation value $J$ (E-step), and maximizes it by updating $\boldsymbol{\mu_k, \Sigma_k, \pi_k}$ (M-step), and after enough iterations $J$ converges to some desired local maximum. How so? That would be a topic of the next post!</p>
+<h3 id="brem-for-gaussian-mixtures-in-r"><!-- raw HTML omitted -->EM for Gaussian Mixtures in R</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R">hun_EM <span style="color:#f92672">=</span> <span style="color:#a6e22e">function</span>(df, K, tol<span style="color:#f92672">=</span><span style="color:#ae81ff">0.01</span>){
+
+  df <span style="color:#f92672">=</span> <span style="color:#a6e22e">data.matrix</span>(df)
+  n <span style="color:#f92672">=</span> <span style="color:#a6e22e">nrow</span>(df)
+  d <span style="color:#f92672">=</span> <span style="color:#a6e22e">ncol</span>(df)
+  
+  <span style="color:#75715e"># 0. initialize pr, mu, sigma</span>
+  km <span style="color:#f92672">=</span> <span style="color:#a6e22e">hun_kmeans</span>(df, K)
+  pr <span style="color:#f92672">=</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span>K, K), ncol<span style="color:#f92672">=</span>K)
+  mu <span style="color:#f92672">=</span> <span style="color:#a6e22e">array</span>(<span style="color:#a6e22e">t</span>(km<span style="color:#f92672">$</span>mu), dim<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>))
+  sigma <span style="color:#f92672">=</span> <span style="color:#a6e22e">array</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#a6e22e">diag</span>(d),K), dim<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(d,d,K))
+  
+  
+  <span style="color:#75715e"># 0. calculate log likelihood</span>
+  
+  dmnorm <span style="color:#f92672">=</span> <span style="color:#a6e22e">function</span>(y, Theta, Sigma){
+    y <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.matrix</span>(y)
+    Theta <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.matrix</span>(Theta)
+    Sigma <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.matrix</span>(Sigma)
+    p <span style="color:#f92672">=</span> <span style="color:#a6e22e">nrow</span>(Theta)
+    (<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span><span style="color:#66d9ef">pi</span>)<span style="color:#a6e22e">^</span>(<span style="color:#f92672">-</span>p<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">*</span><span style="color:#a6e22e">det</span>(Sigma)<span style="color:#a6e22e">^</span>(<span style="color:#ae81ff">-1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">*</span>
+      <span style="color:#a6e22e">exp</span>(<span style="color:#f92672">-</span><span style="color:#a6e22e">t</span>(y<span style="color:#f92672">-</span>Theta) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">solve</span>(Sigma) <span style="color:#f92672">%*%</span> (y <span style="color:#f92672">-</span> Theta) <span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
+  }
+  
+  prob_per_k <span style="color:#f92672">=</span> <span style="color:#a6e22e">function</span>(x, pr, mu, sigma){
+    lik <span style="color:#f92672">=</span> <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">0</span>, K)
+    <span style="color:#a6e22e">for</span>(k in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>K){
+      lik[k] <span style="color:#f92672">=</span> <span style="color:#a6e22e">dmnorm</span>(x, mu[,,k], sigma[,,k])<span style="color:#f92672">*</span>pr[k]
+    }
+    lik <span style="color:#75715e"># output 1xK vector of pr*N(x|mu, sigma) </span>
+  }
+  
+  z <span style="color:#f92672">=</span> <span style="color:#a6e22e">t</span>(<span style="color:#a6e22e">apply</span>(df, <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">function</span>(x) <span style="color:#a6e22e">prob_per_k</span>(x, pr, mu, sigma)))
+  loglik <span style="color:#f92672">=</span> <span style="color:#a6e22e">sum</span>(<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">rowSums</span>(z)))
+  
+  convergence <span style="color:#f92672">=</span> F
+  count <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+  <span style="color:#75715e"># 1. do EM until convergence</span>
+  
+  <span style="color:#a6e22e">while</span>(convergence<span style="color:#f92672">==</span>F){
+    <span style="color:#75715e"># E: update responsibility (cond exp of hidde variable z)</span>
+    z <span style="color:#f92672">=</span> <span style="color:#a6e22e">t</span>(<span style="color:#a6e22e">apply</span>(z, <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">function</span>(x) x<span style="color:#f92672">/</span><span style="color:#a6e22e">sum</span>(x)))
+    
+    <span style="color:#75715e"># M: update parameters</span>
+    pr <span style="color:#f92672">=</span> <span style="color:#a6e22e">colSums</span>(z)<span style="color:#f92672">/</span>n
+    <span style="color:#a6e22e">for</span>(k in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>K){
+      mu[,,k] <span style="color:#f92672">=</span> <span style="color:#a6e22e">colSums</span>(df<span style="color:#f92672">*</span>z[,k]) <span style="color:#f92672">/</span><span style="color:#a6e22e">colSums</span>(z)[k]
+      Mu <span style="color:#f92672">=</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">1</span>, n), ncol<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">%*%</span> mu[,,k]
+      sigma[,,k] <span style="color:#f92672">=</span>  <span style="color:#a6e22e">t</span>(df<span style="color:#f92672">-</span>Mu) <span style="color:#f92672">%*%</span> ((df <span style="color:#f92672">-</span> Mu)<span style="color:#f92672">*</span> z[,k])<span style="color:#f92672">/</span><span style="color:#a6e22e">colSums</span>(z)[k]
+    }
+    
+    <span style="color:#75715e"># check: calculate log likelihood</span>
+    z <span style="color:#f92672">=</span> <span style="color:#a6e22e">t</span>(<span style="color:#a6e22e">apply</span>(df, <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">function</span>(x) <span style="color:#a6e22e">prob_per_k</span>(x, pr, mu, sigma)))
+    loglik_new <span style="color:#f92672">=</span> <span style="color:#a6e22e">sum</span>(<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">rowSums</span>(z)))
+    convergence <span style="color:#f92672">=</span> (<span style="color:#a6e22e">abs</span>(loglik_new<span style="color:#f92672">-</span>loglik) <span style="color:#f92672">&lt;</span> tol)
+    loglik <span style="color:#f92672">=</span> loglik_new
+    count <span style="color:#f92672">=</span> count<span style="color:#ae81ff">+1</span>
+  }
+  
+  output <span style="color:#f92672">=</span> <span style="color:#a6e22e">list</span>(mu<span style="color:#f92672">=</span>mu, sigma<span style="color:#f92672">=</span>sigma, pr<span style="color:#f92672">=</span>pr, loglik<span style="color:#f92672">=</span>loglik, count<span style="color:#f92672">=</span>count)
+  <span style="color:#a6e22e">return</span>(output)
+}
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#75715e">## faithful data ##</span>
+<span style="color:#a6e22e">library</span>(ggplot2)
+<span style="color:#a6e22e">library</span>(cowplot)
+<span style="color:#a6e22e">library</span>(reshape)
+
+<span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">101</span>)
+nNoise <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span>
+Noise <span style="color:#f92672">=</span> <span style="color:#a6e22e">apply</span>(faithful, <span style="color:#ae81ff">2</span>, <span style="color:#a6e22e">function</span>(x)
+  <span style="color:#a6e22e">runif</span>(nNoise, min<span style="color:#f92672">=</span><span style="color:#a6e22e">min</span>(x)<span style="color:#ae81ff">-0.1</span>, max<span style="color:#f92672">=</span><span style="color:#a6e22e">max</span>(x)<span style="color:#ae81ff">+0.1</span>))
+df <span style="color:#f92672">=</span> <span style="color:#a6e22e">rbind</span>(faithful, Noise)
+df <span style="color:#f92672">=</span> <span style="color:#a6e22e">apply</span>(df, <span style="color:#ae81ff">2</span>, <span style="color:#a6e22e">function</span>(x){<span style="color:#a6e22e">return</span>((x<span style="color:#f92672">-</span><span style="color:#a6e22e">mean</span>(x))<span style="color:#f92672">/</span><span style="color:#a6e22e">sd</span>(x))})
+
+<span style="color:#a6e22e">ggplot</span>(<span style="color:#a6e22e">data.frame</span>(df), <span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>eruptions, y<span style="color:#f92672">=</span>waiting))<span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_point</span>()<span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">theme_cowplot</span>()
+</code></pre></div><p><img src="/image/BayesMLweek5/Rplot05.png" alt="Rplot05"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#75715e">## plot result ##</span>
+<span style="color:#a6e22e">set.seed</span>(<span style="color:#ae81ff">101</span>)
+result <span style="color:#f92672">=</span> <span style="color:#a6e22e">hun_EM</span>(df, <span style="color:#ae81ff">2</span>)
+
+dmnorm <span style="color:#f92672">=</span> <span style="color:#a6e22e">function</span>(y, Theta, Sigma){
+  y <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.matrix</span>(y)
+  Theta <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.matrix</span>(Theta)
+  Sigma <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.matrix</span>(Sigma)
+  p <span style="color:#f92672">=</span> <span style="color:#a6e22e">nrow</span>(Theta)
+  (<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span><span style="color:#66d9ef">pi</span>)<span style="color:#a6e22e">^</span>(<span style="color:#f92672">-</span>p<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">*</span><span style="color:#a6e22e">det</span>(Sigma)<span style="color:#a6e22e">^</span>(<span style="color:#ae81ff">-1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)<span style="color:#f92672">*</span>
+    <span style="color:#a6e22e">exp</span>(<span style="color:#f92672">-</span><span style="color:#a6e22e">t</span>(y<span style="color:#f92672">-</span>Theta) <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">solve</span>(Sigma) <span style="color:#f92672">%*%</span> (y <span style="color:#f92672">-</span> Theta) <span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>)
+}
+
+dGMM <span style="color:#f92672">=</span> <span style="color:#a6e22e">function</span>(x, pr, mu, sigma){
+  K <span style="color:#f92672">=</span> <span style="color:#a6e22e">length</span>(pr)
+  lik <span style="color:#f92672">=</span> <span style="color:#a6e22e">rep</span>(<span style="color:#ae81ff">0</span>, K)
+  <span style="color:#a6e22e">for</span>(k in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>K){
+    lik[k] <span style="color:#f92672">=</span> <span style="color:#a6e22e">dmnorm</span>(x, mu[,,k], sigma[,,k])<span style="color:#f92672">*</span>pr[k]
+  }
+  <span style="color:#a6e22e">sum</span>(lik)
+}
+
+y1 <span style="color:#f92672">=</span> <span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">-2</span>, <span style="color:#ae81ff">2</span>, length<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>)
+y2 <span style="color:#f92672">=</span> <span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">-2</span>, <span style="color:#ae81ff">2</span>, length<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>)
+
+calc.density <span style="color:#f92672">=</span> <span style="color:#a6e22e">Vectorize</span>(<span style="color:#a6e22e">function</span>(y1, y2){
+  y <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(y1, y2)
+  <span style="color:#a6e22e">dGMM</span>(y, result<span style="color:#f92672">$</span>pr, result<span style="color:#f92672">$</span>mu, result<span style="color:#f92672">$</span>sigma)
+})
+
+grid <span style="color:#f92672">=</span> <span style="color:#a6e22e">outer</span>(y1, y2, FUN <span style="color:#f92672">=</span> calc.density)
+<span style="color:#a6e22e">rownames</span>(grid) <span style="color:#f92672">=</span> y1
+<span style="color:#a6e22e">colnames</span>(grid) <span style="color:#f92672">=</span> y2
+grid <span style="color:#f92672">=</span> <span style="color:#a6e22e">melt</span>(grid)
+<span style="color:#a6e22e">colnames</span>(grid)<span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;eruptions&#39;</span>,<span style="color:#e6db74">&#39;waiting&#39;</span>,<span style="color:#e6db74">&#39;density&#39;</span>)
+
+density <span style="color:#f92672">=</span> <span style="color:#a6e22e">apply</span>(df, <span style="color:#ae81ff">1</span>, <span style="color:#a6e22e">function</span>(x) <span style="color:#a6e22e">dGMM</span>(x, result<span style="color:#f92672">$</span>pr, result<span style="color:#f92672">$</span>mu, result<span style="color:#f92672">$</span>sigma))
+df <span style="color:#f92672">=</span> <span style="color:#a6e22e">cbind</span>(df, density)
+
+
+<span style="color:#a6e22e">ggplot</span>(grid, <span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>eruptions, y<span style="color:#f92672">=</span>waiting, z<span style="color:#f92672">=</span>density))<span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_contour</span>(<span style="color:#a6e22e">aes</span>(color<span style="color:#f92672">=</span>..level..))<span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_point</span>(data<span style="color:#f92672">=</span><span style="color:#a6e22e">data.frame</span>(df), <span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>eruptions, y<span style="color:#f92672">=</span>waiting))<span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">guides</span>(color<span style="color:#f92672">=</span><span style="color:#66d9ef">FALSE</span>)<span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">theme_cowplot</span>()
+</code></pre></div><p><img src="/image/BayesMLweek5/Rplot06.png" alt="Rplot06"></p>
+<h3 id="br-references"><!-- raw HTML omitted --> References</h3>
+<ol>
+<li>Pattern Recognition and Machine Learning, Bishop, 2006</li>
+<li><a href="https://bloomberg.github.io/foml/#lectures">https://bloomberg.github.io/foml/#lectures</a></li>
+</ol>
+<h3 id="heading"></h3>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/clustering/" rel="tag">Clustering</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/gaussian-mixtures/" rel="tag">Gaussian Mixtures</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/em-algorithm/" rel="tag">EM algorithm</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/pattern-recognition-and-machine-learning/" rel="tag">Pattern Recognition and Machine Learning</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Kang Gyeonghun avatar" src="/mypic1.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Kang Gyeonghun</span>
+	</div>
+	<div class="authorbox__description">
+		I study statistics, machine learning, data science or whatever that concerns making inference on infinitie dimension from a limited sample in fintie dimension. This blog is an archive of my journey of study.
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/posts/bayesian-ml/week5/01-k-means-clustering/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">K-means clustering</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/posts/bayesian-ml/week5/03-em-algorithm-for-latent-variable-models/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">EM Algorithm for Latent Variable Models</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q" aria-label="SEARCH...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/04-note-on-kullback-leibler-divergence/">Note on Kullback-Leibler Divergence</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/03-em-algorithm-for-latent-variable-models/">EM Algorithm for Latent Variable Models</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/02-mixtures-of-gaussians-and-em/">Mixtures of Gaussians and EM algorithm</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/01-k-means-clustering/">K-means clustering</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week3/03-bayesian-hierarchical-modeling-and-applications/">Bayesian Hierarchical Modeling and its Applications</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week3/02-mcmc-approximation-for-bayesian-posterior/">(MCMC) 베이지안 사후분포 근사를 위한 MCMC 방법론</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/adaboost/" title="ADABOOST">ADABOOST</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/adaptive-basis-model/" title="Adaptive Basis Model">Adaptive Basis Model</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayeisan/" title="Bayeisan">Bayeisan</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian/" title="Bayesian">Bayesian</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian-hierarchical/" title="Bayesian Hierarchical">Bayesian Hierarchical</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bootstrap/" title="Bootstrap">Bootstrap</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cart/" title="CART">CART</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/clustering/" title="Clustering">Clustering</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/conjugacy/" title="Conjugacy">Conjugacy</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/determinant/" title="Determinant">Determinant</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/diagonalization/" title="Diagonalization">Diagonalization</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/em-algorithm/" title="EM algorithm">EM algorithm</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ensemble-learning/" title="Ensemble Learning">Ensemble Learning</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/frequentist/" title="Frequentist">Frequentist</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/gaussian-mixtures/" title="Gaussian Mixtures">Gaussian Mixtures</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/generalized-additive-models/" title="Generalized Additive Models">Generalized Additive Models</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/intro-to-statistical-learning/" title="Intro to Statistical Learning">Intro to Statistical Learning</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jacobian/" title="Jacobian">Jacobian</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/k-cv/" title="k-CV">k-CV</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/k-means/" title="K-means">K-means</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kernel/" title="Kernel">Kernel</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kullback-leibler-divergence/" title="Kullback-Leibler Divergence">Kullback-Leibler Divergence</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lagrangian-duality/" title="Lagrangian Duality">Lagrangian Duality</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lasso/" title="Lasso">Lasso</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/latent-variable/" title="Latent Variable">Latent Variable</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lda/" title="LDA">LDA</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linear-adjoint/" title="Linear Adjoint">Linear Adjoint</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/logistic-regression/" title="Logistic Regression">Logistic Regression</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/markov-chain/" title="Markov Chain">Markov Chain</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/matrix-derivatives/" title="Matrix Derivatives">Matrix Derivatives</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mcmc/" title="MCMC">MCMC</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mse/" title="MSE">MSE</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/multivariate-normal/" title="Multivariate Normal">Multivariate Normal</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/naive-bayes-classifier/" title="Naive Bayes Classifier">Naive Bayes Classifier</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ols/" title="OLS">OLS</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pattern-recognition-and-machine-learning/" title="Pattern Recognition and Machine Learning">Pattern Recognition and Machine Learning</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pca/" title="PCA">PCA</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/probability/" title="Probability">Probability</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/regression-splines/" title="Regression Splines">Regression Splines</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ridge/" title="Ridge">Ridge</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/self-adjoint/" title="Self Adjoint">Self Adjoint</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/similar-matrices/" title="Similar Matrices">Similar Matrices</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/singular-value-decomposition/" title="Singular Value Decomposition">Singular Value Decomposition</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/statistics/" title="Statistics">Statistics</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/svm/" title="SVM">SVM</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vector-derivatives/" title="vector derivatives">vector derivatives</a>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Kang Gyeonghun.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

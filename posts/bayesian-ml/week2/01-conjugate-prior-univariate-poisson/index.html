@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Conjugate Prior for Univariate - Poisson Model - Hun Learning</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="Example article description">
+		<meta property="og:title" content="Conjugate Prior for Univariate - Poisson Model" />
+<meta property="og:description" content="Example article description" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/bayesian-ml/week2/01-conjugate-prior-univariate-poisson/" />
+<meta property="article:published_time" content="2020-07-20T06:00:00+09:00" />
+<meta property="article:modified_time" content="2020-07-20T06:00:00+09:00" />
+
+		<meta itemprop="name" content="Conjugate Prior for Univariate - Poisson Model">
+<meta itemprop="description" content="Example article description">
+<meta itemprop="datePublished" content="2020-07-20T06:00:00+09:00" />
+<meta itemprop="dateModified" content="2020-07-20T06:00:00+09:00" />
+<meta itemprop="wordCount" content="1083">
+
+
+
+<meta itemprop="keywords" content="Bayesian,Conjugacy," />
+
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="Hun Learning" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/mypic2.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Hun Learning</div>
+					<div class="logo__tagline">In Search Of The Truth Projected Onto A Finite Dimension</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/about/">
+				
+				<span class="menu__text">Author</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+	<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+</script>
+<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "all" } }
+  });
+</script>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Conjugate Prior for Univariate - Poisson Model</h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-20T06:00:00&#43;09:00">2020-07-20</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/bayesian-machine-learning/" rel="category">Bayesian Machine Learning</a>
+	</span>
+</div></div>
+		</header>
+		<figure class="post__thumbnail">
+			<img src="/cover/conjugate_prior.jpg" alt="Conjugate Prior for Univariate - Poisson Model">
+		</figure><div class="content post__content clearfix">
+			<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#a6e22e">library</span>(ggplot2)
+<span style="color:#a6e22e">library</span>(cowplot)
+<span style="color:#a6e22e">library</span>(reshape)
+</code></pre></div><h2 id="bayesian-update-and-prediction">Bayesian Update and Prediction</h2>
+<p>Given a data $\mathbf{D}={x_1, x_2, &hellip;, x_n}$, once a likelihood model $p(\mathbf{D}|\theta)$ and a prior on a parameter $p(\theta)$ are specified, Bayesian inference produces an updated belief on $\theta$.</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\text{Prior Belief}&amp;\quad p(\theta)\\\<br>
+\text{Likelihood}&amp;\quad p(\mathbf{D}|\theta)\\\<br>
+\text{Updated (Posterior)}&amp;\quad p(\theta|\mathbf{D}) =
+\dfrac{p(\mathbf{D}|\theta)p(\theta)}{\int p(\mathbf{D}|\theta)p(\theta)d\theta}
+\propto p(\mathbf{D}|\theta)p(\theta)
+\end{align}
+$$</p>
+<p><!-- raw HTML omitted -->Our interest may extend to the prediction the new value $\tilde{x}$ that would be generated from the same sampling distribution. This is obtanind by taking a weighted average of $p(\tilde{x}|\theta)$ over all the possible $\theta$. $p(\tilde{x})$ is called a <strong>prior predictive</strong> distribution where the weight is the belief prior to the data. $p(\tilde{x}|\mathbf{D})$ is called <strong>posterior predictive</strong> distribution as its weight is updated per data.</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\text{Prior predictive}&amp;\quad p(\tilde{x}) = \int p(\tilde{x}|\theta)p(\theta)d\theta\\\<br>
+\text{Posterior predictive}&amp;\quad p(\tilde{x}|\mathbf{D}) = \int p(\tilde{x}|\theta)p(\theta|\mathbf{D})d\theta
+\end{align}
+$$</p>
+<h2 id="brgamma-poisson-model"><!-- raw HTML omitted -->Gamma-Poisson Model</h2>
+<p>Poisson likelihood is often used for modelling a distribution of counts.</p>
+<!-- raw HTML omitted -->
+<p>$$
+p(x|\theta) = \dfrac{\theta^x e^{-\theta}}{x!} \quad (x\in \mathcal{X}={0, 1, 2,&hellip;})
+$$
+<!-- raw HTML omitted --></p>
+<p>For $\mathbf{D} = {x_1, x_2, &hellip;,x_n}$ we have joint likelihood</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\text{Poisson likelihood}\quad p(\mathbf{D}|\theta) &amp;= \prod_{i=1}^n\dfrac{\theta^{x_i} e^{-\theta}}{x_i!}
+= c(x_1, x_2, &hellip;, x_n) \theta^{\sum_{i}x_i}e^{-n\theta}
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
+<p>Give any prior $p(\theta)$, the posterior would be</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+p(\theta|\mathbf{D}) \propto p(\theta, \mathbf{D}) &amp;= p(\theta)p(\mathbf{D}|\theta)\\\<br>
+&amp;= p(\theta) \theta^{\sum_{i}x_i}e^{-n\theta}
+\end{align}
+$$</p>
+<!-- raw HTML omitted -->
+<p>For $p(\theta)$ to be conjugate, i.e. for $p(\theta)$ to be in same form as $p(\theta|\mathbf{D})$, the prior must contain a term $\theta^{c_1}e^{-c_2}$. A natural choice for the prior would be gamma density $\theta \sim \Gamma(a,b)$</p>
+<!-- raw HTML omitted -->
+<p>$$
+\text{Gamma prior}\quad p(\theta) = \dfrac{b^a}{\Gamma(a)}\theta^{a-1}e^{-b\theta}
+$$
+<!-- raw HTML omitted --></p>
+<p>Then we can easily see that the posterior is given as $\theta|\mathbf{D} \sim \Gamma(a+\sum_{i}x_i, b+n)$</p>
+<!-- raw HTML omitted -->
+<p>$$
+\text{Gamma posterior}\quad p(\theta|\mathbf{D}) =
+\dfrac{(b+n)^{(a+\sum x_i)}}{\Gamma(a+\sum x_i)}\theta^{a+\sum x_i-1}e^{-\theta(b+n)}
+$$
+<!-- raw HTML omitted --></p>
+<p>with mean and variance</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+E[\theta] &amp;= \dfrac{a+\sum_{i}x_i}{b+n} = \dfrac{b}{b+n}\dfrac{a}{b} + \dfrac{n}{b+n}\dfrac{\sum_ix_i}{n}\<br>
+V[\theta] &amp;= \dfrac{a+\sum_{i}x_i}{(b+n)^2}
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
+<p>Two points worth noted;</p>
+<ul>
+<li>
+<p>The prior parameter $a$ means &ldquo;prior sample counts&rdquo;, and $b$ means &ldquo;prior sample size&rdquo;. ($a$ counts among $b$ samples)</p>
+</li>
+<li>
+<p>As $n\to \infty$, $E[\theta] \to \bar{x}$ and $V[\theta] \to \bar{x}/n$. We can see that for large $n$, the prior information is dominated by the sample likelihood.</p>
+</li>
+</ul>
+<p>Posterior predictive distribtion for prediction of new value $\tilde{x}$ can be obtained from</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+p(x|\mathbf{D})&amp;= \int p(x|\theta)p(\theta|\mathbf{D})d\theta\\\<br>
+&amp;= \int \dfrac{\theta^x e^{-\theta}}{x!}\dfrac{(b+n)^{(a+\sum x_i)}}
+{\Gamma(a+\sum x_i)}\theta^{a+\sum x_i-1}e^{-\theta(b+n)}   d\theta\\\<br>
+&amp;= \dfrac{(b+n)^{(a+\sum x_i)}}{\Gamma(x+1)\Gamma(a+\sum x_i)}
+\int \theta^{a+\sum x_i + x -1} e^{-(b+n+1)\theta}d\theta\\\<br>
+&amp;= \dfrac{\Gamma(a+\sum x_i+x)}{\Gamma(x+1)\Gamma(a+\sum x_i)}
+(\dfrac{b+n}{b+n+1})^{a+\sum x_i}(\dfrac{1}{b+n+1})^{x}\\\<br>
+&amp;= {x+a+\sum x_i -1 \choose a+\sum x_i -1}
+(\dfrac{b+n}{b+n+1})^{a+\sum x_i}(\dfrac{1}{b+n+1})^{x}
+\end{align}
+$$</p>
+<!-- raw HTML omitted -->
+<p>From this we can see that the posterior predictive distribution of Gamma-Poisson model is actually a negative binomial model with mean and variance</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\text{Posterior predictive}\quad &amp; x|\mathbf{D} \sim NB(a+\sum x_i, \dfrac{b+n}{b+n+1})\\\<br>
+\text{Posterior predictive mean}\quad &amp; E[x|\mathbf{D}] = \dfrac{a+\sum x_i}{b+n} = E[\theta|\mathbf{D}]\\\<br>
+\text{Posterior predictive variance}\quad &amp; V[x|\mathbf{D}] = \dfrac{a+\sum x_i}{b+n} \dfrac{b+n+1}{b+n} \\\<br>
+&amp;= V[\theta|\mathbf{D}] ;(b+n+1)\\\<br>
+&amp;= E[\theta|\mathbf{D}];(1+\dfrac{1}{b+n})
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
+<p>Compare this with the frequentist approach. In frequentist prediction for poisson model, we would obtain a single estimator say, mle, $\hat{\theta}$ for $\theta$, and this yields a predictive distribution $p(x|\hat{\theta})$ with $E[x|\hat{\theta}]=V[x|\hat{\theta}]=\hat{\theta}$. In Bayesian, since inference on the parameter is given as a distribution, not a single number, we have to marginalize out $\theta$. The marginalization leads to, rather incidentally, the negative binomial predictive distribution, and we have mean $E[\theta |\mathbf{D}]$ instead of $\hat{\theta}$, and variance $E[\theta|\mathbf{D}] (1+1/(b+n))$ instead of $\hat{\theta}$.</p>
+<p>Posterior predictive variance implies an uncertainty about the new value of $x$. This uncertainty stems from</p>
+<ol>
+<li>$E[\theta|\mathbf{D}]$: sampling variability inherent in the poisson likelihood model</li>
+<li>$1+1/(b+n)$: mainly due to uncertainty in the true value of $\theta$.</li>
+</ol>
+<p>Hence we can see that as $n \to \infty$, we have plenty of data for $\theta$ and the predictive variance reduces to $E[\theta|\mathbf{D}]$.</p>
+<p>In summary,</p>
+<!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\text{Data} &amp;\quad \mathbf{D} ={x_1, x_2, &hellip;, x_n}\\\<br>
+\text{Likelihood} &amp;\quad x_i \sim poi(\theta)\\\<br>
+\\\<br>
+\text{Prior} &amp;\quad \theta \sim \Gamma(a,b)\\\<br>
+\text{Posterior} &amp;\quad \theta|\mathbf{D} \sim \Gamma(a+\sum x_i,b+n)\\\<br>
+\\\<br>
+\text{Posterior predictive} &amp;\quad x|\mathbf{D} \sim NB(a+\sum x_i, \dfrac{b+n}{b+n+1})\\\<br>
+&amp;E[x|\mathbf{D}] = E[\theta|\mathbf{D}]\\\<br>
+&amp;V[x|\mathbf{D}]=E[\theta|\mathbf{D}];(1+\dfrac{1}{b+n})
+\end{align}
+$$</p>
+<h3 id="brexample-birth-rates-fcbsm-ex-48"><!-- raw HTML omitted -->Example: Birth Rates (FCBSM Ex 4.8)</h3>
+<p><!-- raw HTML omitted -->Let $\theta_A$ and $\theta_B$ be the average number of children of men in their 30s with and without bachelor&rsquo;s degrees, respectively. Accordingly, let $Y_{i,A}$, $Y_{i,B}$ be a number of child such that</p>
+<!-- raw HTML omitted -->
+<p>$$
+Y_{i,A} \sim poi(\theta_A)\\\<br>
+Y_{i,B} \sim poi(\theta_B)
+$$
+<!-- raw HTML omitted --></p>
+<p>and are given data where $n_A = 58, n_B = 305$ and $\sum Y_{i,A}=54, \sum Y_{i,B}=305$.</p>
+<p>Suppose we have a prior belief in $\theta_A, \theta_B$ as follows</p>
+<!-- raw HTML omitted -->
+<p>$$
+\theta_A \sim \Gamma(2,1)\\\<br>
+\theta_B \sim \Gamma(2,1)
+$$
+<!-- raw HTML omitted --></p>
+<p>which can be plotted as</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R">df<span style="color:#f92672">=</span><span style="color:#a6e22e">data.frame</span>(
+  theta <span style="color:#f92672">=</span> <span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">5</span>, by<span style="color:#f92672">=</span><span style="color:#ae81ff">0.01</span>),
+  prior <span style="color:#f92672">=</span> <span style="color:#a6e22e">dgamma</span>(<span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">5</span>, by<span style="color:#f92672">=</span><span style="color:#ae81ff">0.01</span>), <span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>)
+)
+<span style="color:#a6e22e">ggplot</span>(df, <span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>theta, y<span style="color:#f92672">=</span>prior))<span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_line</span>()<span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">ggtitle</span>(<span style="color:#a6e22e">bquote</span>(<span style="color:#e6db74">&#34;Prior:&#34;</span><span style="color:#f92672">~</span>theta<span style="color:#f92672">~</span><span style="color:#e6db74">&#34;~&#34;</span><span style="color:#f92672">~</span><span style="color:#a6e22e">Gamma</span>(<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>)))
+</code></pre></div><p><img src="/image/Rplot.png" alt="Rplot"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R">menchild30bach<span style="color:#f92672">=</span><span style="color:#a6e22e">scan</span>(<span style="color:#a6e22e">url</span>(<span style="color:#e6db74">&#39;http://www2.stat.duke.edu/~pdh10/FCBS/Exercises/menchild30bach.dat&#39;</span>))
+menchild30nobach<span style="color:#f92672">=</span><span style="color:#a6e22e">scan</span>(<span style="color:#a6e22e">url</span>(<span style="color:#e6db74">&#39;http://www2.stat.duke.edu/~pdh10/FCBS/Exercises/menchild30nobach.dat&#39;</span>))
+<span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">sum</span>(menchild30bach), <span style="color:#a6e22e">length</span>(menchild30bach))
+<span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">sum</span>(menchild30nobach), <span style="color:#a6e22e">length</span>(menchild30nobach))
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#75715e"># prior</span>
+a<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>; b<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+theta<span style="color:#f92672">=</span> <span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">5</span>, by<span style="color:#f92672">=</span><span style="color:#ae81ff">0.01</span>)
+<span style="color:#75715e"># posterior</span>
+df<span style="color:#f92672">=</span><span style="color:#a6e22e">data.frame</span>(
+  theta <span style="color:#f92672">=</span> theta,
+  prior <span style="color:#f92672">=</span> <span style="color:#a6e22e">dgamma</span>(theta, a, b),
+  pos_thetaA <span style="color:#f92672">=</span> <span style="color:#a6e22e">dgamma</span>(theta, a <span style="color:#f92672">+</span> <span style="color:#a6e22e">sum</span>(menchild30bach), b <span style="color:#f92672">+</span> <span style="color:#a6e22e">length</span>(menchild30bach)),
+  pos_thetaB <span style="color:#f92672">=</span> <span style="color:#a6e22e">dgamma</span>(theta, a <span style="color:#f92672">+</span> <span style="color:#a6e22e">sum</span>(menchild30nobach), b <span style="color:#f92672">+</span> <span style="color:#a6e22e">length</span>(menchild30nobach))
+)
+
+df_long <span style="color:#f92672">=</span> <span style="color:#a6e22e">melt</span>(df, id.vars<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;theta&#39;</span>, variable_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;dist&#39;</span>)
+<span style="color:#a6e22e">ggplot</span>(df_long, <span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>theta, y<span style="color:#f92672">=</span>value, group<span style="color:#f92672">=</span>dist, color<span style="color:#f92672">=</span>dist))<span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_line</span>()<span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">ylab</span>(<span style="color:#e6db74">&#39;probability&#39;</span>)
+</code></pre></div><p><img src="/image/Rplot01.png" alt="Rplot01"></p>
+<p>We can sample from posterior predictive distribution as follows</p>
+<pre><code class="language-{r}" data-lang="{r}"># mc sample size
+N=50000
+
+# sample from posterior belief
+thetaA = rgamma(N, a + sum(menchild30bach), b + length(menchild30bach))
+thetaB = rgamma(N, a + sum(menchild30nobach), b + length(menchild30nobach))
+
+# sample new values of Y
+ynewA = rpois(N, thetaA)
+ynewB = rpois(N, thetaB)
+
+# Assemble
+pos_predict = data.frame(
+  ynew = c(ynewA, ynewB),
+  dist = factor( rep(c('bach','nobach'), each=N), levels=c('bach','nobach')),
+  type='posterior'
+)
+
+ggplot(pos_predict, aes(x=ynew, group=dist)) +
+  geom_histogram() +
+  facet_grid(.~dist)
+
+</code></pre><p><img src="/image/Rplot02.png" alt="Rplot02"></p>
+<p>Compared with the empirical distribution, the model for &ldquo;nobach&rdquo; data poorly reflected counts for 0 and 1 child. This is not a big of a concern as long as the parameter in interest, which is in this case a mean of the distribution, is not significantly differenct from the data. However, if the very modelling purpose was to do an inference on a parameter such as a proportion of observations with 0 or 1 child, then our poisson model should be reconsidered, in favor of a more suitable model such as in this case a multinomial model. When modelling the distribution of the data. the primary criterion should be the parameters in question.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R">emp_df <span style="color:#f92672">=</span> <span style="color:#a6e22e">data.frame</span>(
+  ynew <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(menchild30bach, menchild30nobach),
+  dist <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(<span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">rep</span>(<span style="color:#e6db74">&#39;bach&#39;</span>,<span style="color:#a6e22e">length</span>(menchild30bach)), <span style="color:#a6e22e">rep</span>(<span style="color:#e6db74">&#39;nobach&#39;</span>,<span style="color:#a6e22e">length</span>(menchild30nobach))),
+                levels<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;bach&#39;</span>,<span style="color:#e6db74">&#39;nobach&#39;</span>)),
+  type<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;empirical&#39;</span>
+)
+
+total_df <span style="color:#f92672">=</span> <span style="color:#a6e22e">rbind</span>(pos_predict, emp_df)
+
+<span style="color:#a6e22e">ggplot</span>(total_df, <span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>ynew, y<span style="color:#f92672">=</span>..density.., group <span style="color:#f92672">=</span> type, fill<span style="color:#f92672">=</span>type))<span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_histogram</span>(position<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;dodge&#39;</span>)<span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">facet_grid</span>(. <span style="color:#f92672">~</span> dist)
+</code></pre></div><p><img src="/image/Rplot03.png" alt="Rplot03"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R">d <span style="color:#f92672">=</span> <span style="color:#ae81ff">50</span> <span style="color:#75715e"># number of factors (variables)</span>
+N <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>^17 <span style="color:#75715e"># number of observation</span>
+p <span style="color:#f92672">=</span> <span style="color:#a6e22e">runif</span>(d) <span style="color:#75715e"># different distribution for each factor</span>
+
+factor <span style="color:#f92672">=</span> <span style="color:#a6e22e">function</span>(p){<span style="color:#a6e22e">return</span>(<span style="color:#a6e22e">rbinom</span>(N, <span style="color:#ae81ff">1</span>, p))}
+output <span style="color:#f92672">=</span> <span style="color:#a6e22e">sapply</span>(p, factor) <span style="color:#75715e"># generate distribution of factors</span>
+beta <span style="color:#f92672">=</span> <span style="color:#a6e22e">runif</span>(d)<span style="color:#f92672">*</span><span style="color:#ae81ff">2-1</span> <span style="color:#75715e"># generate beta for each factor</span>
+
+df <span style="color:#f92672">=</span> <span style="color:#a6e22e">data.frame</span>(height <span style="color:#f92672">=</span> output <span style="color:#f92672">%*%</span> beta)
+
+<span style="color:#a6e22e">ggplot</span>(df, <span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>height)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">geom_histogram</span>(color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>,fill<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;grey&#39;</span>, bins<span style="color:#f92672">=</span><span style="color:#ae81ff">30</span>)
+</code></pre></div><h1 id="references">References</h1>
+<ol>
+<li>First Course into Bayesian Statistical Analysis (Hoff, 2009)</li>
+<li><a href="https://github.com/jayelm/hoff-bayesian-statistics">https://github.com/jayelm/hoff-bayesian-statistics</a></li>
+</ol>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/bayesian/" rel="tag">Bayesian</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/conjugacy/" rel="tag">Conjugacy</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Kang Gyeonghun avatar" src="/mypic1.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Kang Gyeonghun</span>
+	</div>
+	<div class="authorbox__description">
+		I study statistics, machine learning, data science or whatever that concerns making inference on infinitie dimension from a limited sample in fintie dimension. This blog is an archive of my journey of study.
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/posts/bayesian-ml/week1/08-bayesian-approach-%ED%95%98%EB%82%98%EC%9D%98-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%97%AC%EB%9F%AC-%EA%B0%9C%EC%9D%98-%EB%AA%A8%EC%88%98/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Bayesian Approach: 하나의 데이터, 임의의 모수</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/posts/bayesian-ml/week2/02-conjugate-prior-for-univariate-normal-model/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">Conjugate Prior for Univariate - Normal Model</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q" aria-label="SEARCH...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/04-note-on-kullback-leibler-divergence/">Note on Kullback-Leibler Divergence</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/03-em-algorithm-for-latent-variable-models/">EM Algorithm for Latent Variable Models</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/02-mixtures-of-gaussians-and-em/">Mixtures of Gaussians and EM algorithm</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/01-k-means-clustering/">K-means clustering</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week3/03-bayesian-hierarchical-modeling-and-applications/">Bayesian Hierarchical Modeling and its Applications</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week3/02-mcmc-approximation-for-bayesian-posterior/">(MCMC) 베이지안 사후분포 근사를 위한 MCMC 방법론</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/adaboost/" title="ADABOOST">ADABOOST</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/adaptive-basis-model/" title="Adaptive Basis Model">Adaptive Basis Model</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayeisan/" title="Bayeisan">Bayeisan</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian/" title="Bayesian">Bayesian</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian-hierarchical/" title="Bayesian Hierarchical">Bayesian Hierarchical</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bootstrap/" title="Bootstrap">Bootstrap</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cart/" title="CART">CART</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/clustering/" title="Clustering">Clustering</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/conjugacy/" title="Conjugacy">Conjugacy</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/determinant/" title="Determinant">Determinant</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/diagonalization/" title="Diagonalization">Diagonalization</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/em-algorithm/" title="EM algorithm">EM algorithm</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ensemble-learning/" title="Ensemble Learning">Ensemble Learning</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/frequentist/" title="Frequentist">Frequentist</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/gaussian-mixtures/" title="Gaussian Mixtures">Gaussian Mixtures</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/generalized-additive-models/" title="Generalized Additive Models">Generalized Additive Models</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/intro-to-statistical-learning/" title="Intro to Statistical Learning">Intro to Statistical Learning</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jacobian/" title="Jacobian">Jacobian</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/k-cv/" title="k-CV">k-CV</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/k-means/" title="K-means">K-means</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kernel/" title="Kernel">Kernel</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kullback-leibler-divergence/" title="Kullback-Leibler Divergence">Kullback-Leibler Divergence</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lagrangian-duality/" title="Lagrangian Duality">Lagrangian Duality</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lasso/" title="Lasso">Lasso</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/latent-variable/" title="Latent Variable">Latent Variable</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lda/" title="LDA">LDA</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linear-adjoint/" title="Linear Adjoint">Linear Adjoint</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/logistic-regression/" title="Logistic Regression">Logistic Regression</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/markov-chain/" title="Markov Chain">Markov Chain</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/matrix-derivatives/" title="Matrix Derivatives">Matrix Derivatives</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mcmc/" title="MCMC">MCMC</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mse/" title="MSE">MSE</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/multivariate-normal/" title="Multivariate Normal">Multivariate Normal</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/naive-bayes-classifier/" title="Naive Bayes Classifier">Naive Bayes Classifier</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ols/" title="OLS">OLS</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pattern-recognition-and-machine-learning/" title="Pattern Recognition and Machine Learning">Pattern Recognition and Machine Learning</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pca/" title="PCA">PCA</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/probability/" title="Probability">Probability</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/regression-splines/" title="Regression Splines">Regression Splines</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ridge/" title="Ridge">Ridge</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/self-adjoint/" title="Self Adjoint">Self Adjoint</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/similar-matrices/" title="Similar Matrices">Similar Matrices</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/singular-value-decomposition/" title="Singular Value Decomposition">Singular Value Decomposition</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/statistics/" title="Statistics">Statistics</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/svm/" title="SVM">SVM</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vector-derivatives/" title="vector derivatives">vector derivatives</a>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Kang Gyeonghun.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

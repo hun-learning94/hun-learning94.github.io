@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lagrangian Duality on Hun Learning</title>
+    <link>/tags/lagrangian-duality/</link>
+    <description>Recent content in Lagrangian Duality on Hun Learning</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 17 Apr 2020 11:00:00 +0900</lastBuildDate>
+    
+	<atom:link href="/tags/lagrangian-duality/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Support Vector Machine 이해를 위한 Lagrangian Dual Problem 이해해보기</title>
+      <link>/posts/2020-04-17-support-vector-machine-%EC%9D%B4%ED%95%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-lagrangian-dual-problem/</link>
+      <pubDate>Fri, 17 Apr 2020 11:00:00 +0900</pubDate>
+      
+      <guid>/posts/2020-04-17-support-vector-machine-%EC%9D%B4%ED%95%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-lagrangian-dual-problem/</guid>
+      <description>Optimization with inequality constraints 다음과 같은 최적화 문제를 생각해보자.
+$$ \begin{align*} \textbf{Primal Problem:}\quad minimize &amp;amp;\quad f_0(\mathbf{x}) \quad (\mathbf{x} \in \mathbb{R}^n, ;domain;\mathcal{D})\\\
+s.t. &amp;amp;\quad f_i(\mathbf{x}) \leq 0, \quad ^\forall i \in [m] \\\
+&amp;amp;\quad h_i(\mathbf{x})=0 \quad ^\forall i \in [p] \end{align*} $$
+우리가 익숙한 Lagrange Multiplier에서는 제약식이 등호로만 되어있었지만, 이제는 부등식이 추가되었다. 이러한 경우 부등호 조건식 $f_i(\mathbf{x})$를 inequality constraints, 등호 조건식 $h_i(\mathbf{x})$를 equality constraints라고 한다.
+부등호 조건이 들어간 최적화 문제를 푸는 것은 참 막막한 일이다.</description>
+    </item>
+    
+    <item>
+      <title>ISL 09 Support Vector Machine</title>
+      <link>/posts/isl/isl-09/</link>
+      <pubDate>Sun, 26 Jan 2020 11:00:00 +0900</pubDate>
+      
+      <guid>/posts/isl/isl-09/</guid>
+      <description>훈러닝 채널에 ISL 전 범위 유투브 강의 있습니다!</description>
+    </item>
+    
+  </channel>
+</rss>
