@@ -18,7 +18,7 @@
       
       <guid>/posts/bayesian-ml/week5/04-note-on-kullback-leibler-divergence/</guid>
       <description>How do we quantify an amount of information that some data $x$ contains? If the data is pretty much expected than it tells nothing new to us. But if it is so rare then it has some value. In this sense, we can think of an amount of information as a &amp;ldquo;degree of surprise&amp;rdquo;, and define
-$$ \text{information content of data $x$:}\quad h(x) = -\log p(x) $$ where the logarithm ensures $h(x,y)=h(x)h(y) \Leftrightarrow p(x,y)=p(x)p(y)$, and the negative sign makes $h(x)\geq 0$.</description>
+$$ \text{information content of data $x$:}\quad h(x) = -\log p(x) $$ where the logarithm ensures $h(x,y)=h(x)+h(y) \Leftrightarrow p(x,y)=p(x)p(y)$, and the negative sign makes $h(x)\geq 0$.</description>
     </item>
     
   </channel>

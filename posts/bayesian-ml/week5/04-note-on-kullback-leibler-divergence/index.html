@@ -121,7 +121,7 @@
 \text{information content of data $x$:}\quad h(x) = -\log p(x)
 $$
 <!-- raw HTML omitted --></p>
-<p>where the logarithm ensures $h(x,y)=h(x)h(y) \Leftrightarrow p(x,y)=p(x)p(y)$, and the negative sign makes $h(x)\geq 0$. Note that if we use $\log_2$ instead, then $h(x)=-\log_2p(x)$ indicates a number of bits to encode an information in $x$. Data that is less likely (small $p(x)$) requires more bits to encode than more common (high $p(x)$) one.</p>
+<p>where the logarithm ensures $h(x,y)=h(x)+h(y) \Leftrightarrow p(x,y)=p(x)p(y)$, and the negative sign makes $h(x)\geq 0$. Note that if we use $\log_2$ instead, then $h(x)=-\log_2p(x)$ indicates a number of bits to encode an information in $x$. Data that is less likely (small $p(x)$) requires more bits to encode than more common (high $p(x)$) one.</p>
 <p>We define an information of a random variable $x$ with a distribution $p(x)$ as the expectation of its information content;</p>
 <!-- raw HTML omitted -->
 <p>$$

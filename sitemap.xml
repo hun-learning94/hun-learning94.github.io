@@ -203,6 +203,11 @@
   </url>
   
   <url>
+    <loc>/posts/about/</loc>
+    <lastmod>2020-07-11T09:10:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/logistic-regression/</loc>
     <lastmod>2020-06-15T09:10:00+09:00</lastmod>
   </url>
@@ -283,7 +288,7 @@
   </url>
   
   <url>
-    <loc>/posts/vectormatrixderiv/2020-03-29-03-matrix-derivatives/</loc>
+    <loc>/posts/2020-03-29-03-matrix-derivatives/</loc>
     <lastmod>2020-03-29T09:20:00+09:00</lastmod>
   </url>
   
@@ -298,7 +303,7 @@
   </url>
   
   <url>
-    <loc>/posts/vectormatrixderiv/2020-03-29-02-example-change-of-variables/</loc>
+    <loc>/posts/2020-03-29-02-example-change-of-variables/</loc>
     <lastmod>2020-03-29T09:10:00+09:00</lastmod>
   </url>
   
@@ -308,7 +313,7 @@
   </url>
   
   <url>
-    <loc>/posts/vectormatrixderiv/2020-03-29-01-vector-derivatives/</loc>
+    <loc>/posts/2020-03-29-01-vector-derivatives/</loc>
     <lastmod>2020-03-29T09:00:00+09:00</lastmod>
   </url>
   
@@ -318,7 +323,7 @@
   </url>
   
   <url>
-    <loc>/posts/linearalgebra/linear04/</loc>
+    <loc>/posts/2020-03-25-04-least-squares-projection/</loc>
     <lastmod>2020-03-25T09:50:00+09:00</lastmod>
   </url>
   
@@ -333,7 +338,7 @@
   </url>
   
   <url>
-    <loc>/posts/linearalgebra/linear03/</loc>
+    <loc>/posts/2020-03-25-03-matrix-as-a-change-of-basis/</loc>
     <lastmod>2020-03-25T09:40:00+09:00</lastmod>
   </url>
   
@@ -343,7 +348,7 @@
   </url>
   
   <url>
-    <loc>/posts/linearalgebra/linear02/</loc>
+    <loc>/posts/2020-03-25-02-matrix-as-a-linear-operator/</loc>
     <lastmod>2020-03-25T09:30:00+09:00</lastmod>
   </url>
   
@@ -368,7 +373,7 @@
   </url>
   
   <url>
-    <loc>/posts/linearalgebra/linear01/</loc>
+    <loc>/posts/2020-03-25-01-length-angle-and-area/</loc>
     <lastmod>2020-03-25T09:00:00+09:00</lastmod>
   </url>
   
@@ -465,11 +470,6 @@
   <url>
     <loc>/posts/isl/isl-02/</loc>
     <lastmod>2020-01-20T11:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/about/</loc>
-    <lastmod>2020-01-01T09:10:00+09:00</lastmod>
   </url>
   
 </urlset>

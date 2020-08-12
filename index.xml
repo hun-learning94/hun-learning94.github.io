@@ -18,7 +18,7 @@
       
       <guid>/posts/bayesian-ml/week5/04-note-on-kullback-leibler-divergence/</guid>
       <description>How do we quantify an amount of information that some data $x$ contains? If the data is pretty much expected than it tells nothing new to us. But if it is so rare then it has some value. In this sense, we can think of an amount of information as a &amp;ldquo;degree of surprise&amp;rdquo;, and define
-$$ \text{information content of data $x$:}\quad h(x) = -\log p(x) $$ where the logarithm ensures $h(x,y)=h(x)h(y) \Leftrightarrow p(x,y)=p(x)p(y)$, and the negative sign makes $h(x)\geq 0$.</description>
+$$ \text{information content of data $x$:}\quad h(x) = -\log p(x) $$ where the logarithm ensures $h(x,y)=h(x)+h(y) \Leftrightarrow p(x,y)=p(x)p(y)$, and the negative sign makes $h(x)\geq 0$.</description>
     </item>
     
     <item>
@@ -207,6 +207,16 @@ $$ \text{Sampling Density of $x_i$:}\quad f(x|\theta) \quad (x\in \mathcal{X}, \
     </item>
     
     <item>
+      <title>Author</title>
+      <link>/posts/about/</link>
+      <pubDate>Sat, 11 Jul 2020 09:10:00 +0900</pubDate>
+      
+      <guid>/posts/about/</guid>
+      <description>“Study hard what interests you the most in the most undisciplined, irreverent and original manner possible.” (Richard Feynmann)
+ About My name is Kang Gyeonghun (Korean: 강경훈, Pronunciation: Khane-gi-yeong-hoon). I am currently an undergraduate student in Yonsei University, Korea. I am majoring in Economics but I was disenchanted with that subject way back, and had dreamed of being an professional investor. I spent most of my eight semesters of undergraduate course studying corporate finance, accounting, portfolio strategy and such, along with an internship in a local private equity.</description>
+    </item>
+    
+    <item>
       <title>Logit Regression과 SVM은 Loss function의 차이</title>
       <link>/posts/2020-06-15-logit-svm/</link>
       <pubDate>Mon, 15 Jun 2020 09:10:00 +0900</pubDate>
@@ -262,64 +272,64 @@ $$ Classification;Error:; I(t_i \neq \hat{t_i}) = \begin{cases} 0 &amp;amp; \tex
     
     <item>
       <title>03 Matrix Derivatives</title>
-      <link>/posts/vectormatrixderiv/2020-03-29-03-matrix-derivatives/</link>
+      <link>/posts/2020-03-29-03-matrix-derivatives/</link>
       <pubDate>Sun, 29 Mar 2020 09:20:00 +0900</pubDate>
       
-      <guid>/posts/vectormatrixderiv/2020-03-29-03-matrix-derivatives/</guid>
+      <guid>/posts/2020-03-29-03-matrix-derivatives/</guid>
       <description>훈러닝 채널에 벡터 및 행렬 미분 강의 있습니다!</description>
     </item>
     
     <item>
       <title>02 Example: Change of Variables</title>
-      <link>/posts/vectormatrixderiv/2020-03-29-02-example-change-of-variables/</link>
+      <link>/posts/2020-03-29-02-example-change-of-variables/</link>
       <pubDate>Sun, 29 Mar 2020 09:10:00 +0900</pubDate>
       
-      <guid>/posts/vectormatrixderiv/2020-03-29-02-example-change-of-variables/</guid>
+      <guid>/posts/2020-03-29-02-example-change-of-variables/</guid>
       <description>훈러닝 채널에 벡터 및 행렬 미분 강의 있습니다!</description>
     </item>
     
     <item>
       <title>01 Vector Derivatives</title>
-      <link>/posts/vectormatrixderiv/2020-03-29-01-vector-derivatives/</link>
+      <link>/posts/2020-03-29-01-vector-derivatives/</link>
       <pubDate>Sun, 29 Mar 2020 09:00:00 +0900</pubDate>
       
-      <guid>/posts/vectormatrixderiv/2020-03-29-01-vector-derivatives/</guid>
+      <guid>/posts/2020-03-29-01-vector-derivatives/</guid>
       <description>훈러닝 채널에 벡터 및 행렬 미분 강의 있습니다!</description>
     </item>
     
     <item>
       <title>04 Least Squares Projection</title>
-      <link>/posts/linearalgebra/linear04/</link>
+      <link>/posts/2020-03-25-04-least-squares-projection/</link>
       <pubDate>Wed, 25 Mar 2020 09:50:00 +0900</pubDate>
       
-      <guid>/posts/linearalgebra/linear04/</guid>
+      <guid>/posts/2020-03-25-04-least-squares-projection/</guid>
       <description>훈러닝 채널에 선형대수 강의 있습니다!</description>
     </item>
     
     <item>
       <title>03 Matrix as a Change of Basis</title>
-      <link>/posts/linearalgebra/linear03/</link>
+      <link>/posts/2020-03-25-03-matrix-as-a-change-of-basis/</link>
       <pubDate>Wed, 25 Mar 2020 09:40:00 +0900</pubDate>
       
-      <guid>/posts/linearalgebra/linear03/</guid>
+      <guid>/posts/2020-03-25-03-matrix-as-a-change-of-basis/</guid>
       <description>훈러닝 채널에 선형대수 강의 있습니다!</description>
     </item>
     
     <item>
       <title>02 Matrix as a Linear Operator</title>
-      <link>/posts/linearalgebra/linear02/</link>
+      <link>/posts/2020-03-25-02-matrix-as-a-linear-operator/</link>
       <pubDate>Wed, 25 Mar 2020 09:30:00 +0900</pubDate>
       
-      <guid>/posts/linearalgebra/linear02/</guid>
+      <guid>/posts/2020-03-25-02-matrix-as-a-linear-operator/</guid>
       <description>훈러닝 채널에 선형대수 강의 있습니다!</description>
     </item>
     
     <item>
       <title>01 Length, Angle and Area</title>
-      <link>/posts/linearalgebra/linear01/</link>
+      <link>/posts/2020-03-25-01-length-angle-and-area/</link>
       <pubDate>Wed, 25 Mar 2020 09:00:00 +0900</pubDate>
       
-      <guid>/posts/linearalgebra/linear01/</guid>
+      <guid>/posts/2020-03-25-01-length-angle-and-area/</guid>
       <description>훈러닝 채널에 선형대수 강의 있습니다!</description>
     </item>
     
@@ -384,16 +394,6 @@ $$ Classification;Error:; I(t_i \neq \hat{t_i}) = \begin{cases} 0 &amp;amp; \tex
       
       <guid>/posts/isl/isl-02/</guid>
       <description>훈러닝 채널에 ISL 전 범위 유투브 강의 있습니다!</description>
-    </item>
-    
-    <item>
-      <title>Author</title>
-      <link>/posts/about/</link>
-      <pubDate>Wed, 01 Jan 2020 09:10:00 +0900</pubDate>
-      
-      <guid>/posts/about/</guid>
-      <description>“Study hard what interests you the most in the most undisciplined, irreverent and original manner possible.” (Richard Feynmann)
- About My name is Kang Gyeonghun (Korean: 강경훈, Pronunciation: Khane-gi-yeong-hoon). I am currently an undergraduate student in Yonsei University, Korea. I am majoring in Economics but I was disenchanted with that subject way back, and had dreamed of being an professional investor. I spent most of my eight semesters of undergraduate course studying corporate finance, accounting, portfolio strategy and such, along with an internship in a local private equity.</description>
     </item>
     
   </channel>
