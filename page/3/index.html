@@ -99,6 +99,36 @@
 <main class="main list" role="main">
 	<article class="list__item post">
 	<figure class="list__thumbnail">
+		<a href="/posts/bayesian-ml/week1/05-frequentist-optimality-%EC%96%B4%EB%96%A4-%EC%B6%94%EC%A0%95%EB%9F%89%EC%9D%84-%EC%93%B8-%EA%B2%83%EC%9D%B8%EA%B0%80/">
+			<img src="/cover/classical.jpg" alt="05 Frequentist Optimality: 어떤 추정량을 쓸 것인가?" />
+		</a>
+	</figure>
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/bayesian-ml/week1/05-frequentist-optimality-%EC%96%B4%EB%96%A4-%EC%B6%94%EC%A0%95%EB%9F%89%EC%9D%84-%EC%93%B8-%EA%B2%83%EC%9D%B8%EA%B0%80/" rel="bookmark">
+			05 Frequentist Optimality: 어떤 추정량을 쓸 것인가?
+			</a>
+		</h3>
+		<p class="list__lead post__lead">가장 좋은 추정량 같은 것은 없다.</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-20T05:00:00&#43;09:00">2020-07-20</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/statistics/" rel="category">Statistics</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		빈도론자들의 세계관을 다시 한번 복기해봅시다. 데이터의 sampling density를 모수 $\theta$로 결정되는 확률분포함수로 가정하였고, $\theta$를 모를 때 이 sampling density를 데이터에 의해 정해지는 $\theta$의 식인 Likelihood로 해석합니다. 비록 우리가 가진 샘플은 $D^{(s)}$ 하나이지만 내가 모르는 수많은 평행우주에 똑같은 확률실험의 결과들의 앙상블인 ${D^{(s)}}_{s=1}^{\infty}$가 있다고 믿어봅시다.
+$$ \begin{align} \text{Ensemble of Data:}\quad &amp; D_{s=1}^{\infty} = [x_1^{(s)}, x_2^{(s)}, &hellip;, x_n^{(s)}]_{s=1}^{\infty}\\\
+\text{Sampling Density of $D^{(s)}$ (iid):}\quad&amp; f(D^{(s)}|\theta) = \prod_{i=1}^nf(x_i^{(s)}|\theta) \quad (x_i^{(s)}\in \mathcal{X}, \theta \in \Omega)\\\
+\text{Likelihood of $\theta$ given $D^{(s)}$:}\quad&amp; L(\theta|D^{(s)}) \end{align} $$ 우리는 데이터를 보고 모수를 추정하고자 합니다.
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/bayesian-ml/week1/05-frequentist-optimality-%EC%96%B4%EB%96%A4-%EC%B6%94%EC%A0%95%EB%9F%89%EC%9D%84-%EC%93%B8-%EA%B2%83%EC%9D%B8%EA%B0%80/">Read more…</a>
+	</div>
+</article><article class="list__item post">
+	<figure class="list__thumbnail">
 		<a href="/posts/bayesian-ml/week1/04-frequentist-approach-%ED%95%98%EB%82%98%EC%9D%98-%EB%AA%A8%EC%88%98-%EC%97%AC%EB%9F%AC-%EA%B0%9C%EC%9D%98-%EB%8D%B0%EC%9D%B4%ED%84%B0/">
 			<img src="/cover/classical.jpg" alt="04 Frequentist Approach 하나의 모수, 여러 개의 데이터" />
 		</a>
@@ -258,33 +288,6 @@ I. Intro 2범주 범주형자료분석에서 여러 개의 연속형 응답변�
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/2020-06-15-logit-svm/">Read more…</a>
 	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/2020-04-17-support-vector-machine-%EC%9D%B4%ED%95%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-lagrangian-dual-problem/" rel="bookmark">
-			Support Vector Machine 이해를 위한 Lagrangian Dual Problem 이해해보기
-			</a>
-		</h3>
-		<p class="list__lead post__lead">최적화 수업을 듣지 않고 어디까지 이해할 수 있을까...</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-04-17T11:00:00&#43;09:00">2020-04-17</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/optimization/" rel="category">Optimization</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		Optimization with inequality constraints 다음과 같은 최적화 문제를 생각해보자.
-$$ \begin{align*} \textbf{Primal Problem:}\quad minimize &amp;\quad f_0(\mathbf{x}) \quad (\mathbf{x} \in \mathbb{R}^n, ;domain;\mathcal{D})\\\
-s.t. &amp;\quad f_i(\mathbf{x}) \leq 0, \quad ^\forall i \in [m] \\\
-&amp;\quad h_i(\mathbf{x})=0 \quad ^\forall i \in [p] \end{align*} $$
-우리가 익숙한 Lagrange Multiplier에서는 제약식이 등호로만 되어있었지만, 이제는 부등식이 추가되었다. 이러한 경우 부등호 조건식 $f_i(\mathbf{x})$를 inequality constraints, 등호 조건식 $h_i(\mathbf{x})$를 equality constraints라고 한다.
-부등호 조건이 들어간 최적화 문제를 푸는 것은 참 막막한 일이다.
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/posts/2020-04-17-support-vector-machine-%EC%9D%B4%ED%95%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-lagrangian-dual-problem/">Read more…</a>
-	</div>
 </article>
 </main>
 
@@ -351,6 +354,7 @@ s.t. &amp;\quad f_i(\mathbf{x}) \leq 0, \quad ^\forall i \in [m] \\\
 		<a class="widget-taglist__link widget__link btn" href="/tags/bayeisan/" title="Bayeisan">Bayeisan</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian/" title="Bayesian">Bayesian</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian-hierarchical/" title="Bayesian Hierarchical">Bayesian Hierarchical</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bic/" title="BIC">BIC</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/bootstrap/" title="Bootstrap">Bootstrap</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/cart/" title="CART">CART</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/clustering/" title="Clustering">Clustering</a>
@@ -369,6 +373,7 @@ s.t. &amp;\quad f_i(\mathbf{x}) \leq 0, \quad ^\forall i \in [m] \\\
 		<a class="widget-taglist__link widget__link btn" href="/tags/kernel/" title="Kernel">Kernel</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/kullback-leibler-divergence/" title="Kullback-Leibler Divergence">Kullback-Leibler Divergence</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/lagrangian-duality/" title="Lagrangian Duality">Lagrangian Duality</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/laplace-approximation/" title="Laplace Approximation">Laplace Approximation</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/lasso/" title="Lasso">Lasso</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/latent-variable/" title="Latent Variable">Latent Variable</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/lda/" title="LDA">LDA</a>

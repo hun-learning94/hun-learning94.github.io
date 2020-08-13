@@ -99,6 +99,33 @@
 	<header class="main__header">
 		<h1 class="main__title">Posts</h1>
 	</header><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/2020-04-17-support-vector-machine-%EC%9D%B4%ED%95%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-lagrangian-dual-problem/" rel="bookmark">
+			Support Vector Machine 이해를 위한 Lagrangian Dual Problem 이해해보기
+			</a>
+		</h3>
+		<p class="list__lead post__lead">최적화 수업을 듣지 않고 어디까지 이해할 수 있을까...</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-04-17T11:00:00&#43;09:00">2020-04-17</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/optimization/" rel="category">Optimization</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		Optimization with inequality constraints 다음과 같은 최적화 문제를 생각해보자.
+$$ \begin{align*} \textbf{Primal Problem:}\quad minimize &amp;\quad f_0(\mathbf{x}) \quad (\mathbf{x} \in \mathbb{R}^n, ;domain;\mathcal{D})\\\
+s.t. &amp;\quad f_i(\mathbf{x}) \leq 0, \quad ^\forall i \in [m] \\\
+&amp;\quad h_i(\mathbf{x})=0 \quad ^\forall i \in [p] \end{align*} $$
+우리가 익숙한 Lagrange Multiplier에서는 제약식이 등호로만 되어있었지만, 이제는 부등식이 추가되었다. 이러한 경우 부등호 조건식 $f_i(\mathbf{x})$를 inequality constraints, 등호 조건식 $h_i(\mathbf{x})$를 equality constraints라고 한다.
+부등호 조건이 들어간 최적화 문제를 푸는 것은 참 막막한 일이다.
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/2020-04-17-support-vector-machine-%EC%9D%B4%ED%95%B4%EB%A5%BC-%EC%9C%84%ED%95%9C-lagrangian-dual-problem/">Read more…</a>
+	</div>
+</article><article class="list__item post">
 	<figure class="list__thumbnail">
 		<a href="/posts/linear-methods-for-classification/">
 			<img src="/cover/PRML.jpg" alt="Classification을 위한 선형 방법들" />
@@ -248,30 +275,6 @@ $$ Classification;Error:; I(t_i \neq \hat{t_i}) = \begin{cases} 0 &amp; \text{if
 	<div class="content list__excerpt post__content clearfix">
 		훈러닝 채널에 벡터 및 행렬 미분 강의 있습니다!
 	</div>
-</article><article class="list__item post">
-	<figure class="list__thumbnail">
-		<a href="/posts/2020-03-25-04-least-squares-projection/">
-			<img src="/posts/LinearAlgebra/LinAlg/93C5DB1E001.jpeg" alt="04 Least Squares Projection" />
-		</a>
-	</figure>
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/2020-03-25-04-least-squares-projection/" rel="bookmark">
-			04 Least Squares Projection
-			</a>
-		</h3>
-		<p class="list__lead post__lead">Linear Regression is statistician&#39;s garnish on mathematician&#39;s least squares projection</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-03-25T09:50:00&#43;09:00">2020-03-25</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/linear-algebra/" rel="category">Linear Algebra</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		훈러닝 채널에 선형대수 강의 있습니다!
-	</div>
 </article>
 </main>
 
@@ -338,6 +341,7 @@ $$ Classification;Error:; I(t_i \neq \hat{t_i}) = \begin{cases} 0 &amp; \text{if
 		<a class="widget-taglist__link widget__link btn" href="/tags/bayeisan/" title="Bayeisan">Bayeisan</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian/" title="Bayesian">Bayesian</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian-hierarchical/" title="Bayesian Hierarchical">Bayesian Hierarchical</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bic/" title="BIC">BIC</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/bootstrap/" title="Bootstrap">Bootstrap</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/cart/" title="CART">CART</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/clustering/" title="Clustering">Clustering</a>
@@ -356,6 +360,7 @@ $$ Classification;Error:; I(t_i \neq \hat{t_i}) = \begin{cases} 0 &amp; \text{if
 		<a class="widget-taglist__link widget__link btn" href="/tags/kernel/" title="Kernel">Kernel</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/kullback-leibler-divergence/" title="Kullback-Leibler Divergence">Kullback-Leibler Divergence</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/lagrangian-duality/" title="Lagrangian Duality">Lagrangian Duality</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/laplace-approximation/" title="Laplace Approximation">Laplace Approximation</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/lasso/" title="Lasso">Lasso</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/latent-variable/" title="Latent Variable">Latent Variable</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/lda/" title="LDA">LDA</a>
