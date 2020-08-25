@@ -11,7 +11,7 @@
 <meta property="og:description" content="Hun Learng Blog is the archive of my journey of studying statistical inference." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/posts/" />
-<meta property="og:updated_time" content="2020-08-10T11:00:00+09:00" />
+<meta property="og:updated_time" content="2020-08-25T10:00:00+09:00" />
 
 		<meta itemprop="name" content="Posts">
 <meta itemprop="description" content="Hun Learng Blog is the archive of my journey of studying statistical inference.">
@@ -100,6 +100,122 @@
 		<h1 class="main__title">Posts</h1>
 	</header><article class="list__item post">
 	<figure class="list__thumbnail">
+		<a href="/posts/bayesian-ml/week2/01-conjugate-prior-univariate-poisson/">
+			<img src="/cover/conjugate_prior.jpg" alt="Conjugate Prior for Univariate - Poisson Model" />
+		</a>
+	</figure>
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/bayesian-ml/week2/01-conjugate-prior-univariate-poisson/" rel="bookmark">
+			Conjugate Prior for Univariate - Poisson Model
+			</a>
+		</h3>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-20T06:00:00&#43;09:00">2020-07-20</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/probabilistic-machine-learning/" rel="category">Probabilistic Machine Learning</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		library(ggplot2) library(cowplot) library(reshape) Bayesian Update and Prediction Given a data $\mathbf{D}={x_1, x_2, &hellip;, x_n}$, once a likelihood model $p(\mathbf{D}|\theta)$ and a prior on a parameter $p(\theta)$ are specified, Bayesian inference produces an updated belief on $\theta$.
+$$ \begin{align} \text{Prior Belief}&amp;\quad p(\theta)\\\
+\text{Likelihood}&amp;\quad p(\mathbf{D}|\theta)\\\
+\text{Updated (Posterior)}&amp;\quad p(\theta|\mathbf{D}) = \dfrac{p(\mathbf{D}|\theta)p(\theta)}{\int p(\mathbf{D}|\theta)p(\theta)d\theta} \propto p(\mathbf{D}|\theta)p(\theta) \end{align} $$
+Our interest may extend to the prediction the new value $\tilde{x}$ that would be generated from the same sampling distribution.
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/bayesian-ml/week2/01-conjugate-prior-univariate-poisson/">Read more…</a>
+	</div>
+</article><article class="list__item post">
+	<figure class="list__thumbnail">
+		<a href="/posts/bayesian-ml/week1/08-bayesian-approach-%ED%95%98%EB%82%98%EC%9D%98-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%97%AC%EB%9F%AC-%EA%B0%9C%EC%9D%98-%EB%AA%A8%EC%88%98/">
+			<img src="/cover/robotbayesian.jpg" alt="Bayesian Approach: 하나의 데이터, 임의의 모수" />
+		</a>
+	</figure>
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/bayesian-ml/week1/08-bayesian-approach-%ED%95%98%EB%82%98%EC%9D%98-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%97%AC%EB%9F%AC-%EA%B0%9C%EC%9D%98-%EB%AA%A8%EC%88%98/" rel="bookmark">
+			Bayesian Approach: 하나의 데이터, 임의의 모수
+			</a>
+		</h3>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-20T05:30:00&#43;09:00">2020-07-20</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/probabilistic-machine-learning/" rel="category">Probabilistic Machine Learning</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		0. 생각하는 로봇은 베이지안이다! 주변 환경을 인지하고 목적지를 찾는 로봇을 생각해보자. 목적지로 가는 경로에는 수많은 경우의 수가 있다. 이 경로에서 로봇은 시시각각 환경을 파악해서, 즉 데이터를 수집해서 가장 안전한 길을 택해야 한다. 전방에 위험징후를 포착했다. 로봇은 그 방향으로 가는 길이 위험하다고 판단해 경로를 변경해야 한다. 자 그러면 이걸 어떻게 코딩할까? 각각의 길이 위험할 확률 $p(road_i=unsafe)$과, 각각의 길에서 위험한 징후가 포착될 확률 $p(sign\mid road_i=unsafe)$ 을 고려하여, 위험할 확률 $p(road_i = unsafe \mid sign)$ 을 다시 계산해야한다.
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/bayesian-ml/week1/08-bayesian-approach-%ED%95%98%EB%82%98%EC%9D%98-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%97%AC%EB%9F%AC-%EA%B0%9C%EC%9D%98-%EB%AA%A8%EC%88%98/">Read more…</a>
+	</div>
+</article><article class="list__item post">
+	<figure class="list__thumbnail">
+		<a href="/posts/bayesian-ml/week1/07-%EB%B9%88%EB%8F%84%EB%A1%A0%EC%A0%81-%EA%B7%80%EB%AC%B4%EA%B0%80%EC%84%A4%EC%9C%A0%EC%9D%98%EC%88%98%EC%A4%80%EA%B2%80%EC%A0%95nhst%EC%9D%98-%EB%AC%B8%EC%A0%9C%EC%A0%90/">
+			<img src="/cover/classical.jpg" alt="07 빈도론적 귀무가설유의수준검정(NHST)의 문제점" />
+		</a>
+	</figure>
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/bayesian-ml/week1/07-%EB%B9%88%EB%8F%84%EB%A1%A0%EC%A0%81-%EA%B7%80%EB%AC%B4%EA%B0%80%EC%84%A4%EC%9C%A0%EC%9D%98%EC%88%98%EC%A4%80%EA%B2%80%EC%A0%95nhst%EC%9D%98-%EB%AC%B8%EC%A0%9C%EC%A0%90/" rel="bookmark">
+			07 빈도론적 귀무가설유의수준검정(NHST)의 문제점
+			</a>
+		</h3>
+		<p class="list__lead post__lead">숫자 옆에 별표만 잔뜩 치면 다인가?</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-20T05:20:00&#43;09:00">2020-07-20</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/statistics/" rel="category">Statistics</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		1. 빈도론적 추론의 병폐 자 이제 빈도통계론의 논리도 이해했고 그 끝판왕인 MLE와 LRT도 봤습니다. 지금부터는 빈도론적 통계 추론, 그 중에서도 검정 (NHST)이 가진 &ldquo;병폐&quot;들에 대해서 살펴보겠습니다. 앞서 잠깐 봤는데, 여기서는 좀 더 자세하게 다뤄보겠습니다.
+1) Trigger Happy: $p(D \mid H_0)$만 보고 $H_0$을 기각함 $p(D\mid H_0)$이 굉장히 작아야지만 귀무가설을 기각하는 것이 얼핏 보면 굉장히 보수적으로 보이지만, 사실 이런 식으로 세팅을 해놓으면 &ldquo;귀무가설에 반대되는 evidence&quot;만 반영하게 되지, 귀무가설에 좋은 evidence는 절대 반영을 못함.
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/bayesian-ml/week1/07-%EB%B9%88%EB%8F%84%EB%A1%A0%EC%A0%81-%EA%B7%80%EB%AC%B4%EA%B0%80%EC%84%A4%EC%9C%A0%EC%9D%98%EC%88%98%EC%A4%80%EA%B2%80%EC%A0%95nhst%EC%9D%98-%EB%AC%B8%EC%A0%9C%EC%A0%90/">Read more…</a>
+	</div>
+</article><article class="list__item post">
+	<figure class="list__thumbnail">
+		<a href="/posts/bayesian-ml/week1/06-maximum-likelihood-theory/">
+			<img src="/cover/classical.jpg" alt="06 Maximum Likelihood Theory" />
+		</a>
+	</figure>
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/bayesian-ml/week1/06-maximum-likelihood-theory/" rel="bookmark">
+			06 Maximum Likelihood Theory
+			</a>
+		</h3>
+		<p class="list__lead post__lead">Likelihood에 대해 말할 수 있는 (거의) 모든 것</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-20T05:10:00&#43;09:00">2020-07-20</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/statistics/" rel="category">Statistics</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		지금까지의 논의를 종합해보면 다음과 같습니다.
+  빈도통계학 추론은 평행우주 데이터 ${D^{(s)}}_{s=1}^{\infty}$에서의 Sampling Distrubtion $\delta(D^{(s)}) \sim p(.\mid \theta^*)$에 달렸다.
+  모수 $\theta$에 대한 추정량 $\hat{\theta} = \delta(D^{(s)})$의 결정은 다음의 사항을 고려해야 한다.
+  일단 $\delta$의 sampling distribtion을 근사적으로나마 알아야 한다.
+  가급적이면 $\delta$의 평행우주 데이터 ${D^{(s)}}_{s=1}^{\infty}$에서의 행태가 &ldquo;이쁘면&rdquo; 좋겠다. (Consistent, Unbiased, Efficient)
+    Sampling distribution $\delta(D^{(s)}) \sim p(.\mid\theta^*)$만 알면 점 추정, 구간 추정, 가설 검정 다 할 수 있다!
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/bayesian-ml/week1/06-maximum-likelihood-theory/">Read more…</a>
+	</div>
+</article><article class="list__item post">
+	<figure class="list__thumbnail">
 		<a href="/posts/bayesian-ml/week1/05-frequentist-optimality-%EC%96%B4%EB%96%A4-%EC%B6%94%EC%A0%95%EB%9F%89%EC%9D%84-%EC%93%B8-%EA%B2%83%EC%9D%B8%EA%B0%80/">
 			<img src="/cover/classical.jpg" alt="05 Frequentist Optimality: 어떤 추정량을 쓸 것인가?" />
 		</a>
@@ -185,116 +301,12 @@ $$ \begin{align} \text{Data (iid):}\quad &amp;D = [x_1, x_2, &hellip;, x_n]\\\
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/bayesian-ml/week1/03-%EB%B9%88%EB%8F%84%ED%86%B5%EA%B3%84%ED%95%99%EA%B3%BC-%EB%B2%A0%EC%9D%B4%EC%A6%88%ED%86%B5%EA%B3%84%ED%95%99-%EC%B2%A0%ED%95%99%EC%9D%98-%EC%B0%A8%EC%9D%B4/">Read more…</a>
 	</div>
-</article><article class="list__item post">
-	<figure class="list__thumbnail">
-		<a href="/posts/bayesian-ml/week1/02-%ED%86%B5%EA%B3%84%ED%95%99%EC%9D%98-%EB%AA%A9%EC%A0%81-inference%EC%99%80-prediction/">
-			<img src="/cover/classical.jpg" alt="02 통계학의 목적: Inference와 Prediction" />
-		</a>
-	</figure>
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/bayesian-ml/week1/02-%ED%86%B5%EA%B3%84%ED%95%99%EC%9D%98-%EB%AA%A9%EC%A0%81-inference%EC%99%80-prediction/" rel="bookmark">
-			02 통계학의 목적: Inference와 Prediction
-			</a>
-		</h3>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-20T04:00:00&#43;09:00">2020-07-20</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/statistics/" rel="category">Statistics</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		이처럼 데이터는 알고 모수는 모르는 상황에서, 우리는 오직 하나의 Likelihood 함수만 관측할 수 있습니다. 이 Likelihood 함수를 가지고 통계학자들이 하고 싶은 일은 두 가지로 요약할 수 있습니다.
- Inference: 데이터 $\mathbf{x}$를 바탕으로 모수 $\theta$에 대해 무엇을 말할 수 있는가? Prediction: 데이터 $\mathbf{x}$를 바탕으로 새로운 데이터 $x_{new}$를 예측해보자.  동전의 예를 생각해보면, inference는 이 동전이 과연 fair한가 아닌가, 즉 앞면이 나올 확률이 무엇인가에 대해 답하고자 하는 것이며, prediction은 그렇다면 다음 시행에서 앞면이 나올지 뒷면이 나올지 예측하는 것입니다.
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/posts/bayesian-ml/week1/02-%ED%86%B5%EA%B3%84%ED%95%99%EC%9D%98-%EB%AA%A9%EC%A0%81-inference%EC%99%80-prediction/">Read more…</a>
-	</div>
-</article><article class="list__item post">
-	<figure class="list__thumbnail">
-		<a href="/posts/bayesian-ml/week1/01-probability-densities%EC%99%80-likelihood/">
-			<img src="/cover/classical.jpg" alt="01 Probability Densities와 Likelihood" />
-		</a>
-	</figure>
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/bayesian-ml/week1/01-probability-densities%EC%99%80-likelihood/" rel="bookmark">
-			01 Probability Densities와 Likelihood
-			</a>
-		</h3>
-		<p class="list__lead post__lead">분포는 모른다. 우리에게는 오직 Likelihood만 있을 뿐이다.</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-20T03:43:58&#43;09:00">2020-07-20</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/statistics/" rel="category">Statistics</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		어떤 확률 변수 $x_i$가 가질 수 있는 값들을 sample space $\mathcal{X}$라고 하고, 그 값들의 분포는 어떤 모수 $\theta$에 의해 완전히 결정되는 함수 $f(x\mid\theta)$라고 생각해봅시다(예컨대 이항분포나 분산이 주어진 정규분포 등을 생각해볼 수 있겠습니다). 모수 $\theta$가 가질 수 있는 값들은 parameter space $\mathcal{\Omega}$라고 합니다. (이때 모수 $\theta$는 스칼라가 아니라 벡터일 수도 있습니다. 여기서는 스칼라인 경우만 일단 생각해볼게요.)
-$$ \text{Sampling Density of $x_i$:}\quad f(x|\theta) \quad (x\in \mathcal{X}, \theta \in \Omega) $$
-이때 함수 $f$를 probability density라고 합니다.
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/posts/bayesian-ml/week1/01-probability-densities%EC%99%80-likelihood/">Read more…</a>
-	</div>
-</article><article class="list__item post">
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/about/" rel="bookmark">
-			Author
-			</a>
-		</h3>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-11T09:10:00&#43;09:00">2020-07-11</time></div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		“Study hard what interests you the most in the most undisciplined, irreverent and original manner possible.” (Richard Feynmann)
- About My name is Kang Gyeonghun (Korean: 강경훈, Pronunciation: Khane-gi-yeong-hoon). I am currently an undergraduate student in Yonsei University, Korea. I am majoring in Economics but I was disenchanted with that subject way back, and had dreamed of being an professional investor. I spent most of my eight semesters of undergraduate course studying corporate finance, accounting, portfolio strategy and such, along with an internship in a local private equity.
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/posts/about/">Read more…</a>
-	</div>
-</article><article class="list__item post">
-	<figure class="list__thumbnail">
-		<a href="/posts/2020-06-15-logit-svm/">
-			<img src="/posts/classificationloss.PNG" alt="Logit Regression과 SVM은 Loss function의 차이" />
-		</a>
-	</figure>
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/2020-06-15-logit-svm/" rel="bookmark">
-			Logit Regression과 SVM은 Loss function의 차이
-			</a>
-		</h3>
-		<p class="list__lead post__lead">Jacobian cancels out the distortion in space brought by changing cooridinate system</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-06-15T09:10:00&#43;09:00">2020-06-15</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/statistics/" rel="category">Statistics</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		학교 과제로 썼던 자료인데 조금 다듬어서 블로그에 올립니다.
-I. Intro 2범주 범주형자료분석에서 여러 개의 연속형 응답변수가 주어졌을 때 쓸 수 있는 확률 모형의 대표적인 예는 로지스틱 회귀가 있다. 모델의 계수에 대한 해석이 가능한 Generalized Linear Model의 틀 안에 있기 때문에 결과에 대한 해석이 가능한 장점이 있다. 로지스틱 회귀는 로그 오드에 대한 선형식으로 Likelihood를 세워 MLE 방식으로 추정하는 함수적 추정 방법이다. 그러나 범주형자료분석에서 만일 목적이 예측이라면 해석이 불가능한 비모수적 함수 추정 방법을 쓸 수 있는데, 그 대표적인 예가 옆 동네 컴퓨터 공학과에서 처음 개발한 Support Vector Machine 방법이다.
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/posts/2020-06-15-logit-svm/">Read more…</a>
-	</div>
 </article>
 </main>
 
 <div class="pagination">
 	<a class="pagination__item pagination__item--prev btn" href="/posts/page/2/">«</a>
-	<span class="pagination__item pagination__item--current">3/6</span>
+	<span class="pagination__item pagination__item--current">3/7</span>
 	<a class="pagination__item pagination__item--next btn" href="/posts/page/4/">»</a>
 </div>
 
@@ -313,12 +325,12 @@ I. Intro 2범주 범주형자료분석에서 여러 개의 연속형 응답변�
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/2020-08-25-variational-inference/">Variational Inference and Bayesian Gaussian Mixture Model</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/2020-08-24-forward-and-reverse-kl-divergence/">Forward and Reverse KL divergence</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/05-mle-minimizes-kl-divergence/">Interpretation of MLE in terms of KL divergence</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/04-note-on-kullback-leibler-divergence/">Note on Kullback-Leibler Divergence</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/2020-08-11-bayesian-networks-directed-acyclical-graphs/">Bayesian Networks (Directed Acyclical Graphs)</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/03-em-algorithm-for-latent-variable-models/">EM Algorithm for Latent Variable Models</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/02-mixtures-of-gaussians-and-em/">Mixtures of Gaussians and EM algorithm</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/01-k-means-clustering/">K-means clustering</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week3/03-bayesian-hierarchical-modeling-and-applications/">Bayesian Hierarchical Modeling and its Applications</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week3/02-mcmc-approximation-for-bayesian-posterior/">(MCMC) 베이지안 사후분포 근사를 위한 MCMC 방법론</a></li>
 		</ul>
 	</div>
 </div>
@@ -327,9 +339,6 @@ I. Intro 2범주 범주형자료분석에서 여러 개의 연속형 응답변�
 	<div class="widget__content">
 		<ul class="widget__list">
 			<li class="widget__item">
-				<a class="widget__link" href="/categories/bayesian-machine-learning/">Bayesian Machine Learning</a>
-			</li>
-			<li class="widget__item">
 				<a class="widget__link" href="/categories/intro-to-statistical-learning/">Intro to Statistical Learning</a>
 			</li>
 			<li class="widget__item">
@@ -337,6 +346,9 @@ I. Intro 2범주 범주형자료분석에서 여러 개의 연속형 응답변�
 			</li>
 			<li class="widget__item">
 				<a class="widget__link" href="/categories/optimization/">Optimization</a>
+			</li>
+			<li class="widget__item">
+				<a class="widget__link" href="/categories/probabilistic-machine-learning/">Probabilistic Machine Learning</a>
 			</li>
 			<li class="widget__item">
 				<a class="widget__link" href="/categories/statistics/">Statistics</a>
@@ -352,14 +364,15 @@ I. Intro 2범주 범주형자료분석에서 여러 개의 연속형 응답변�
 	<div class="widget__content">
 		<a class="widget-taglist__link widget__link btn" href="/tags/adaboost/" title="ADABOOST">ADABOOST</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/adaptive-basis-model/" title="Adaptive Basis Model">Adaptive Basis Model</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/bayeisan/" title="Bayeisan">Bayeisan</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian/" title="Bayesian">Bayesian</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian-hierarchical/" title="Bayesian Hierarchical">Bayesian Hierarchical</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/bic/" title="BIC">BIC</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayes-rule/" title="Bayes Rule">Bayes Rule</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian-gmm/" title="Bayesian GMM">Bayesian GMM</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian-hierarchy/" title="Bayesian Hierarchy">Bayesian Hierarchy</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian-networks/" title="Bayesian Networks">Bayesian Networks</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/bootstrap/" title="Bootstrap">Bootstrap</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/cart/" title="CART">CART</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/clustering/" title="Clustering">Clustering</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/conjugacy/" title="Conjugacy">Conjugacy</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/d-seperation/" title="D-seperation">D-seperation</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/determinant/" title="Determinant">Determinant</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/diagonalization/" title="Diagonalization">Diagonalization</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/em-algorithm/" title="EM algorithm">EM algorithm</a>
@@ -367,14 +380,14 @@ I. Intro 2범주 범주형자료분석에서 여러 개의 연속형 응답변�
 		<a class="widget-taglist__link widget__link btn" href="/tags/frequentist/" title="Frequentist">Frequentist</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/gaussian-mixtures/" title="Gaussian Mixtures">Gaussian Mixtures</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/generalized-additive-models/" title="Generalized Additive Models">Generalized Additive Models</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/gibbs-sampling/" title="Gibbs Sampling">Gibbs Sampling</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/intro-to-statistical-learning/" title="Intro to Statistical Learning">Intro to Statistical Learning</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/jacobian/" title="Jacobian">Jacobian</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/k-cv/" title="k-CV">k-CV</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/k-means/" title="K-means">K-means</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/kernel/" title="Kernel">Kernel</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/kullback-leibler-divergence/" title="Kullback-Leibler Divergence">Kullback-Leibler Divergence</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kl-divergence/" title="KL divergence">KL divergence</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/lagrangian-duality/" title="Lagrangian Duality">Lagrangian Duality</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/laplace-approximation/" title="Laplace Approximation">Laplace Approximation</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/lasso/" title="Lasso">Lasso</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/latent-variable/" title="Latent Variable">Latent Variable</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/lda/" title="LDA">LDA</a>
@@ -383,19 +396,19 @@ I. Intro 2범주 범주형자료분석에서 여러 개의 연속형 응답변�
 		<a class="widget-taglist__link widget__link btn" href="/tags/markov-chain/" title="Markov Chain">Markov Chain</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/matrix-derivatives/" title="Matrix Derivatives">Matrix Derivatives</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/mcmc/" title="MCMC">MCMC</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/metropolis-hastings/" title="Metropolis Hastings">Metropolis Hastings</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/mse/" title="MSE">MSE</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/multivariate-normal/" title="Multivariate Normal">Multivariate Normal</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/naive-bayes-classifier/" title="Naive Bayes Classifier">Naive Bayes Classifier</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/ols/" title="OLS">OLS</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/pattern-recognition-and-machine-learning/" title="Pattern Recognition and Machine Learning">Pattern Recognition and Machine Learning</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/pca/" title="PCA">PCA</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/probability/" title="Probability">Probability</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/posterior-approximation/" title="Posterior Approximation">Posterior Approximation</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/regression-splines/" title="Regression Splines">Regression Splines</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/ridge/" title="Ridge">Ridge</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/self-adjoint/" title="Self Adjoint">Self Adjoint</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/similar-matrices/" title="Similar Matrices">Similar Matrices</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/singular-value-decomposition/" title="Singular Value Decomposition">Singular Value Decomposition</a>
-		<a class="widget-taglist__link widget__link btn" href="/tags/statistics/" title="Statistics">Statistics</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/stochastic-process/" title="Stochastic Process">Stochastic Process</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/svm/" title="SVM">SVM</a>
 		<a class="widget-taglist__link widget__link btn" href="/tags/vector-derivatives/" title="vector derivatives">vector derivatives</a>
 	</div>

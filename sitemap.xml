@@ -3,48 +3,88 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/categories/bayesian-machine-learning/</loc>
-    <lastmod>2020-08-10T11:00:00+09:00</lastmod>
+    <loc>/tags/bayesian-gmm/</loc>
+    <lastmod>2020-08-25T10:00:00+09:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2020-08-10T11:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2020-08-10T11:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/kullback-leibler-divergence/</loc>
-    <lastmod>2020-08-10T11:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/bayesian-ml/week5/04-note-on-kullback-leibler-divergence/</loc>
-    <lastmod>2020-08-10T11:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/pattern-recognition-and-machine-learning/</loc>
-    <lastmod>2020-08-10T11:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/posts/</loc>
-    <lastmod>2020-08-10T11:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2020-08-10T11:00:00+09:00</lastmod>
+    <lastmod>2020-08-25T10:00:00+09:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/clustering/</loc>
-    <lastmod>2020-08-10T10:00:00+09:00</lastmod>
+    <lastmod>2020-08-25T10:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-08-25T10:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/kl-divergence/</loc>
+    <lastmod>2020-08-25T10:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/latent-variable/</loc>
+    <lastmod>2020-08-25T10:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/posterior-approximation/</loc>
+    <lastmod>2020-08-25T10:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/</loc>
+    <lastmod>2020-08-25T10:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/probabilistic-machine-learning/</loc>
+    <lastmod>2020-08-25T10:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-08-25T10:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2020-08-25-variational-inference/</loc>
+    <lastmod>2020-08-25T10:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2020-08-24-forward-and-reverse-kl-divergence/</loc>
+    <lastmod>2020-08-24T08:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bayesian-ml/week5/05-mle-minimizes-kl-divergence/</loc>
+    <lastmod>2020-08-11T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/bayesian-ml/week5/04-note-on-kullback-leibler-divergence/</loc>
+    <lastmod>2020-08-11T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/bayesian-networks/</loc>
+    <lastmod>2020-08-11T01:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/posts/2020-08-11-bayesian-networks-directed-acyclical-graphs/</loc>
+    <lastmod>2020-08-11T01:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/d-seperation/</loc>
+    <lastmod>2020-08-11T01:00:00+09:00</lastmod>
   </url>
   
   <url>
@@ -54,11 +94,6 @@
   
   <url>
     <loc>/posts/bayesian-ml/week5/03-em-algorithm-for-latent-variable-models/</loc>
-    <lastmod>2020-08-10T10:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/latent-variable/</loc>
     <lastmod>2020-08-10T10:00:00+09:00</lastmod>
   </url>
   
@@ -83,27 +118,12 @@
   </url>
   
   <url>
-    <loc>/tags/bayesian/</loc>
-    <lastmod>2020-08-03T08:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/bayesian-hierarchical/</loc>
-    <lastmod>2020-08-03T08:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/posts/bayesian-ml/week3/03-bayesian-hierarchical-modeling-and-applications/</loc>
     <lastmod>2020-08-03T08:00:00+09:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/probability/</loc>
-    <lastmod>2020-08-03T08:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/statistics/</loc>
+    <loc>/tags/bayesian-hierarchy/</loc>
     <lastmod>2020-08-03T08:00:00+09:00</lastmod>
   </url>
   
@@ -113,7 +133,17 @@
   </url>
   
   <url>
+    <loc>/tags/gibbs-sampling/</loc>
+    <lastmod>2020-08-03T07:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/mcmc/</loc>
+    <lastmod>2020-08-03T07:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/metropolis-hastings/</loc>
     <lastmod>2020-08-03T07:00:00+09:00</lastmod>
   </url>
   
@@ -128,17 +158,12 @@
   </url>
   
   <url>
+    <loc>/tags/stochastic-process/</loc>
+    <lastmod>2020-08-03T06:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/posts/2020-07-31-bayesian-modeling/</loc>
-    <lastmod>2020-07-31T09:10:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/bic/</loc>
-    <lastmod>2020-07-31T09:10:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/laplace-approximation/</loc>
     <lastmod>2020-07-31T09:10:00+09:00</lastmod>
   </url>
   
@@ -165,6 +190,11 @@
   <url>
     <loc>/posts/bayesian-ml/week2/01-conjugate-prior-univariate-poisson/</loc>
     <lastmod>2020-07-20T06:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/bayes-rule/</loc>
+    <lastmod>2020-07-20T05:30:00+09:00</lastmod>
   </url>
   
   <url>
@@ -258,18 +288,8 @@
   </url>
   
   <url>
-    <loc>/tags/lda/</loc>
-    <lastmod>2020-04-10T11:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/naive-bayes-classifier/</loc>
     <lastmod>2020-04-10T11:00:00+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/bayeisan/</loc>
-    <lastmod>2020-04-07T12:00:00+09:00</lastmod>
   </url>
   
   <url>
@@ -479,6 +499,11 @@
   
   <url>
     <loc>/posts/2020-01-21-isl-04-classification/</loc>
+    <lastmod>2020-01-21T11:00:00+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/lda/</loc>
     <lastmod>2020-01-21T11:00:00+09:00</lastmod>
   </url>
   
