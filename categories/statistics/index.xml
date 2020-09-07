@@ -102,10 +102,10 @@ I. Intro 2범주 범주형자료분석에서 여러 개의 연속형 응답변�
     
     <item>
       <title>Classification을 위한 선형 방법들</title>
-      <link>/posts/linear-methods-for-classification/</link>
+      <link>/posts/2020-04-10/</link>
       <pubDate>Fri, 10 Apr 2020 11:00:00 +0900</pubDate>
       
-      <guid>/posts/linear-methods-for-classification/</guid>
+      <guid>/posts/2020-04-10/</guid>
       <description>1. Classification and Test Error Rate 데이터 $x_i$에 대해 target 변수 $t_i$가 범주형 자료인 경우 (남자/여자, 성공/실패, 양념/간장/후라이드) 우리가 세우는 예측 모델 $f$을 Classifier라고 한다.
 $$ Classifier:; \hat{t_i} = f(x_i)$$
 당연히 우리의 모델 $f$는 종종 틀릴 것이다. Regression에서는 우리가 Error를 예측값과 실제값 사이의 거리의 제곱을 오차로 정의했다면, Classification은 좀 더 간단하게 전체 데이터에서 틀리게 분류된 횟수로 Error를 정의한다. 자세히 말하자면 아래와 같은 Indicator function을 만들어놓고

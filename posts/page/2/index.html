@@ -11,7 +11,7 @@
 <meta property="og:description" content="Hun Learng Blog is the archive of my journey of studying statistical inference." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/posts/" />
-<meta property="og:updated_time" content="2020-09-06T10:00:00+09:00" />
+<meta property="og:updated_time" content="2020-09-07T10:00:00+09:00" />
 
 		<meta itemprop="name" content="Posts">
 <meta itemprop="description" content="Hun Learng Blog is the archive of my journey of studying statistical inference.">
@@ -99,6 +99,33 @@
 	<header class="main__header">
 		<h1 class="main__title">Posts</h1>
 	</header><article class="list__item post">
+	<figure class="list__thumbnail">
+		<a href="/posts/bayesian-ml/week5/03-em-algorithm-for-latent-variable-models/">
+			<img src="/cover/EM.jpg" alt="EM Algorithm for Latent Variable Models" />
+		</a>
+	</figure>
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/bayesian-ml/week5/03-em-algorithm-for-latent-variable-models/" rel="bookmark">
+			EM Algorithm for Latent Variable Models
+			</a>
+		</h3>
+		<p class="list__lead post__lead">At least you get a pretty tight lower bound</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-08-10T10:00:00&#43;09:00">2020-08-10</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/probabilistic-machine-learning/" rel="category">Probabilistic Machine Learning</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		For an observed data $\mathbf{x}$, we might posit the existence of an unobserved data $\mathbf{z}$ and include it in model $p(\mathbf{x,z}\mid \theta)$. This is called a latent variable model. The question is, why bother? It turns out that in many cases, learning $\theta$ with the marginal log likelihood $p(\mathbf{x}\mid \theta)$ is hard, whereas learning with the joint likelihood with a complete data set $p(\mathbf{x,z}\mid \theta)$ is relatively easy. GMM is one such case.
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/bayesian-ml/week5/03-em-algorithm-for-latent-variable-models/">Read more…</a>
+	</div>
+</article><article class="list__item post">
 	<figure class="list__thumbnail">
 		<a href="/posts/bayesian-ml/week5/02-mixtures-of-gaussians-and-em/">
 			<img src="/cover/clustering.jpg" alt="Mixtures of Gaussians and EM algorithm" />
@@ -267,39 +294,6 @@ http://videolectures.net/mlss2012_ghahramani_bayesian_modelling/
 	<div class="list__footer clearfix">
 		<a class="list__footer-readmore btn" href="/posts/2020-07-31-bayesian-modeling/">Read more…</a>
 	</div>
-</article><article class="list__item post">
-	<figure class="list__thumbnail">
-		<a href="/posts/bayesian-ml/week2/03-conjugate-prior-for-multivariate-model/">
-			<img src="/cover/conjugate_prior.jpg" alt="Conjugate Prior for Multivariate Model" />
-		</a>
-	</figure>
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/bayesian-ml/week2/03-conjugate-prior-for-multivariate-model/" rel="bookmark">
-			Conjugate Prior for Multivariate Model
-			</a>
-		</h3>
-		<p class="list__lead post__lead">The intuitions for posterior parameters we studied from the univariate normal pretty much carry over to the multivariate case.</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-07-20T06:10:00&#43;09:00">2020-07-20</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/probabilistic-machine-learning/" rel="category">Probabilistic Machine Learning</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		library(ggplot2) library(cowplot) library(reshape) Multivariate Normal Model Consider a bivariate normal random variable $[y_1, y_2]^T$. The density is written as ($p=2$)
-$$ p(\mathbf{y}|\theta, \Sigma) = (\dfrac{1}{2\pi})^{-p/2}|\Sigma|^{-1/2} \exp{-\dfrac{1}{2}(\mathbf{y}-\theta)^T\Sigma^{-1}(\mathbf{y}-\theta)} $$
-where the parameter is $\theta = \begin{pmatrix} E[y_1]\\\ E[y_2] \end{pmatrix}$ and $\Sigma = \begin{pmatrix} E[y_1^2]-E[y_1]^2 &amp; E[y_1y_2]-E[y_1]E[y_2]\\\
-E[y_2y_1]-E[y_2]E[y_1] &amp; E[y_2^2]-E[y_2]^2 \end{pmatrix}$ $=\begin{pmatrix} \sigma_1^2 &amp; \sigma_{12}\\\
-\sigma_{21} &amp; \sigma_2^1 \end{pmatrix}$.
-Few things worth mentioning for multivariate normal model
-  the term in the exponent $(\mathbf{y}-\theta)^T\Sigma^{-1}(\mathbf{y}-\theta)$ is somewhat a measure of distance between mean and the data.
-	</div>
-	<div class="list__footer clearfix">
-		<a class="list__footer-readmore btn" href="/posts/bayesian-ml/week2/03-conjugate-prior-for-multivariate-model/">Read more…</a>
-	</div>
 </article>
 </main>
 
@@ -324,12 +318,12 @@ Few things worth mentioning for multivariate normal model
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/posts/how-to-add-rtools-to-windows-path-env/">Rtools를 윈도우 환경변수 PATH에 추가하는 방법</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/2020-09-07-intro-to-rcpp-and-rcpparmadillo/">Introduction to Rcpp and RcppArmadillo</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/2020-09-06-how-to-add-rtools-to-windows-path-env/">Rtools를 윈도우 환경변수 PATH에 추가하는 방법</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/2020-08-25-variational-inference/">Variational Inference and Bayesian Gaussian Mixture Model</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/2020-08-24-forward-and-reverse-kl-divergence/">Forward and Reverse KL divergence</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/05-mle-minimizes-kl-divergence/">Interpretation of MLE in terms of KL divergence</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/04-note-on-kullback-leibler-divergence/">Note on Kullback-Leibler Divergence</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/2020-08-11-bayesian-networks-directed-acyclical-graphs/">Bayesian Networks (Directed Acyclical Graphs)</a></li>
 		</ul>
 	</div>
 </div>
@@ -350,7 +344,7 @@ Few things worth mentioning for multivariate normal model
 				<a class="widget__link" href="/categories/probabilistic-machine-learning/">Probabilistic Machine Learning</a>
 			</li>
 			<li class="widget__item">
-				<a class="widget__link" href="/categories/r/">R</a>
+				<a class="widget__link" href="/categories/rcpp/">Rcpp</a>
 			</li>
 			<li class="widget__item">
 				<a class="widget__link" href="/categories/statistics/">Statistics</a>

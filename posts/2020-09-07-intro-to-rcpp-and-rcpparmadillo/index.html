@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Introduction to Rcpp and RcppArmadillo - Hun Learning</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="Coding in C&#43;&#43; made easy by Rcpp">
+		<meta property="og:title" content="Introduction to Rcpp and RcppArmadillo" />
+<meta property="og:description" content="Coding in C&#43;&#43; made easy by Rcpp" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/2020-09-07-intro-to-rcpp-and-rcpparmadillo/" />
+<meta property="article:published_time" content="2020-09-07T10:00:00+09:00" />
+<meta property="article:modified_time" content="2020-09-07T10:00:00+09:00" />
+
+		<meta itemprop="name" content="Introduction to Rcpp and RcppArmadillo">
+<meta itemprop="description" content="Coding in C&#43;&#43; made easy by Rcpp">
+<meta itemprop="datePublished" content="2020-09-07T10:00:00+09:00" />
+<meta itemprop="dateModified" content="2020-09-07T10:00:00+09:00" />
+<meta itemprop="wordCount" content="2199">
+
+
+
+<meta itemprop="keywords" content="Rcpp," />
+
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="Hun Learning" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/mypic2.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Hun Learning</div>
+					<div class="logo__tagline">In Search Of The Truth Projected Onto A Finite Dimension</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/about/">
+				
+				<span class="menu__text">Author</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+	<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+</script>
+<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "all" } }
+  });
+</script>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Introduction to Rcpp and RcppArmadillo</h1>
+			<p class="post__lead">You can actually code in C&#43;&#43; in RStudio</p>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-09-07T10:00:00&#43;09:00">2020-09-07</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/rcpp/" rel="category">Rcpp</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#1-main-tools-for-exploring-rcpp">1. Main Tools for Exploring Rcpp</a></li>
+    <li><a href="#2-how-fast-is-rcpp">2. How fast is Rcpp?</a>
+      <ul>
+        <li><a href="#3-more-rcpp-examples">3. More Rcpp examples</a></li>
+        <li><a href="#4-cautions-with-rcpp-functions">4. Cautions with Rcpp Functions</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-rcpparmadillo">5. RcppArmadillo</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+    <li><a href="#6-rcpparmadillo-fastlm-example">6. RcppArmadillo: FastLM example</a></li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<p> </p>
+<h5 id="references"><strong>References</strong></h5>
+<p>This post is based on several sources including; <!-- raw HTML omitted --></p>
+<ul>
+<li>
+<p><a href="https://dirk.eddelbuettel.com/papers/useR2019_rcpp_tutorial.pdf">https://dirk.eddelbuettel.com/papers/useR2019_rcpp_tutorial.pdf</a></p>
+<p>(Intro to Rcpp and Rcpparmadillo)</p>
+</li>
+<li>
+<p><a href="https://privefl.github.io/R-presentation/Rcpp.html">https://privefl.github.io/R-presentation/Rcpp.html</a></p>
+<p>(Intro to Rcpp)</p>
+</li>
+<li>
+<p><a href="https://teuder.github.io/rcpp4everyone_en/">https://teuder.github.io/rcpp4everyone_en/</a></p>
+<p>(for Rcpp object class, methods and functions)</p>
+</li>
+<li>
+<p><a href="http://arma.sourceforge.net/docs.html">http://arma.sourceforge.net/docs.html</a></p>
+<p>(for RcppArmadillo class, methods and functions)</p>
+</li>
+<li>
+<p><a href="http://dirk.eddelbuettel.com/code/rcpp/Rcpp-sugar.pdf">http://dirk.eddelbuettel.com/code/rcpp/Rcpp-sugar.pdf</a></p>
+<p>(for Rcpp sugar functions, including prob dists)</p>
+</li>
+<li>
+<p><a href="https://teuder.github.io/rcpp4everyone_en/310_Rmath.html">https://teuder.github.io/rcpp4everyone_en/310_Rmath.html</a></p>
+<p>(for Rmath in <code>R::</code> namespace, mostly prob dists)</p>
+</li>
+<li>
+<p><a href="https://www.w3schools.com/cpp/cpp_math.asp">https://www.w3schools.com/cpp/cpp_math.asp</a></p>
+<p>(for cmath in <code>std::</code> namespace)</p>
+</li>
+</ul>
+<p>and other pages annotated in the post below.</p>
+<p>$~$</p>
+<h5 id="br-required-packages"><!-- raw HTML omitted --> <strong>Required Packages</strong></h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">sapply</span>(<span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;Rcpp&#39;</span>,<span style="color:#e6db74">&#39;RcppArmadillo&#39;</span>, <span style="color:#75715e"># Rcpp families</span>
+         <span style="color:#e6db74">&#39;rbenchmark&#39;</span>,<span style="color:#e6db74">&#39;microbenchmark&#39;</span>,<span style="color:#e6db74">&#39;bench&#39;</span>, <span style="color:#75715e"># to compare speed</span>
+         <span style="color:#e6db74">&#39;lobstr&#39;</span> <span style="color:#75715e"># for object address</span>
+         ), require, character.only<span style="color:#f92672">=</span>T)
+</code></pre></div><p> </p>
+<h2 id="1-main-tools-for-exploring-rcpp">1. Main Tools for Exploring Rcpp</h2>
+<hr>
+<p> </p>
+<p><!-- raw HTML omitted --> <strong>evalCpp(code, depends = , plugins = )</strong> : evaluates a single
+C++ expression. You can declare includes and dependencies as well.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">evalCpp</span>(<span style="color:#e6db74">&#34;2+2&#34;</span>)
+</code></pre></div><pre><code>## [1] 4
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">evalCpp</span>(<span style="color:#e6db74">&#34;std::numeric_limits&lt;double&gt;::min()&#34;</span>) <span style="color:#75715e"># returns minimum integer in C++ capacity </span>
+</code></pre></div><pre><code>## [1] 2.225074e-308
+</code></pre>
+<p><!-- raw HTML omitted --> <strong>cppFunction(code, depends = , plugins = )</strong> : creates,
+compiles and links a C++ file, and then creates an R function for access</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">src <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;int exampleCpp11(){
+</span><span style="color:#e6db74">auto x = 10; // auto assign (guess) data type, cpp11 feature
+</span><span style="color:#e6db74">return x;
+</span><span style="color:#e6db74">}&#39;</span>
+<span style="color:#a6e22e">cppFunction</span>(src, plugins <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;cpp11&#39;</span>)) <span style="color:#75715e"># include cpp11 plugin</span>
+<span style="color:#a6e22e">exampleCpp11</span>()
+</code></pre></div><pre><code>## [1] 10
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">cppFunction</span>(<span style="color:#e6db74">&#34;int f(int a, int b){return(a+b);}&#34;</span>)
+<span style="color:#a6e22e">f</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>)
+</code></pre></div><pre><code>## [1] 3
+</code></pre>
+<p><!-- raw HTML omitted --> <strong>sourceCpp()</strong> : actual workhorse behind evalCpp() and
+cppFunction(). bulids on and extends inline::cxxfunction() and made much
+easier to use. plug-ins and dependencies are declared inside the code
+file. we can skip creating a separate cpp file and instead include the
+entire code chunk inside R markdown code chunk with engine set to be
+Rcpp as shown below</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;RcppArmadillo.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#75715e">// [[Rcpp::depends(RcppArmadillo)]]
+</span><span style="color:#75715e">// [[Rcpp::plugins(&#34;cpp11&#34;)]]
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> Rcpp;
+<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> arma;
+<span style="color:#75715e">// convolution of two finite vectors
+</span><span style="color:#75715e">//[[Rcpp::export]]
+</span><span style="color:#75715e"></span>vec <span style="color:#a6e22e">convolution</span>(vec x, vec y){
+  <span style="color:#66d9ef">auto</span> nx <span style="color:#f92672">=</span> x.size(), ny <span style="color:#f92672">=</span> y.size();
+  vec z(nx <span style="color:#f92672">+</span> ny <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+  <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nx; i<span style="color:#f92672">++</span>){
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> ny; j<span style="color:#f92672">++</span>){
+      z[i<span style="color:#f92672">+</span>j] <span style="color:#f92672">+=</span> x[i] <span style="color:#f92672">*</span> y[j];
+    }
+  }
+  <span style="color:#66d9ef">return</span> z;
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">t</span>(<span style="color:#a6e22e">convolution</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span><span style="color:#f92672">:</span><span style="color:#ae81ff">5</span>))
+</code></pre></div><pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6]
+## [1,]    2    7   16   22   22   15
+</code></pre>
+<p> </p>
+<h2 id="2-how-fast-is-rcpp">2. How fast is Rcpp?</h2>
+<hr>
+<p> </p>
+<p>Let us see a simple example to illustrate speed enhance brought by Rcpp. Consider a recursive function defined as below <strong>(fibonacci function)</strong>;
+$$
+f(n) = 
+\begin{cases}
+n \quad &amp;(n &lt; 2)\<br>
+f(n-1)+f(n-2)\quad &amp;(n \geq 2)
+\end{cases}
+$$</p>
+<p>To implement this function in R we would have</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">f <span style="color:#f92672">=</span> <span style="color:#a6e22e">function</span>(n){
+  <span style="color:#a6e22e">ifelse</span>(n<span style="color:#f92672">&lt;</span><span style="color:#ae81ff">2</span>, n, <span style="color:#a6e22e">f</span>(n<span style="color:#ae81ff">-1</span>)<span style="color:#f92672">+</span><span style="color:#a6e22e">f</span>(n<span style="color:#ae81ff">-2</span>)) <span style="color:#75715e"># recursive function</span>
+}
+<span style="color:#a6e22e">sapply</span>(<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>, f)
+</code></pre></div><pre><code>##  [1]  0  1  1  2  3  5  8 13 21 34 55
+</code></pre>
+<p><!-- raw HTML omitted --> R is particularly slow in performing loops and repeated function calls. Since we have a recursive function, R is pretty slow at returning a function value as <em>n</em> grows larger.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">rbenchmark<span style="color:#f92672">::</span><span style="color:#a6e22e">benchmark</span>(<span style="color:#a6e22e">f</span>(<span style="color:#ae81ff">10</span>), <span style="color:#a6e22e">f</span>(<span style="color:#ae81ff">15</span>), <span style="color:#a6e22e">f</span>(<span style="color:#ae81ff">20</span>))[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>]
+</code></pre></div><pre><code>##    test replications elapsed relative
+## 1 f(10)          100    0.04      1.0
+## 2 f(15)          100    0.44     11.0
+## 3 f(20)          100    4.30    107.5
+</code></pre>
+<p><!-- raw HTML omitted --> Rcpp alternative would be</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">src <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;int g(int n){
+</span><span style="color:#e6db74">  if (n&lt;2) return n;
+</span><span style="color:#e6db74">  return g(n-1)+g(n-2);
+</span><span style="color:#e6db74">}&#39;</span>
+<span style="color:#a6e22e">cppFunction</span>(src)
+<span style="color:#a6e22e">sapply</span>(<span style="color:#ae81ff">0</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>, g)
+</code></pre></div><pre><code>##  [1]  0  1  1  2  3  5  8 13 21 34 55
+</code></pre>
+<p><!-- raw HTML omitted --> which is way faster than R implementation.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">bench<span style="color:#f92672">::</span><span style="color:#a6e22e">mark</span>(<span style="color:#a6e22e">f</span>(<span style="color:#ae81ff">20</span>), <span style="color:#a6e22e">g</span>(<span style="color:#ae81ff">20</span>))
+</code></pre></div><pre><code>## Warning: Some expressions had a GC in every iteration; so filtering is disabled.
+
+## # A tibble: 2 x 6
+##   expression      min   median `itr/sec` mem_alloc `gc/sec`
+##   &lt;bch:expr&gt; &lt;bch:tm&gt; &lt;bch:tm&gt;     &lt;dbl&gt; &lt;bch:byt&gt;    &lt;dbl&gt;
+## 1 f(20)        46.6ms   53.2ms      19.0        0B     20.9
+## 2 g(20)        22.6us   23.6us   41087.     2.49KB      0
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">res <span style="color:#f92672">=</span> microbenchmark<span style="color:#f92672">::</span><span style="color:#a6e22e">microbenchmark</span>(<span style="color:#a6e22e">f</span>(<span style="color:#ae81ff">20</span>), <span style="color:#a6e22e">g</span>(<span style="color:#ae81ff">20</span>))
+res
+</code></pre></div><pre><code>## Unit: microseconds
+##   expr     min      lq      mean   median      uq     max neval
+##  f(20) 39004.1 40723.2 43160.746 41561.85 42823.5 83602.0   100
+##  g(20)    22.4    22.8    30.303    33.70    34.6    60.1   100
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">suppressMessages</span>(microbenchmark<span style="color:#f92672">:::</span><span style="color:#a6e22e">autoplot.microbenchmark</span>(res))
+</code></pre></div><p><img src="/posts/unnamed-chunk-12-1.png" alt=""></p>
+<p> </p>
+<h3 id="3-more-rcpp-examples">3. More Rcpp examples</h3>
+<hr>
+<p> </p>
+<h5 id="1-finding-max-of-a-vector-in-an-inefficient-way"><strong>1. finding max of a vector (in an inefficient way)</strong></h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;Rcpp.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> Rcpp;
+<span style="color:#75715e">//[[Rcpp::export]]
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">getMax</span>(NumericVector v){
+  <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> v.size();
+  <span style="color:#66d9ef">double</span> m <span style="color:#f92672">=</span> v[<span style="color:#ae81ff">0</span>];
+  <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>n; i<span style="color:#f92672">++</span>){
+    <span style="color:#66d9ef">if</span> (v[i] <span style="color:#f92672">&gt;</span> m) {
+      Rcout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Now &#34;</span> <span style="color:#f92672">&lt;&lt;</span> m <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>;
+      m <span style="color:#f92672">=</span> v[i];
+    }
+  }
+  <span style="color:#66d9ef">return</span> m;
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">getMax</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>))
+</code></pre></div><pre><code>## Now 1
+## Now 4
+
+## [1] 5
+</code></pre>
+<h5 id="br-2-column-sums-function"><!-- raw HTML omitted --> <strong>2. column sums function</strong></h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;Rcpp.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> Rcpp;
+<span style="color:#75715e">//[[Rcpp::export]]
+</span><span style="color:#75715e"></span>NumericVector <span style="color:#a6e22e">colSums</span>(NumericMatrix mat){
+  <span style="color:#75715e">// &#34;size_t&#34; stands for a really large integer, and is used for a large iteration
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// Rcpp alternative is &#34;R_xlen_t&#34;
+</span><span style="color:#75715e"></span>  size_t cols <span style="color:#f92672">=</span> mat.cols(); <span style="color:#75715e">// .cols(): n of columns
+</span><span style="color:#75715e"></span>  NumericVector res(cols);
+  <span style="color:#66d9ef">for</span>(size_t i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>cols; i<span style="color:#f92672">++</span>){
+    res[i] <span style="color:#f92672">=</span> sum(mat.column(i));
+  }
+  <span style="color:#66d9ef">return</span>(res);
+}
+<span style="color:#75715e">// read https://teuder.github.io/rcpp4everyone_en/100_matrix.html#member-functions-1
+</span><span style="color:#75715e">// for more Rcpp::NumericMatrix methods
+</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">colSums</span>(<span style="color:#a6e22e">diag</span>(<span style="color:#ae81ff">3</span>))
+</code></pre></div><pre><code>## [1] 1 1 1
+</code></pre>
+<h5 id="br-3-pmax-in-rcpp"><!-- raw HTML omitted --> <strong>3. pmax in Rcpp</strong></h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;Rcpp.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> Rcpp;
+<span style="color:#75715e">//[[Rcpp::export]]
+</span><span style="color:#75715e"></span>NumericVector <span style="color:#a6e22e">pmax_rcpp</span>(NumericVector x, NumericVector y){
+  <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>max(x.size(), y.size());
+  NumericVector x_recl <span style="color:#f92672">=</span> rep_len(x, n);
+  NumericVector y_recl <span style="color:#f92672">=</span> rep_len(y, n);
+  NumericVector out(n);
+  <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>n; i<span style="color:#f92672">++</span>){
+    out[i] <span style="color:#f92672">=</span> std<span style="color:#f92672">::</span>max(x_recl[i], y_recl[i]);
+  }
+  <span style="color:#66d9ef">return</span> out;
+}
+</code></pre></div><h5 id="br-note-using-c-math-functions-compared-to-rcpp-sugar"><!-- raw HTML omitted --> <strong>Note: using C++ math functions compared to Rcpp sugar</strong></h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;Rcpp.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> Rcpp;
+<span style="color:#75715e">//[[Rcpp::export]]
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">cppmath</span>(){
+  <span style="color:#66d9ef">double</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.7</span>, y <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.2</span>;
+  Rcout <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>abs(x); <span style="color:#75715e">// read https://www.w3schools.com/cpp/cpp_math.asp for more
+</span><span style="color:#75715e"></span>  Rcout <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>cos(x) <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+  Rcout <span style="color:#f92672">&lt;&lt;</span> abs(x); <span style="color:#75715e">// most are included in Rcpp sugar
+</span><span style="color:#75715e"></span>  Rcout <span style="color:#f92672">&lt;&lt;</span> cos(x) <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+  <span style="color:#75715e">// except for max and min. Note that Rcpp max, min applies to a vector
+</span><span style="color:#75715e"></span>  Rcout <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>max(x,y); 
+  NumericVector z <span style="color:#f92672">=</span> NumericVector<span style="color:#f92672">::</span>create(x,y);
+  Rcout <span style="color:#f92672">&lt;&lt;</span> max(z) <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">cppmath</span>()
+</code></pre></div><pre><code>## 3.7-0.8481
+## 3.7-0.8481
+## 3.73.7
+</code></pre>
+<h5 id="br-4-lapply-mean-in-cpp"><!-- raw HTML omitted --> <strong>4. lapply mean in Cpp</strong></h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;Rcpp.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> Rcpp;
+<span style="color:#75715e">//[[Rcpp::export]]
+</span><span style="color:#75715e"></span>NumericVector <span style="color:#a6e22e">f4</span>(List x){
+  <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> x.size();
+  NumericVector res(n);
+  <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>n; i<span style="color:#f92672">++</span>){
+    res[i] <span style="color:#f92672">=</span> mean( as<span style="color:#f92672">&lt;</span>NumericVector<span style="color:#f92672">&gt;</span>(x[i]) );
+    <span style="color:#75715e">// mean: Rcpp function for NumericVector -&gt; use as&lt;type&gt;(x) to coerce x into &#34;type&#34;
+</span><span style="color:#75715e"></span>  }
+  <span style="color:#66d9ef">return</span> res;  
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">x <span style="color:#f92672">=</span> <span style="color:#a6e22e">lapply</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>, runif)
+<span style="color:#a6e22e">isTRUE</span>(<span style="color:#a6e22e">all.equal</span>(<span style="color:#a6e22e">f4</span>(x), <span style="color:#a6e22e">sapply</span>(x, mean)))
+</code></pre></div><pre><code>## [1] TRUE
+</code></pre>
+<p> </p>
+<h3 id="4-cautions-with-rcpp-functions">4. Cautions with Rcpp Functions</h3>
+<hr>
+<p> </p>
+<h5 id="1-na_logical-in-rcpp-is-evaluated-as-true-by-cpp-bool-type"><strong>1. NA_LOGICAL in Rcpp is evaluated as TRUE by Cpp bool type.</strong></h5>
+<p>Do NOT use NA_LOGICAL for if condition as it is, and be specific to include <code>if(condition==TRUE)</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">src <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;List scalar_missings(){
+</span><span style="color:#e6db74">  int int_s = NA_INTEGER;
+</span><span style="color:#e6db74">  String chr_s = NA_STRING; // scalar type corresponding to the element of CharacterVector
+</span><span style="color:#e6db74">  bool lgl_s = NA_LOGICAL; // will be coerced to &#34;TRUE&#34; bool
+</span><span style="color:#e6db74">  double num_s = NA_REAL;
+</span><span style="color:#e6db74">  return List::create(int_s, chr_s, lgl_s, num_s);
+</span><span style="color:#e6db74">}&#39;</span>
+<span style="color:#a6e22e">cppFunction</span>(src)
+<span style="color:#a6e22e">str</span>(<span style="color:#a6e22e">scalar_missings</span>())
+</code></pre></div><pre><code>## List of 4
+##  $ : int NA
+##  $ : chr NA
+##  $ : logi TRUE
+##  $ : num NA
+</code></pre>
+<h5 id="br2-when-dealing-with-rcpp-objects-use-clone-to-avoid-coupling"><!-- raw HTML omitted --><strong>2. When dealing with Rcpp objects, Use clone() to avoid coupling.</strong></h5>
+<p>Assigning an object to another object is to create another alias for the original value. In R, if you change the value of the original vector, R first makes a copy of it and then performs modification. But in Rcpp you have to explicitly copy the object.</p>
+<p><strong>This is NOT the case for C++ object such as</strong> <code>int</code>. In general, to call by reference, you have to use <code>&amp;</code>,
+e.g. <code>int&amp; a = b</code>. Rcpp objects by default assign only reference with <code>=</code>, probably for memory issue, so to add <code>&amp;</code> for Rcpp objects does nothing new (besides adding a mere “visual sugar”)
+<!-- raw HTML omitted --><a href="https://stackoverflow.com/questions/48363076/declare-a-variable-as-a-reference-in-rcpp">https://stackoverflow.com/questions/48363076/declare-a-variable-as-a-reference-in-rcpp</a><!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-R" data-lang="R"><span style="color:#a6e22e">library</span>(lobstr)
+x <span style="color:#f92672">=</span> y <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>; <span style="color:#a6e22e">obj_addr</span>(x) <span style="color:#f92672">==</span> <span style="color:#a6e22e">obj_addr</span>(y)
+</code></pre></div><pre><code>## [1] TRUE
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">x[1] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; <span style="color:#a6e22e">obj_addr</span>(x) <span style="color:#f92672">==</span> <span style="color:#a6e22e">obj_addr</span>(y)
+</code></pre></div><pre><code>## [1] FALSE
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;Rcpp.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> Rcpp;
+<span style="color:#75715e">//[[Rcpp::plugins(&#34;cpp11&#34;)]]
+</span><span style="color:#75715e">//[[Rcpp::export]]
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test</span>(){
+  NumericVector v1 <span style="color:#f92672">=</span> {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>};
+  NumericVector v2 <span style="color:#f92672">=</span> v1; <span style="color:#75715e">// shallow copy
+</span><span style="color:#75715e"></span>  NumericVector v3 <span style="color:#f92672">=</span> clone(v1); <span style="color:#75715e">// deep copy
+</span><span style="color:#75715e"></span>  
+  v1[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>; 
+  
+  Rcout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;v1 = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> v1 <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl; 
+  Rcout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;v2 = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> v2 <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl; <span style="color:#75715e">// modified (coupled)
+</span><span style="color:#75715e"></span>  Rcout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;v3 = &#34;</span> <span style="color:#f92672">&lt;&lt;</span> v3 <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl; <span style="color:#75715e">// intact
+</span><span style="color:#75715e"></span>}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">test</span>()
+</code></pre></div><pre><code>## v1 = 100 2 3
+## v2 = 100 2 3
+## v3 = 1 2 3
+</code></pre>
+<h5 id="br-3-return-type-of-operator--is-not-a-vector-but-rather-a-vector-proxy-vectorproxy"><!-- raw HTML omitted --> <strong>3. Return type of operator</strong> <code>[]</code> <strong>is NOT a vector, but rather a vector proxy</strong> <code>Vector::Proxy</code>.</h5>
+<p>Always remember to coerce the vector proxy into vector with <code>as&lt;T&gt;()</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">src <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;void test(){
+</span><span style="color:#e6db74">  NumericVector v = {1,2,3,4,5};
+</span><span style="color:#e6db74">  IntegerVector i = {1,3}; // vector of indices
+</span><span style="color:#e6db74">  
+</span><span style="color:#e6db74">  // compile error with this code
+</span><span style="color:#e6db74">  // double x1 = sum(v[i]);
+</span><span style="color:#e6db74">  
+</span><span style="color:#e6db74">  // instead, try make a copy,
+</span><span style="color:#e6db74">  NumericVector vi = v[i];
+</span><span style="color:#e6db74">  double x2 = sum(vi);
+</span><span style="color:#e6db74">  Rcout &lt;&lt; x2 &lt;&lt; std::endl;
+</span><span style="color:#e6db74">  
+</span><span style="color:#e6db74">  // or without having to make a copy, coerce into NumericVector
+</span><span style="color:#e6db74">  double x3 = sum(as&lt;NumericVector&gt;(v[i]));
+</span><span style="color:#e6db74">  Rcout &lt;&lt; x3 &lt;&lt; std::endl;
+</span><span style="color:#e6db74">}&#39;</span>
+<span style="color:#a6e22e">cppFunction</span>(src, plugins <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;cpp11&#39;</span>))
+<span style="color:#a6e22e">test</span>()
+</code></pre></div><pre><code>## 6
+## 6
+</code></pre>
+<h5 id="br-4-in-c-integer-division-where-denominator-and-the-numerator-are-both-integer-returns-quotient-ietruncates-to-the-largest-smaller-integer"><!-- raw HTML omitted --> <strong>4. In C++, integer division, where denominator and the numerator are both integer, returns quotient, i.e. truncates to the largest smaller integer.</strong></h5>
+<p>To get double value from integer operation,
+use typecasting. For detail, read
+<!-- raw HTML omitted --><a href="https://stackoverflow.com/questions/3144610/integer-division-how-do-you-produce-a-double">https://stackoverflow.com/questions/3144610/integer-division-how-do-you-produce-a-double</a><!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;Rcpp.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> Rcpp;
+<span style="color:#75715e">//[[Rcpp::export]]
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">int_div1</span>(){
+  <span style="color:#66d9ef">int</span> x<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, y<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>;
+  <span style="color:#66d9ef">double</span> z <span style="color:#f92672">=</span> x<span style="color:#f92672">/</span>y; <span style="color:#75715e">// returns 1.0
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span>(z);
+}
+
+<span style="color:#75715e">// Need explicit typecasting 
+</span><span style="color:#75715e">// 1) explicit
+</span><span style="color:#75715e">//[[Rcpp::export]]
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">int_div2</span>(){
+  <span style="color:#66d9ef">int</span> x<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, y<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>;
+  <span style="color:#66d9ef">double</span> z <span style="color:#f92672">=</span> (<span style="color:#66d9ef">double</span>) x <span style="color:#f92672">/</span> y; <span style="color:#75715e">// typecast 3L into 3.0 explicitly, and y coerced to double naturally
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> z;
+}
+
+<span style="color:#75715e">// 2) implicit 
+</span><span style="color:#75715e">//[[Rcpp::export]]
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">int_div3</span>(){
+  <span style="color:#66d9ef">int</span> x<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>, y<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>;
+  <span style="color:#66d9ef">double</span> z <span style="color:#f92672">=</span> x<span style="color:#f92672">*</span><span style="color:#ae81ff">1.0</span> <span style="color:#f92672">/</span> y; <span style="color:#75715e">// typecast 3L into 3.0 implicitly, and y coerced to double naturally
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> z;
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">c</span>(<span style="color:#a6e22e">int_div1</span>(), <span style="color:#a6e22e">int_div2</span>(), <span style="color:#a6e22e">int_div3</span>())
+</code></pre></div><pre><code>## [1] 1.0 1.5 1.5
+</code></pre>
+<p> </p>
+<h2 id="5-rcpparmadillo">5. RcppArmadillo</h2>
+<p> </p>
+<p>Rcpp vectors and matrices do not support linear algebra. We need RcppArmadillo for math operations.</p>
+<h4 id="br-what-is-armadillo-br"><!-- raw HTML omitted --> What is Armadillo? <!-- raw HTML omitted --></h4>
+<p>(<!-- raw HTML omitted --><a href="https://dirk.eddelbuettel.com/papers/useR2019_rcpp_tutorial.pdf">https://dirk.eddelbuettel.com/papers/useR2019_rcpp_tutorial.pdf</a><!-- raw HTML omitted -->)
+<!-- raw HTML omitted --></p>
+<ul>
+<li>Armadillo is a C++ linear algebra library.</li>
+<li>The syntax is designed to be similar to Matlab.</li>
+<li>Supports integer, floating point and complex numbers.</li>
+<li>Employs delayed evaluation approach for compiling, allowing for
+combining several operations into one and doing away with temporary
+objects.</li>
+<li>Due to speed and integration capabilities, appropriate for
+converting research code (e.g. in MATLAB) into production
+environments.</li>
+</ul>
+<h4 id="brrccparmadillo-examples-br"><!-- raw HTML omitted -->RccpArmadillo examples <!-- raw HTML omitted --></h4>
+<!-- raw HTML omitted -->
+<p>Read <!-- raw HTML omitted --><a href="http://arma.sourceforge.net/docs.html#part_classes">http://arma.sourceforge.net/docs.html#part_classes</a> <!-- raw HTML omitted -->for class and methods. <!-- raw HTML omitted --></p>
+<h5 id="br1-column-sums"><!-- raw HTML omitted --><strong>1. column sums</strong></h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;RcppArmadillo.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#75715e">// [[Rcpp::depends(RcppArmadillo)]]
+</span><span style="color:#75715e">// [[Rcpp::export]]
+</span><span style="color:#75715e"></span>arma<span style="color:#f92672">::</span>rowvec colSums(arma<span style="color:#f92672">::</span>mat M){ <span style="color:#75715e">// default vec is alias for colvec
+</span><span style="color:#75715e"></span>  size_t cols <span style="color:#f92672">=</span> M.n_cols;
+  arma<span style="color:#f92672">::</span>rowvec res(cols);
+  
+  <span style="color:#66d9ef">for</span>(size_t i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; i<span style="color:#f92672">&lt;</span>cols; i<span style="color:#f92672">++</span>){
+    res[i] <span style="color:#f92672">=</span> sum(M.col(i)); <span style="color:#75715e">// column accessor is col(i)
+</span><span style="color:#75715e"></span>  }
+  
+  <span style="color:#66d9ef">return</span> res;
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">colSums</span>(<span style="color:#a6e22e">diag</span>(<span style="color:#ae81ff">3</span>))
+</code></pre></div><pre><code>##      [,1] [,2] [,3]
+## [1,]    1    1    1
+</code></pre>
+<h5 id="br-2-get-eigen-values"><!-- raw HTML omitted --> <strong>2. get eigen values</strong></h5>
+<p>Refer to <!-- raw HTML omitted --><a href="http://arma.sourceforge.net/docs.html#part_decompdense">http://arma.sourceforge.net/docs.html#part_decompdense</a> <!-- raw HTML omitted -->for more functions of vector/matrix</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">src <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;arma::vec getEigenValues(arma::mat M){
+</span><span style="color:#e6db74">  return arma::eig_sym(M);
+</span><span style="color:#e6db74">}&#34;</span>
+<span style="color:#a6e22e">cppFunction</span>(src, depends <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;RcppArmadillo&#34;</span>)
+
+M <span style="color:#f92672">=</span> <span style="color:#a6e22e">cbind</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">-1</span>),<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">-1</span>,<span style="color:#ae81ff">1</span>))
+<span style="color:#a6e22e">getEigenValues</span>(M)
+</code></pre></div><pre><code>##      [,1]
+## [1,]    0
+## [2,]    2
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">eigen</span>(M)[[<span style="color:#e6db74">&#34;values&#34;</span>]]
+</code></pre></div><pre><code>## [1] 2 0
+</code></pre>
+<h5 id="br-3-inner-and-outer-products"><!-- raw HTML omitted --> <strong>3. inner and outer products</strong></h5>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;RcppArmadillo.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#75715e">// [[Rcpp::depends(RcppArmadillo)]]
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">// Outer product
+</span><span style="color:#75715e">//[[Rcpp::export]]
+</span><span style="color:#75715e"></span>arma<span style="color:#f92672">::</span>mat outer_arma(<span style="color:#66d9ef">const</span> arma<span style="color:#f92672">::</span>colvec <span style="color:#f92672">&amp;</span> x){ 
+  <span style="color:#75715e">// do not copy x (call by reference &#34;&amp;&#34;), 
+</span><span style="color:#75715e"></span>  <span style="color:#75715e">// but prevent accidentally modifying x by declaring &#34;const&#34;
+</span><span style="color:#75715e"></span>  arma<span style="color:#f92672">::</span>mat M <span style="color:#f92672">=</span> x <span style="color:#f92672">*</span> x.t(); <span style="color:#75715e">// * does matrix multiplication
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> M;
+}
+
+<span style="color:#75715e">// Inner product
+</span><span style="color:#75715e">//[[Rcpp::export]]
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">inner_arma</span>(<span style="color:#66d9ef">const</span> arma<span style="color:#f92672">::</span>colvec <span style="color:#f92672">&amp;</span> x){
+  <span style="color:#66d9ef">double</span> v <span style="color:#f92672">=</span> arma<span style="color:#f92672">::</span>as_scalar(x.t() <span style="color:#f92672">*</span> x); <span style="color:#75715e">// transform vector with 1 element to a scalar
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> v;
+}
+<span style="color:#75715e">//
+</span></code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">outer_arma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>); <span style="color:#a6e22e">inner_arma</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">3</span>)
+</code></pre></div><pre><code>##      [,1] [,2] [,3]
+## [1,]    1    2    3
+## [2,]    2    4    6
+## [3,]    3    6    9
+
+## [1] 14
+</code></pre>
+<h5 id="br-bnote-what-are-const-and--forb-br"><!-- raw HTML omitted --> <!-- raw HTML omitted -->Note: what are <code>const</code> and <code>&amp;</code> for?<!-- raw HTML omitted --> <!-- raw HTML omitted --></h5>
+<p>In C++, you may assign only a reference and avoid copying by using <code>&amp;</code>. Read</p>
+<p><a href="https://www.geeksforgeeks.org/references-in-c/">https://www.geeksforgeeks.org/references-in-c/</a></p>
+<p><a href="https://stackoverflow.com/questions/44795308/why-put-const-in-c">https://stackoverflow.com/questions/44795308/why-put-const-in-c</a></p>
+<p>for more detail.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;Rcpp.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+<span style="color:#75715e">//[[Rcpp::export]]
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">test</span>(){
+  <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+  <span style="color:#66d9ef">int</span> y <span style="color:#f92672">=</span> x; 
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;1) int y = x all 10&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+  x <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>;
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;x changed to 15 &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;value of y is &#34;</span> <span style="color:#f92672">&lt;&lt;</span> y <span style="color:#f92672">&lt;&lt;</span> endl;
+  y <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;y changed to 20 &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;value of x is &#34;</span> <span style="color:#f92672">&lt;&lt;</span> x <span style="color:#f92672">&lt;&lt;</span> endl;
+  
+  cout  <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+  <span style="color:#66d9ef">int</span><span style="color:#f92672">&amp;</span> b <span style="color:#f92672">=</span> a;
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;2) int&amp; b = a all 10&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+  a <span style="color:#f92672">=</span> <span style="color:#ae81ff">15</span>;
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a changed to 15 &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;value of b is &#34;</span> <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> endl;
+  b <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;b changed to 20 &#34;</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;value of a is &#34;</span> <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> endl;
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">test</span>()
+</code></pre></div><p><!-- raw HTML omitted --> Note that assigning with <code>&amp;</code> is to make another alias for the same value with the same address. So you might accidentally modify the original variable. To prevent this, we use <code>const</code>. <strong>The combination of
+<code>const</code> and <code>&amp;</code> is preferable if your function takes in a huge data, and does not necessarily need copy or modification of the input.</strong></p>
+<p> </p>
+<h2 id="6-rcpparmadillo-fastlm-example">6. RcppArmadillo: FastLM example</h2>
+<p> </p>
+<p>Computing value of parameters $\hat{\beta}_p, \hat{\sigma}^2$ and their standard deviation <strong>fast</strong> was a motivation behind building
+RcppArmadillo library.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;RcppArmadillo.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span><span style="color:#75715e">//[[Rcpp::depends(RcppArmadillo)]]
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> Rcpp;
+
+<span style="color:#75715e">//[[Rcpp::export]]
+</span><span style="color:#75715e"></span>List <span style="color:#a6e22e">fastLm</span>(<span style="color:#66d9ef">const</span> arma<span style="color:#f92672">::</span>mat<span style="color:#f92672">&amp;</span> X, <span style="color:#66d9ef">const</span> arma<span style="color:#f92672">::</span>colvec<span style="color:#f92672">&amp;</span> y){ <span style="color:#75715e">// call reference of design matrix X and target y
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> X.n_rows, k <span style="color:#f92672">=</span> X.n_cols;
+  
+  arma<span style="color:#f92672">::</span>colvec coef <span style="color:#f92672">=</span> arma<span style="color:#f92672">::</span>solve(X, y); <span style="color:#75715e">// solve underdetermined linear system with OLS method
+</span><span style="color:#75715e"></span>  arma<span style="color:#f92672">::</span>colvec resid <span style="color:#f92672">=</span> y <span style="color:#f92672">-</span> X <span style="color:#f92672">*</span> coef;
+  
+  <span style="color:#66d9ef">double</span> sig2 <span style="color:#f92672">=</span> arma<span style="color:#f92672">::</span>as_scalar(arma<span style="color:#f92672">::</span>trans(resid) <span style="color:#f92672">*</span> resid <span style="color:#f92672">/</span> (n<span style="color:#f92672">-</span>k));
+  arma<span style="color:#f92672">::</span>colvec std_err <span style="color:#f92672">=</span> arma<span style="color:#f92672">::</span>sqrt(sig2 <span style="color:#f92672">*</span> arma<span style="color:#f92672">::</span>diagvec(arma<span style="color:#f92672">::</span>pinv(arma<span style="color:#f92672">::</span>trans(X)<span style="color:#f92672">*</span>X)));
+  
+  <span style="color:#66d9ef">return</span> List<span style="color:#f92672">::</span>create(Named(<span style="color:#e6db74">&#34;coefficients&#34;</span>) <span style="color:#f92672">=</span> coef,
+                      Named(<span style="color:#e6db74">&#34;stderr&#34;</span>) <span style="color:#f92672">=</span> std_err,
+                      Named(<span style="color:#e6db74">&#34;df.residual&#34;</span>) <span style="color:#f92672">=</span> n<span style="color:#f92672">-</span>k);
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">n <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e3</span>; k <span style="color:#f92672">=</span> <span style="color:#ae81ff">1e1</span>
+X <span style="color:#f92672">=</span> <span style="color:#a6e22e">runif</span>(n<span style="color:#f92672">*</span>k); <span style="color:#a6e22e">dim</span>(X) <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(n,k)
+beta <span style="color:#f92672">=</span> <span style="color:#a6e22e">seq_len</span>(k)
+sigma <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>
+y <span style="color:#f92672">=</span> X <span style="color:#f92672">%*%</span> beta <span style="color:#f92672">+</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">rnorm</span>(n, mean<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, sd<span style="color:#f92672">=</span>sigma), nrow<span style="color:#f92672">=</span>n)
+
+<span style="color:#a6e22e">benchmark</span>(<span style="color:#a6e22e">fastLm</span>(X, y))
+</code></pre></div><pre><code>##           test replications elapsed relative user.self sys.self user.child
+## 1 fastLm(X, y)          100    0.03        1      0.03        0         NA
+##   sys.child
+## 1        NA
+</code></pre>
+<p><!-- raw HTML omitted --> A few points worth noted in this example:</p>
+<ol>
+<li>Since usually <em>X</em>, <em>y</em> are heavy, we used <code>const</code> and <code>&amp;</code> combo as
+introduced above to 1) avoid copying huge data and 2) prevent
+unintentionally modifying <em>X</em>, <em>y</em>.</li>
+<li><code>arma::solve</code> solves system of linear equation. If the system is
+underdetermined <em>n</em> &gt; <em>k</em> as in this case, <code>arma::solve</code> uses SVD
+based OLS method to get the best approximation to <em>y</em>. For more
+info, read a reply in
+<!-- raw HTML omitted --><a href="https://stackoverflow.com/questions/50121897/approximate-solution-to-linear-system-in-armadillo-library">https://stackoverflow.com/questions/50121897/approximate-solution-to-linear-system-in-armadillo-library</a><!-- raw HTML omitted --></li>
+<li><code>arma::as_scalar</code> coerce a single element vector / matrix into
+scalar.</li>
+<li><code>arma::diagvec(A)</code> extracts a main diagonal from a matrix <em>A</em> and
+returns as colvec</li>
+<li><code>pinv(A)</code> stands for Moore-Penrose pseudo-inverse $A^T(AA^T)^{-1}$.
+<a href="https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse">https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse</a></li>
+</ol>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/rcpp/" rel="tag">Rcpp</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Kang Gyeonghun avatar" src="/mypic1.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name">About Kang Gyeonghun</span>
+	</div>
+	<div class="authorbox__description">
+		I study statistics, machine learning, data science or whatever that concerns making inference on infinitie dimension from a limited sample in fintie dimension. This blog is an archive of my journey of study.
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/posts/2020-09-06-how-to-add-rtools-to-windows-path-env/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Rtools를 윈도우 환경변수 PATH에 추가하는 방법</p>
+		</a>
+	</div>
+</nav>
+
+<section class="comments">
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hun-learning94" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+			</div>
+			<aside class="sidebar"><div class="widget-search widget">
+	<form class="widget-search__form" role="search" method="get" action="https://google.com/search">
+		<label>
+			<input class="widget-search__field" type="search" placeholder="SEARCH..." value="" name="q" aria-label="SEARCH...">
+		</label>
+		<input class="widget-search__submit" type="submit" value="Search">
+		<input type="hidden" name="sitesearch" value="/" />
+	</form>
+</div>
+<div class="widget-recent widget">
+	<h4 class="widget__title">Recent Posts</h4>
+	<div class="widget__content">
+		<ul class="widget__list">
+			<li class="widget__item"><a class="widget__link" href="/posts/2020-09-07-intro-to-rcpp-and-rcpparmadillo/">Introduction to Rcpp and RcppArmadillo</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/2020-09-06-how-to-add-rtools-to-windows-path-env/">Rtools를 윈도우 환경변수 PATH에 추가하는 방법</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/2020-08-25-variational-inference/">Variational Inference and Bayesian Gaussian Mixture Model</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/2020-08-24-forward-and-reverse-kl-divergence/">Forward and Reverse KL divergence</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/05-mle-minimizes-kl-divergence/">Interpretation of MLE in terms of KL divergence</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/04-note-on-kullback-leibler-divergence/">Note on Kullback-Leibler Divergence</a></li>
+		</ul>
+	</div>
+</div>
+<div class="widget-taglist widget">
+	<h4 class="widget__title">Tags</h4>
+	<div class="widget__content">
+		<a class="widget-taglist__link widget__link btn" href="/tags/adaboost/" title="ADABOOST">ADABOOST</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/adaptive-basis-model/" title="Adaptive Basis Model">Adaptive Basis Model</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayes-rule/" title="Bayes Rule">Bayes Rule</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian-gmm/" title="Bayesian GMM">Bayesian GMM</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian-hierarchy/" title="Bayesian Hierarchy">Bayesian Hierarchy</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bayesian-networks/" title="Bayesian Networks">Bayesian Networks</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/bootstrap/" title="Bootstrap">Bootstrap</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/cart/" title="CART">CART</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/clustering/" title="Clustering">Clustering</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/conjugacy/" title="Conjugacy">Conjugacy</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/d-seperation/" title="D-seperation">D-seperation</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/determinant/" title="Determinant">Determinant</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/diagonalization/" title="Diagonalization">Diagonalization</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/em-algorithm/" title="EM algorithm">EM algorithm</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ensemble-learning/" title="Ensemble Learning">Ensemble Learning</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/frequentist/" title="Frequentist">Frequentist</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/gaussian-mixtures/" title="Gaussian Mixtures">Gaussian Mixtures</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/generalized-additive-models/" title="Generalized Additive Models">Generalized Additive Models</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/gibbs-sampling/" title="Gibbs Sampling">Gibbs Sampling</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/intro-to-statistical-learning/" title="Intro to Statistical Learning">Intro to Statistical Learning</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/jacobian/" title="Jacobian">Jacobian</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/k-cv/" title="k-CV">k-CV</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/k-means/" title="K-means">K-means</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kernel/" title="Kernel">Kernel</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/kl-divergence/" title="KL divergence">KL divergence</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lagrangian-duality/" title="Lagrangian Duality">Lagrangian Duality</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lasso/" title="Lasso">Lasso</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/latent-variable/" title="Latent Variable">Latent Variable</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/lda/" title="LDA">LDA</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/linear-adjoint/" title="Linear Adjoint">Linear Adjoint</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/logistic-regression/" title="Logistic Regression">Logistic Regression</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/markov-chain/" title="Markov Chain">Markov Chain</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/matrix-derivatives/" title="Matrix Derivatives">Matrix Derivatives</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mcmc/" title="MCMC">MCMC</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/metropolis-hastings/" title="Metropolis Hastings">Metropolis Hastings</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/mse/" title="MSE">MSE</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/multivariate-normal/" title="Multivariate Normal">Multivariate Normal</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/naive-bayes-classifier/" title="Naive Bayes Classifier">Naive Bayes Classifier</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ols/" title="OLS">OLS</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/pca/" title="PCA">PCA</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/posterior-approximation/" title="Posterior Approximation">Posterior Approximation</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/rcpp/" title="Rcpp">Rcpp</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/regression-splines/" title="Regression Splines">Regression Splines</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/ridge/" title="Ridge">Ridge</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/self-adjoint/" title="Self Adjoint">Self Adjoint</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/similar-matrices/" title="Similar Matrices">Similar Matrices</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/singular-value-decomposition/" title="Singular Value Decomposition">Singular Value Decomposition</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/stochastic-process/" title="Stochastic Process">Stochastic Process</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/svm/" title="SVM">SVM</a>
+		<a class="widget-taglist__link widget__link btn" href="/tags/vector-derivatives/" title="vector derivatives">vector derivatives</a>
+	</div>
+</div>
+</aside>
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Kang Gyeonghun.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

@@ -6,17 +6,17 @@
     <description>Recent content in Categories on Hun Learning</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 06 Sep 2020 10:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 07 Sep 2020 10:00:00 +0900</lastBuildDate>
     
 	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>R</title>
-      <link>/categories/r/</link>
-      <pubDate>Sun, 06 Sep 2020 10:00:00 +0900</pubDate>
+      <title>Rcpp</title>
+      <link>/categories/rcpp/</link>
+      <pubDate>Mon, 07 Sep 2020 10:00:00 +0900</pubDate>
       
-      <guid>/categories/r/</guid>
+      <guid>/categories/rcpp/</guid>
       <description></description>
     </item>
     

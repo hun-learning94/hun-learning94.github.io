@@ -11,7 +11,7 @@
 <meta property="og:description" content="Hun Learng Blog is the archive of my journey of studying statistical inference." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/posts/" />
-<meta property="og:updated_time" content="2020-09-06T10:00:00+09:00" />
+<meta property="og:updated_time" content="2020-09-07T10:00:00+09:00" />
 
 		<meta itemprop="name" content="Posts">
 <meta itemprop="description" content="Hun Learng Blog is the archive of my journey of studying statistical inference.">
@@ -99,6 +99,36 @@
 	<header class="main__header">
 		<h1 class="main__title">Posts</h1>
 	</header><article class="list__item post">
+	<figure class="list__thumbnail">
+		<a href="/posts/2020-04-10/">
+			<img src="/cover/PRML.jpg" alt="Classification을 위한 선형 방법들" />
+		</a>
+	</figure>
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/posts/2020-04-10/" rel="bookmark">
+			Classification을 위한 선형 방법들
+			</a>
+		</h3>
+		<p class="list__lead post__lead">Linear decision boundary를 그리는 generative한 방법과 discriminative한 접근</p>
+		<div class="list__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
+</div>
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-04-10T11:00:00&#43;09:00">2020-04-10</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/statistics/" rel="category">Statistics</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		1. Classification and Test Error Rate 데이터 $x_i$에 대해 target 변수 $t_i$가 범주형 자료인 경우 (남자/여자, 성공/실패, 양념/간장/후라이드) 우리가 세우는 예측 모델 $f$을 Classifier라고 한다.
+$$ Classifier:; \hat{t_i} = f(x_i)$$
+당연히 우리의 모델 $f$는 종종 틀릴 것이다. Regression에서는 우리가 Error를 예측값과 실제값 사이의 거리의 제곱을 오차로 정의했다면, Classification은 좀 더 간단하게 전체 데이터에서 틀리게 분류된 횟수로 Error를 정의한다. 자세히 말하자면 아래와 같은 Indicator function을 만들어놓고
+$$ Classification;Error:; I(t_i \neq \hat{t_i}) = \begin{cases} 0 &amp; \text{if } t_i = \hat{t_i} \\\
+	</div>
+	<div class="list__footer clearfix">
+		<a class="list__footer-readmore btn" href="/posts/2020-04-10/">Read more…</a>
+	</div>
+</article><article class="list__item post">
 	<figure class="list__thumbnail">
 		<a href="/posts/2020-04-07-ridge%EC%99%80-lasso-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EB%B2%A0%EC%9D%B4%EC%A7%80%EC%95%88-%ED%95%B4%EC%84%9D/">
 			<img src="/cover/PRML.jpg" alt="Ridge와 Lasso, 그리고 베이지안 해석" />
@@ -242,30 +272,6 @@
 	<div class="content list__excerpt post__content clearfix">
 		훈러닝 채널에 선형대수 강의 있습니다!
 	</div>
-</article><article class="list__item post">
-	<figure class="list__thumbnail">
-		<a href="/posts/2020-03-25-03-matrix-as-a-change-of-basis/">
-			<img src="/posts/LinearAlgebra/LinAlg/93C5DB1E001.jpeg" alt="03 Matrix as a Change of Basis" />
-		</a>
-	</figure>
-	<header class="list__header">
-		<h3 class="list__title post__title ">
-			<a href="/posts/2020-03-25-03-matrix-as-a-change-of-basis/" rel="bookmark">
-			03 Matrix as a Change of Basis
-			</a>
-		</h3>
-		<p class="list__lead post__lead">Singular Value Decomposition explicitly shows what a matrix does; change the basis, do the linear transform, and change the basis again</p>
-		<div class="list__meta meta"><div class="meta__item-author meta__item">
-	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
-</div>
-<div class="meta__item-datetime meta__item">
-	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class="meta__text" datetime="2020-03-25T09:40:00&#43;09:00">2020-03-25</time></div><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/linear-algebra/" rel="category">Linear Algebra</a>
-	</span>
-</div></div>
-	</header>
-	<div class="content list__excerpt post__content clearfix">
-		훈러닝 채널에 선형대수 강의 있습니다!
-	</div>
 </article>
 </main>
 
@@ -290,12 +296,12 @@
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/posts/how-to-add-rtools-to-windows-path-env/">Rtools를 윈도우 환경변수 PATH에 추가하는 방법</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/2020-09-07-intro-to-rcpp-and-rcpparmadillo/">Introduction to Rcpp and RcppArmadillo</a></li>
+			<li class="widget__item"><a class="widget__link" href="/posts/2020-09-06-how-to-add-rtools-to-windows-path-env/">Rtools를 윈도우 환경변수 PATH에 추가하는 방법</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/2020-08-25-variational-inference/">Variational Inference and Bayesian Gaussian Mixture Model</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/2020-08-24-forward-and-reverse-kl-divergence/">Forward and Reverse KL divergence</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/05-mle-minimizes-kl-divergence/">Interpretation of MLE in terms of KL divergence</a></li>
 			<li class="widget__item"><a class="widget__link" href="/posts/bayesian-ml/week5/04-note-on-kullback-leibler-divergence/">Note on Kullback-Leibler Divergence</a></li>
-			<li class="widget__item"><a class="widget__link" href="/posts/2020-08-11-bayesian-networks-directed-acyclical-graphs/">Bayesian Networks (Directed Acyclical Graphs)</a></li>
 		</ul>
 	</div>
 </div>
@@ -316,7 +322,7 @@
 				<a class="widget__link" href="/categories/probabilistic-machine-learning/">Probabilistic Machine Learning</a>
 			</li>
 			<li class="widget__item">
-				<a class="widget__link" href="/categories/r/">R</a>
+				<a class="widget__link" href="/categories/rcpp/">Rcpp</a>
 			</li>
 			<li class="widget__item">
 				<a class="widget__link" href="/categories/statistics/">Statistics</a>
