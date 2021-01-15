@@ -6,11 +6,7 @@
     <description>Recent content in Bayesian Hierarchy on Hun Learning</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 03 Aug 2020 08:00:00 +0900</lastBuildDate>
-    
-	<atom:link href="/tags/bayesian-hierarchy/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 03 Aug 2020 08:00:00 +0900</lastBuildDate><atom:link href="/tags/bayesian-hierarchy/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Bayesian Hierarchical Modeling and its Applications</title>
       <link>/posts/bayesian-ml/week3/03-bayesian-hierarchical-modeling-and-applications/</link>

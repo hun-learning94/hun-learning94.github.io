@@ -357,7 +357,7 @@ $$</p>
 </ol>
 <p>이처럼 communication이 equivalence relation이기 때문에 <strong>서로 communicate하는 상태들끼리만 모으는 식으로 마코브 체인의 상태를 각각의 communicating class로 분류</strong>할 수 있다.  무슨 말인지 예시를 통해 살펴보자. (그림 출처 <a href="https://www.probabilitycourse.com/chapter11/11_2_1_introduction.php">https://www.probabilitycourse.com/chapter11/11_2_1_introduction.php</a>)</p>
 <p><img src="/image/BayesMLweek3/fig02.png" alt="fig02"></p>
-<p>여기서 노드들을 communicating class로 나눠보자. 방법은 간단하다. 노드를 찬찬히 뜯어보면서 예컨대 &ldquo;1에서 2로 가는게 있다&rdquo; $\rightarrow$ &ldquo;2에서 1로 언젠가 가나?&rdquo; $\to$ 맞다면 &ldquo;1과 2는 같은 클라스^^&quot;라고 하면 된다. 그렇게 뜯어보면 다음과 같이 나눌 수 있다.</p>
+<p>여기서 노드들을 communicating class로 나눠보자. 방법은 간단하다. 노드를 찬찬히 뜯어보면서 예컨대 &ldquo;1에서 2로 가는게 있다&rdquo; $\rightarrow$ &ldquo;2에서 1로 언젠가 가나?&rdquo; $\to$ 맞다면 &ldquo;1과 2는 같은 클라스^^&ldquo;라고 하면 된다. 그렇게 뜯어보면 다음과 같이 나눌 수 있다.</p>
 <p><img src="/image/BayesMLweek3/fig03.png" alt="fig03"></p>
 <!-- raw HTML omitted -->
 <p>$$
@@ -643,10 +643,10 @@ $$
 </ol>
 <p>2의 조건은 $\pi$에 대하여 detailed balance 방정식을 풀면 &ldquo;충분히&rdquo; 만족할 수 있다. 문제는 1인데, 우리는 detailed balance의 해인 $P$가 ergodic함을 보여야 한다. 증명은 보이지 않겠으나, 만일 모든 상태에 대하여 $p_{ij}$와 $\pi_i$ 모두 양수라면, $\pi$를 stationary 분포로 가지는, $P$로 정의된 마코브 체인은 ergodic함이 알려져 있다. 자세히 쓰자면, *(Leo Breiman. The strong law of large numbers for a class of markov chains. The Annals of Mathematical Statistics, 31(3):801–803, 1960)*</p>
 <p><!-- raw HTML omitted --><strong>Fundamental Theorem</strong></p>
-<p>If a homogenous Markov chain on a finite state space with transition probabilities $T(x, x&rsquo;)$ has $\pi$ as an invariant distribution and</p>
+<p>If a homogenous Markov chain on a finite state space with transition probabilities $T(x, x')$ has $\pi$ as an invariant distribution and</p>
 <!-- raw HTML omitted -->
 <p>$$
-v = \min_{x}\min_{x&rsquo;:\pi(x&rsquo;)&gt;0} T(x, x&rsquo;)/\pi(x&rsquo;) &gt;0
+v = \min_{x}\min_{x':\pi(x')&gt;0} T(x, x')/\pi(x') &gt;0
 $$
 <!-- raw HTML omitted --></p>
 <p>then the Markov chain is erogic, i.e., regardless of the initiai probabilities $p_0(x)$,</p>
@@ -714,7 +714,7 @@ $$</p>
 		<img alt="Kang Gyeonghun avatar" src="/mypic1.jpg" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name">About Kang Gyeonghun</span>
+		<span class="authorbox__name"></span>
 	</div>
 	<div class="authorbox__description">
 		I study statistics, machine learning, data science or whatever that concerns making inference on infinitie dimension from a limited sample in fintie dimension. This blog is an archive of my journey of study.
@@ -844,7 +844,7 @@ $$</p>
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2020 Kang Gyeonghun.
+			&copy; 2021 Kang Gyeonghun.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>

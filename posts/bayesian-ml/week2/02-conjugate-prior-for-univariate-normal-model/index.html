@@ -18,7 +18,7 @@
 <meta itemprop="description" content="Example article description">
 <meta itemprop="datePublished" content="2020-07-20T06:05:00+09:00" />
 <meta itemprop="dateModified" content="2020-07-20T06:05:00+09:00" />
-<meta itemprop="wordCount" content="2268">
+<meta itemprop="wordCount" content="2340">
 
 
 
@@ -191,6 +191,13 @@ $$
 <!-- raw HTML omitted --></p>
 <p>This means that the prior must contain a term similiar $\exp(c_1(\theta-c_2)^2)$, so the normal prior for $\theta$ becomes a natural choice. Let $\theta|\sigma^2 \sim N(\mu_0, \tau_0^2)$ and we have</p>
 <!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+p(\theta|\mathbf{D}, \sigma^2) &amp;\propto p(\theta|\sigma^2)p(\mathbf{D}|\theta, \sigma^2)\\\<br>
+&amp;\propto \exp(-\dfrac{1}{2\tau_0^2}(\theta - \mu_0)^2)\exp(-\dfrac{1}{2\sigma^2}\sum(\theta - x_i)^2)
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
 <p>Since $\theta|\mathbf{D}, \sigma^2$ is also a normal distribution, we only need to figure out the posterior mean and variance. By expanding the exponential term in quadratic form and using the completing the square skill, we can see that</p>
 <!-- raw HTML omitted -->
 <p>$$
@@ -272,7 +279,7 @@ ggplot(df_long, aes(x=theta, y=value, group=dist, color=dist))+
   geom_line()+
   ylab('probability')
 
-</code></pre><p><img src="%5Cimage%5CRplot04.png" alt="Rplot04"></p>
+</code></pre><p><img src="/image/Rplot04.png" alt="Rplot04"></p>
 <h2 id="brnormal-model-unknown-variance-conditional-prior"><!-- raw HTML omitted -->Normal Model (unknown variance, conditional prior)</h2>
 <p>Let us consider a prior where mean is conditional on the variance, as in the normal model with known variance, but there exists a prior for variance also. For the sake of simplicity let the prior on mean as $\theta|\sigma^2 \sim N(\mu_0, \sigma/\tau_0)$. Then we have</p>
 <!-- raw HTML omitted -->
@@ -340,6 +347,24 @@ $$</p>
 </ol>
 <p>In summary,</p>
 <!-- raw HTML omitted -->
+<p>$$
+\begin{align}
+\text{Joint prior and the likelihood}\quad 
+\sigma^2 &amp;\sim inv\Gamma(v_0/2, v_0\sigma_0^2/2)\\\<br>
+\theta|\sigma^2 &amp;\sim N(\mu_0, \sigma/k_0)\\\<br>
+\mathbf{D}|\theta, \sigma^2 &amp;\sim N(\theta, \sigma^2)\\\<br>
+\\\<br>
+\text{Posterior of $\theta$ conditional on $\sigma$}\quad
+\theta|\sigma^2, \mathbf{D} &amp; \sim N(\mu_n, \tau_n^2)\\\<br>
+\mu_n&amp;= \dfrac{k_0}{k_0+n}\mu_0+\dfrac{n}{k_0+n}\bar{x}\\\<br>
+\tau_n^2 &amp;= \dfrac{\sigma^2}{k_0+n}\\\<br>
+\\\<br>
+\text{Posterior of $\sigma$}\quad
+\sigma^2|\mathbf{D} &amp;\sim inv\Gamma(v_n/2, \sigma^2v_n/2)\\\<br>
+v_n &amp;= v_0 +n\\\<br>
+\sigma_n^2 &amp;= \frac{1}{v_n}[v_0\sigma^2_0 + (n-1)s^2+\frac{k_0n}{k_n}(\bar{y}-\mu_0^2)]
+\end{align}
+$$</p>
 <h3 id="brimproper-prior-for-objective-bayesian-inference"><!-- raw HTML omitted -->Improper prior for &ldquo;objective&rdquo; Bayesian inference</h3>
 <p>Some suggested that we use an objective prior for Bayesian inference, so that our prior has minimal impact on the posterior. For the joint infernce on normal model with conditional prior, the prior belief is reflected on the posterior distribution with the weight $k_0, v_0$, which we interpreted as a prior sample size for prior mean and prior variance. If we let $k_0,v_0 \to 0$, we would eventually get a posterior</p>
 <!-- raw HTML omitted -->
@@ -442,7 +467,7 @@ ggplot(df, aes(x=theta, y=sigma2, z=density))+
   geom_contour(aes(color=..level..))+
   guides(color=F)
 
-</code></pre><p><img src="%5Cimage%5CRplot05.png" alt="Rplot05"></p>
+</code></pre><p><img src="/image/Rplot05.png" alt="Rplot05"></p>
 <h2 id="brnormal-model-independent-prior"><!-- raw HTML omitted -->Normal Model (Independent prior)</h2>
 <p><!-- raw HTML omitted -->In some cases the dependence of $\theta$ on $\sigma^2$ might seem unreasonable. We consider independent prior $p(\theta, \sigma^2) =p(\theta)p(\sigma^2)$ as follows</p>
 <!-- raw HTML omitted -->
@@ -517,7 +542,7 @@ colnames(PHI_df) = c('theta','sigma')
 ggplot(PHI_df, aes(x=theta, y=sigma))+
   geom_point()
 
-</code></pre><p><img src="%5Cimage%5CRplot06.png" alt="Rplot06"></p>
+</code></pre><p><img src="/image/Rplot06.png" alt="Rplot06"></p>
 <p>What happened under the hood is</p>
 <pre><code class="language-{r}" data-lang="{r}">PHI_df$n = 1:nrow(PHI_df)
 
@@ -536,7 +561,7 @@ ggplot(phase, aes(x= theta, y= sigma))+
   geom_text(aes(label=n))+
   geom_path(alpha=0.4)+
   facet_wrap(~steps)
-</code></pre><p><img src="%5Cimage%5CRplot07.png" alt="Rplot07"></p>
+</code></pre><p><img src="/image/Rplot07.png" alt="Rplot07"></p>
 <h2 id="brremark-is-normal-sampling-assumption-appropriate"><!-- raw HTML omitted -->Remark: Is normal sampling assumption appropriate?</h2>
 <p>Apparently yes, if we assume that the data $x_i$ is an outcome of a large number of factors $\in {0,1}$ with additive effects $\beta_i$. For example,</p>
 <p>$$
@@ -554,7 +579,7 @@ beta = runif(d)*2-1 # generate beta for each factor
 df = data.frame(height = output %*% beta)
 
 ggplot(df, aes(x=height)) + geom_histogram(color='black',fill='grey', bins=30)
-</code></pre><p><img src="%5Cimage%5CRplot08.png" alt="Rplot08"></p>
+</code></pre><p><img src="/image/Rplot08.png" alt="Rplot08"></p>
 <h3 id="brreferences"><!-- raw HTML omitted -->References</h3>
 <ol>
 <li>First Course into Bayesian Statistical Analysis (Hoff, 2009)</li>
@@ -581,7 +606,7 @@ ggplot(df, aes(x=height)) + geom_histogram(color='black',fill='grey', bins=30)
 		<img alt="Kang Gyeonghun avatar" src="/mypic1.jpg" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name">About Kang Gyeonghun</span>
+		<span class="authorbox__name"></span>
 	</div>
 	<div class="authorbox__description">
 		I study statistics, machine learning, data science or whatever that concerns making inference on infinitie dimension from a limited sample in fintie dimension. This blog is an archive of my journey of study.
@@ -711,7 +736,7 @@ ggplot(df, aes(x=height)) + geom_histogram(color='black',fill='grey', bins=30)
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2020 Kang Gyeonghun.
+			&copy; 2021 Kang Gyeonghun.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>

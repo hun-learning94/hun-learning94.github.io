@@ -142,8 +142,8 @@ $$
 <!-- raw HTML omitted -->
 <p>$$
 \begin{align}
-\text{True (fixed) Parameter:}&amp; \quad \theta^*\\\<br>
-\text{Estimator of $\theta^*$ given $D^{(s)}$:} &amp;\quad \delta(D^{(s)})= \hat{\theta}(D^{(s)})\\\<br>
+\text{True (fixed) Parameter:}&amp; \quad \theta^<em>\\\<br>
+\text{Estimator of $\theta^</em>$ given $D^{(s)}$:} &amp;\quad \delta(D^{(s)})= \hat{\theta}(D^{(s)})\\\<br>
 \text{(Limiting) Sampling Distribution of $\delta(D^{(s)})$:}&amp;\quad  \delta(D^{(s)}) \sim p(.|\theta^*)
 \end{align}
 $$
@@ -152,11 +152,11 @@ $$
 <!-- raw HTML omitted -->
 <p>$$
 \begin{align}
-\text{Loss of $\delta$ in $D^{(s)}$}: \quad &amp; L[\theta^*, \delta(D^{(s)})] = (\theta^* - \delta(D^{(s)}))^2\\\<br>
-\text{Risk of $\delta$ over ${D^{(s)}}_{s=1}^{\infty}$}:\quad &amp;
+\text{Loss of $\delta$ in $D^{(s)}$}: \quad &amp; L[\theta^<em>, \delta(D^{(s)})] = (\theta^</em> - \delta(D^{(s)}))^2\\\<br>
+\text{Risk of $\delta$ over ${D^{(s)}}<em>{s=1}^{\infty}$}:\quad &amp;
 R(\theta^*, \delta)\\\<br>
-\quad &amp;= \mathbb{E}_{D^{(s)}|\theta^*}{L[\theta^*, \delta(D^{(s)})]}\\\<br>
-\quad &amp;=\int L[\theta^*, \delta(D^{(s)})] p(D^{(s)}|\theta^*)dD^{(s)}
+\quad &amp;= \mathbb{E}</em>{D^{(s)}|\theta^<em>}{L[\theta^</em>, \delta(D^{(s)})]}\\\<br>
+\quad &amp;=\int L[\theta^<em>, \delta(D^{(s)})] p(D^{(s)}|\theta^</em>)dD^{(s)}
 \end{align}
 $$
 <!-- raw HTML omitted -->이 Risk를 가장 최소화하는 $\delta$가 가장 Optimal한 추정량이겠지요. 이걸 어떻게 구할 수 있을까요? 못 구해요. 일단 &ldquo;무한 개의 평행우주에서의 데이터&rdquo; 같은 것도 없고, 애초에 참 모수값 $\theta$를 모르니 $p(D^{(s)}\mid\theta)$ 이것도 몰라요. 그래서 빈도통계학에서 &ldquo;최적의 추정량&quot;같은 것은 없습니다. 그렇다고 아예 아무거나 고를 수는 없지요. 그래서 빈도통계론자들은 추정량이 가지면 참 좋을 것 같은 여러 기준을 제시하는데, 무한 데이터 ${D^{(s)}}_{s=1}^{\infty}$에 걸친 추정량 $\delta$의 &ldquo;행태&quot;에 대한 기준이라고 생각해보면 되겠습니다. (때문에 빈도주의보다는 행태주의(Behaviorism)가 더 어울리는 이름이라는 얘기도 있긴 합니다.)</p>
@@ -165,9 +165,9 @@ $$
 <!-- raw HTML omitted -->
 <p>$$
 \begin{align}
-\mathbb{E}_{D^{(s)}|\theta^*}[\theta^*- \delta(D^{(s)})]^2 &amp;=
-\mathbb{E}_{D^{(s)}|\theta^*}(\delta - \mathbb{E}_{D^{(s)}|\theta^*}[\delta])^2 + (\mathbb{E}_{D^{(s)}|\theta^*}[\delta]-\theta^*)^2\\\<br>
-&amp;= \mathbb{V}_{D^{(s)}|\theta^*}(\delta) + Bias^2(\delta)\\\<br>
+\mathbb{E}<em>{D^{(s)}|\theta^<em>}[\theta^</em>- \delta(D^{(s)})]^2 &amp;= 
+\mathbb{E}</em>{D^{(s)}|\theta^<em>}(\delta - \mathbb{E}_{D^{(s)}|\theta^</em>}[\delta])^2 + (\mathbb{E}<em>{D^{(s)}|\theta^<em>}[\delta]-\theta^</em>)^2\\\<br>
+&amp;= \mathbb{V}</em>{D^{(s)}|\theta^*}(\delta) + Bias^2(\delta)\\\<br>
 \therefore MSE &amp;= Variance + Bias^2
 \end{align}
 $$
@@ -202,7 +202,7 @@ $$
 		<img alt="Kang Gyeonghun avatar" src="/mypic1.jpg" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name">About Kang Gyeonghun</span>
+		<span class="authorbox__name"></span>
 	</div>
 	<div class="authorbox__description">
 		I study statistics, machine learning, data science or whatever that concerns making inference on infinitie dimension from a limited sample in fintie dimension. This blog is an archive of my journey of study.
@@ -332,7 +332,7 @@ $$
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2020 Kang Gyeonghun.
+			&copy; 2021 Kang Gyeonghun.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>

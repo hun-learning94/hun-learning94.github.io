@@ -224,7 +224,7 @@ $$
 <!-- raw HTML omitted -->
 <p>$$
 \begin{align}
-E_{x_i|\theta}[s(\theta|x_i)] &amp;= E_{x_i|\theta}[\dfrac{d;l(\theta|x_i)}{d \theta}] = \int \dfrac{f&rsquo;}{f}fdx=\dfrac{d}{d\theta}\int f dx=0 \quad (\theta \in \mathbb{R}^1)\\\<br>
+E_{x_i|\theta}[s(\theta|x_i)] &amp;= E_{x_i|\theta}[\dfrac{d;l(\theta|x_i)}{d \theta}] = \int \dfrac{f'}{f}fdx=\dfrac{d}{d\theta}\int f dx=0 \quad (\theta \in \mathbb{R}^1)\\\<br>
 E_{x_i|\theta}[s(\theta|x_i)] &amp;= \mathbf{0} \in \mathbb{R}^d \quad (\theta \in \mathbb{R}^d)
 \end{align}
 $$</p>
@@ -234,7 +234,7 @@ $$</p>
 <!-- raw HTML omitted -->
 <p>$$
 \begin{align}
-I(\theta)&amp;=V_{x_i|\theta}[s(\theta|x_i)] = -E_{x_i|\theta}[s(\theta|x_i)^2] = -E_{x_i|\theta}[s&rsquo;(\theta|x_i)] \\\<br>
+I(\theta)&amp;=V_{x_i|\theta}[s(\theta|x_i)] = -E_{x_i|\theta}[s(\theta|x_i)^2] = -E_{x_i|\theta}[s'(\theta|x_i)] \\\<br>
 I_n(\theta)&amp;=V_{D^{(s)}|\theta}[s(\theta|D^{(s)})] = nV_{x_i|\theta}[s(\theta|x_i)] = nI(\theta)
 \end{align}
 $$</p>
@@ -251,7 +251,7 @@ $$</p>
 <!-- raw HTML omitted -->
 <p>$$
 \begin{align}
-0 = s(\theta_{mle}|x_i) \approx s(\theta^*|x_i) + s&rsquo;(\theta^*|x_i)(\hat{\theta}_{mle} - \theta^*)
+0 = s(\theta_{mle}|x_i) \approx s(\theta^*|x_i) + s'(\theta^*|x_i)(\hat{\theta}_{mle} - \theta^*)
 \end{align}
 $$
 <!-- raw HTML omitted --></p>
@@ -259,20 +259,20 @@ $$
 <!-- raw HTML omitted -->
 <p>$$
 \begin{align}
-\hat{\theta}_{mle} \approx \theta^* + \dfrac{s(\theta^*|x_i)/n}{-s&rsquo;(\theta^*|x_i)/n}
+\hat{\theta}_{mle} \approx \theta^* + \dfrac{s(\theta^*|x_i)/n}{-s'(\theta^*|x_i)/n}
 \end{align}
 $$</p>
 <!-- raw HTML omitted -->
 <ul>
 <li>$s(\theta \mid x_i)/n$ 이 식은 score function의 평균입니다. score function의 평균은 0이며, 분산은 $I(\theta)$입니다. 때문에 중심극한정리에 의해 $s(\theta\mid x_i)/n \sim^A N(0, I(\theta)/n)$으로 쓸 수 있습니다.</li>
-<li>위에서 이미  $I(\theta)= -\mathbb{E}_{x_i\mid\theta}[s&rsquo;(\theta\mid x_i)]$임을 보였습니다. 때문에 대수의 법칙에 의해 $-s&rsquo;(\theta\mid x_i)/n$은 $I(\theta)$으로 확률 수렴합니다.</li>
+<li>위에서 이미  $I(\theta)= -\mathbb{E}_{x_i\mid\theta}[s'(\theta\mid x_i)]$임을 보였습니다. 때문에 대수의 법칙에 의해 $-s'(\theta\mid x_i)/n$은 $I(\theta)$으로 확률 수렴합니다.</li>
 </ul>
 <p><!-- raw HTML omitted -->이걸 다 종합해보면, 그리고 슬러츠키 정리를 사용해 모르는 참모수 $\theta$을 $\hat{\theta}_{mle}$으로 plug-in 하면,  우리는 다음과 같은 MLE의 극한 분포를 얻을 수 있습니다.</p>
 <!-- raw HTML omitted -->
 <p>$$
 \begin{align}
-\text{Single parameter}&amp;\quad \hat{\theta}_{mle} \sim^A N(\theta^*, \dfrac{1}{nI_{\hat{\theta}_{mle}}})\\\<br>
-\text{Multi-parameter}&amp;\quad \hat{\theta}_{mle} \sim^A N(\theta^*, \dfrac{1}{n}\mathbf{I}^{-1}(\hat{\theta}_{mle}))
+\text{Single parameter}&amp;\quad \hat{\theta}<em>{mle} \sim^A N(\theta^*, \dfrac{1}{nI</em>{\hat{\theta}<em>{mle}}})\\\<br>
+\text{Multi-parameter}&amp;\quad \hat{\theta}</em>{mle} \sim^A N(\theta^*, \dfrac{1}{n}\mathbf{I}^{-1}(\hat{\theta}_{mle}))
 \end{align}
 $$
 <!-- raw HTML omitted -->즉 모든 Likelihood 모델에 대하여, 여기에서 말하지는 않았지만 이 함수들이 어떤 정규성 가정들을 만족한다면 (지수분포족이면 충분히 만족하는), 우리는 Likelihood를 최대로 하는 추정량의 극한분포가 정규분포라는 것을 알 수 있습니다. 이 놀라운 결과를 바탕으로 아까 봤던 빈도통계학의 추론을 똑같이 다 할 수 있는 것입니다. (Likelihood를 이용한 검정 방법은 따로 소개하지 않겠습니다. <a href="https://stats.idre.ucla.edu/other/mult-pkg/faq/general/faqhow-are-the-likelihood-ratio-wald-and-lagrange-multiplier-score-tests-different-andor-similar/">링크</a> 참조)</p>
@@ -310,7 +310,7 @@ $$
 		<img alt="Kang Gyeonghun avatar" src="/mypic1.jpg" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name">About Kang Gyeonghun</span>
+		<span class="authorbox__name"></span>
 	</div>
 	<div class="authorbox__description">
 		I study statistics, machine learning, data science or whatever that concerns making inference on infinitie dimension from a limited sample in fintie dimension. This blog is an archive of my journey of study.
@@ -440,7 +440,7 @@ $$
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2020 Kang Gyeonghun.
+			&copy; 2021 Kang Gyeonghun.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>

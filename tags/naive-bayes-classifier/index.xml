@@ -6,11 +6,7 @@
     <description>Recent content in Naive Bayes Classifier on Hun Learning</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 10 Apr 2020 11:00:00 +0900</lastBuildDate>
-    
-	<atom:link href="/tags/naive-bayes-classifier/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 10 Apr 2020 11:00:00 +0900</lastBuildDate><atom:link href="/tags/naive-bayes-classifier/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Classification을 위한 선형 방법들</title>
       <link>/posts/2020-04-10/</link>

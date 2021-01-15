@@ -125,7 +125,7 @@
 Calls: &lt;Anonymous&gt; ... block_exec -&gt; in_dir -&gt; engine -&gt; do.call -&gt; &lt;Anonymous&gt;
 </code></pre><p>이런 메세지가 발생하는 이유는 시스템 경로에 R tools가 설치된 경로가 포함되지 않았기 때문이다. 직접 R 콘솔에 <code>Sys.getenv()['PATH']</code>를 쳐서 확인해보자.</p>
 <p>This pops up because for some reason, even if you have Rtools installed in your system, the installed path is NOT in the windows <code>PATH</code> environment variable.</p>
-<p>골때리는거는 분명히 이런 에러를 내뱉는 데도 불구하고 <code>devtools::find_rtools()</code> 함수를 치면 몹시 천연덕스럽게 &ldquo;TRUE^^&quot;를 뱉는 훼이크를 시전한다는 것. 때문에 인위적으로 Rtools가 설치된 경로를 시스템 경로에 추가해야 한다.</p>
+<p>골때리는거는 분명히 이런 에러를 내뱉는 데도 불구하고 <code>devtools::find_rtools()</code> 함수를 치면 몹시 천연덕스럽게 &ldquo;TRUE^^&ldquo;를 뱉는 훼이크를 시전한다는 것. 때문에 인위적으로 Rtools가 설치된 경로를 시스템 경로에 추가해야 한다.</p>
 <p>One pervert thing about this error is that even if you type <code>devtools::find_rtools()</code>, which asks the console whether you found Rtools, the console would still answer &ldquo;TRUE&rdquo;, which is clearly a false positive. Hence we need to manually add Rtools path to windows <code>PATH</code> environment variable.</p>
 <p>그 전에 몇 가지 알고 넘어가자.</p>
 <p>Before that, let us see what an envrionment variable is.</p>
@@ -186,7 +186,7 @@ Calls: &lt;Anonymous&gt; ... block_exec -&gt; in_dir -&gt; engine -&gt; do.call 
 		<img alt="Kang Gyeonghun avatar" src="/mypic1.jpg" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name">About Kang Gyeonghun</span>
+		<span class="authorbox__name"></span>
 	</div>
 	<div class="authorbox__description">
 		I study statistics, machine learning, data science or whatever that concerns making inference on infinitie dimension from a limited sample in fintie dimension. This blog is an archive of my journey of study.
@@ -316,7 +316,7 @@ Calls: &lt;Anonymous&gt; ... block_exec -&gt; in_dir -&gt; engine -&gt; do.call 
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2020 Kang Gyeonghun.
+			&copy; 2021 Kang Gyeonghun.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>

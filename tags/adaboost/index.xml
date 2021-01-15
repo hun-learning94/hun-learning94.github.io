@@ -6,11 +6,7 @@
     <description>Recent content in ADABOOST on Hun Learning</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Jan 2020 11:00:00 +0900</lastBuildDate>
-    
-	<atom:link href="/tags/adaboost/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 25 Jan 2020 11:00:00 +0900</lastBuildDate><atom:link href="/tags/adaboost/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ISL 08 Tree Based Methods and Boosting</title>
       <link>/posts/2020-01-25-isl-08-tree-based-methods-and-boosting/</link>

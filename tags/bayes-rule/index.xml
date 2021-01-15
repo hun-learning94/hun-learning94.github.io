@@ -6,11 +6,7 @@
     <description>Recent content in Bayes Rule on Hun Learning</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Jul 2020 05:30:00 +0900</lastBuildDate>
-    
-	<atom:link href="/tags/bayes-rule/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 20 Jul 2020 05:30:00 +0900</lastBuildDate><atom:link href="/tags/bayes-rule/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Bayesian Approach: 하나의 데이터, 임의의 모수</title>
       <link>/posts/bayesian-ml/week1/08-bayesian-approach-%ED%95%98%EB%82%98%EC%9D%98-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%97%AC%EB%9F%AC-%EA%B0%9C%EC%9D%98-%EB%AA%A8%EC%88%98/</link>

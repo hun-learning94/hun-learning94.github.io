@@ -6,11 +6,7 @@
     <description>Recent content in Markov Chain on Hun Learning</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 03 Aug 2020 06:00:00 +0900</lastBuildDate>
-    
-	<atom:link href="/tags/markov-chain/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 03 Aug 2020 06:00:00 +0900</lastBuildDate><atom:link href="/tags/markov-chain/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>(MCMC) Discrete-Time Markov Chain with Finite State Space</title>
       <link>/posts/bayesian-ml/week3/01-discrete-time-markov-chaine-with-finite-state-space/</link>

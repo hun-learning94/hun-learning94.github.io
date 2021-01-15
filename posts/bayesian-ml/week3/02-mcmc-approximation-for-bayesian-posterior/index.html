@@ -187,10 +187,10 @@ $$
 <p>MCMC를 직관적으로 이해하는 가장 좋은 방법은 등고선을 예시로 드는 것이다. 산을 상상해보자. 확률분포의 정확한 식을 안다는 것은 산의 모든 지점에서의 정확한 해발고도를 안다는 것이다. 그러나 확률분포를 어떤 상수배까지 아는 것은, 모든 지점에서의 정확한 해발고도를 알 수는 없지만, 지금 서있는 지점이 주위에 비해 높고 낮은지는 알고 있다는 것이다. 우리는 지도 없이, 마치 게임 스타크래프트에서 시야가 1인 유닛처럼, 전후와 좌우의 높이만 알고 있으며, 우리의 목적은 최대한 산의 개략적인 모습을 등고선으로 그리는 것이다. 산의 개형을 잘 파악하려면 어느 한 곳에 머물지 않고 산의 구석구석을 누벼야 하며, 그 중에서도 특히 높은 곳을 위주로 가야할 것이다. 이러한 &ldquo;스캔&quot;을 가능하게 해주는 방법이 바로 MCMC이다.</p>
 <p>이처럼 MCMC 방법의 핵심은 산의 한 지점에서 다른 지점으로 이동하는 메커니즘이고, 이 메커니즘을 어떻게 하냐에 따라 MCMC에는 대표적인 두 가지 방법 Metropolis-Hastings 알고리즘과 Gibbs Sampler 알고리즘이 있다. 그 전에 먼저 Markov Chain에 대해 간략히 이해하는 것이 중요하다. 어떤 확률변수가 Markov Chain을 따를 때, 어떻게 하여 그 확률변수의 분포를 근사할 수 있는지 공부해보자.</p>
 <h3 id="br2-1-마코브-체인이란"><!-- raw HTML omitted -->2-1. 마코브 체인이란?</h3>
-<p>이 부분은 이전 자료 &ldquo;Discrete-Time Markov Chain with Finite State Space for MCMC&quot;으로 대체한다. 핵심은 타겟 분포 $p(x)$에 대해서 다음의 detailed balance equation을 만족하는 transiton operator $T(x, x&rsquo;)$을 찾는 것이다.</p>
+<p>이 부분은 이전 자료 &ldquo;Discrete-Time Markov Chain with Finite State Space for MCMC&quot;으로 대체한다. 핵심은 타겟 분포 $p(x)$에 대해서 다음의 detailed balance equation을 만족하는 transiton operator $T(x, x')$을 찾는 것이다.</p>
 <!-- raw HTML omitted -->
 <p>$$
-p(x)T(x, x&rsquo;) = p(x&rsquo;)T(x&rsquo;,x) \quad ^\forall x, x&rsquo;\in S\<br>
+p(x)T(x, x') = p(x')T(x',x) \quad ^\forall x, x'\in S\<br>
 \text{equivalently,}\quad\pi_i p_{ij} =  \pi_j p_{ji} \quad ^\forall i,j\in S
 $$</p>
 <!-- raw HTML omitted -->
@@ -398,7 +398,7 @@ $$</p>
 <em>2에서 기울기에 따라 수정된 $\phi$에 따라 $\theta$를 이동한다. 이렇게 이동한 이유는, 새로 이동한 지점에서 다시 기울기를 계산해 또 낮은 방향으로 방향을 틀기 위함이다.</em> $M^{-1}$은 그냥 대각행렬이고, 모수 공간의 각 축마다 스케일을 다시 맞춰준다고 생각하면 된다.</p>
 </li>
 <li>
-<p><em><em>Repeat from 1 to 3 for $L$ times to get $\theta^</em>, \phi^*$</em>*</p>
+<p><strong>Repeat from 1 to 3 for $L$ times to get $\theta^<em>, \phi^</em>$</strong></p>
 </li>
 </ol>
 <p><em>왜 이러는 걸까? 사실 HMC가 정말 하고 싶은 것은 <strong>음수로그분포(골짜기)를 따라 툭 건들었더니 도로록 내려가는 공을 시뮬레이션 하는거다.</strong> 그렇게 해서 공을 적당히 굴리다가 멈추고, 그 멈춘 지점을 새로운 proposal로 받아들이고 싶은 거다. 이렇게 생각하면 음수로그분포 $-\log p(\theta|D)$는 마치 &ldquo;위치 에너지&rdquo;, 모멘텀 벡터의 $-\log p(\theta)$는 마치 &ldquo;운동 에너지&quot;로 볼 수 있다. 그러나 컴퓨터가 이산 공간이니 잠깐 갔다가 다시 방향 틀어서 잠깐 가는 과정을 $L$번 돌려서 최대한 연속적인 움직임을 근사하는 것이다.</em></p>
@@ -499,7 +499,7 @@ $$</p>
 		<img alt="Kang Gyeonghun avatar" src="/mypic1.jpg" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name">About Kang Gyeonghun</span>
+		<span class="authorbox__name"></span>
 	</div>
 	<div class="authorbox__description">
 		I study statistics, machine learning, data science or whatever that concerns making inference on infinitie dimension from a limited sample in fintie dimension. This blog is an archive of my journey of study.
@@ -629,7 +629,7 @@ $$</p>
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2020 Kang Gyeonghun.
+			&copy; 2021 Kang Gyeonghun.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>

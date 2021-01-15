@@ -177,7 +177,7 @@ $$
 $$
 <!-- raw HTML omitted -->즉 표본평균이 어심토틸컬하게 노말하다&hellip; 라는 건데, 사실 오해하기 쉬운 표현이긴 합니다. 중심극한정리가 표본평균이 분포수렴한다는 건 아니거든요. 표본평균은 대수의 법칙에 의해 하나의 값 모평균으로 확률수렴해요. 분포가 그냥 모평균 주위로 엄청 뾰족해지고 나머지는 다 density가 0이 되는 degenerate 분포가 됩니다. 정확히 말하면 &ldquo;표본평균과 모평균의 차이에 $\sqrt{n}$을 곱해 스케일된 편차가 정규분포 $N(0, \sigma^2)$를 따르더라&quot;입니다. 표본 수가 무한정으로 가면 표본평균의 오차는 0이 되겠지만, 거기에 표본 수를 곱한 편차는 정규분포를 따른다는 겁니다.</p>
 <p><!-- raw HTML omitted -->그래도 이런 점만 주의하면 위의 표현이 좀더 직관적입니다. 중심극한정리가 말하는거는, 원래 분포가 뭐든 간에 상관이 없이, 어떤 조건만 만족하면 (대강 말하면) 표본평균의 근사적 분포를 알 수 있다는 것입니다. 그러니까 모수를 몰라도, 모수에 대한 추정량의 극한분포는 알 수 있으며, 때문에 빈도론적 추론이 가능한 것입니다. 어떻게 하는지 이제 자세히 살펴보겠습니다.</p>
-<p><!-- raw HTML omitted -->우리의 관심사가 $\theta$라고 할 때 이 모수의 추정량을 표본평균으로 $(\hat{\theta}(D)=\bar{x})$ 잡을 수 있겠습니다. <em>(사실 표본평균도 되고 표본 미디안도 되고, 그냥 뭐 아무 값이나 뽑아서 추정량으로 삼아도 됩니다. 어떤 추정량 $\hat{\theta}(D)$을 고를 것이냐의 문제는 frequentist optimality라고도 하는데, 나중에 자세히 볼게요. 결론만 말하면 그냥 MLE가 짱입니다. 표본평균도 MLE입니다.)</em> 그러나 중심극한정리를 보면 관심 없는데 끼어있는 다른 모수 $\sigma^2$가 있네요. 이런 애들을 nuisance parameter라고 합니다. 그래서 이런 모수들을 제거해주는 방법을 우리가 수통1 5단원에서 배웠죠. 이 nuisance parameter을 이에 확률 수렴하는 표본통계량으로 바꿔도 분포 수렴에 문제가 없다는 정리가 바로 Slutsky&rsquo;s Theorem이었습니다.
+<p><!-- raw HTML omitted -->우리의 관심사가 $\theta$라고 할 때 이 모수의 추정량을 표본평균으로 $(\hat{\theta}(D)=\bar{x})$ 잡을 수 있겠습니다. <em>(사실 표본평균도 되고 표본 미디안도 되고, 그냥 뭐 아무 값이나 뽑아서 추정량으로 삼아도 됩니다. 어떤 추정량 $\hat{\theta}(D)$을 고를 것이냐의 문제는 frequentist optimality라고도 하는데, 나중에 자세히 볼게요. 결론만 말하면 그냥 MLE가 짱입니다. 표본평균도 MLE입니다.)</em> 그러나 중심극한정리를 보면 관심 없는데 끼어있는 다른 모수 $\sigma^2$가 있네요. 이런 애들을 nuisance parameter라고 합니다. 그래서 이런 모수들을 제거해주는 방법을 우리가 수통1 5단원에서 배웠죠. 이 nuisance parameter을 이에 확률 수렴하는 표본통계량으로 바꿔도 분포 수렴에 문제가 없다는 정리가 바로 Slutsky&rsquo;s Theorem이었습니다. 
 $$
 \begin{align}
 \text{Sampling Distribtion}&amp;\quad \dfrac{\bar{x}-\theta}{\sqrt{s^2/n}}\sim N(0,1) \quad as\quad n\to \infty\\\<br>
@@ -263,7 +263,7 @@ $$
 <li>p-value가 낮으면 낮을수록 $\theta \neq 0$의 확률이 (즉 약발이 좋을 확률이) 더 높은 것으로 착각한다.</li>
 </ol>
 <p><!-- raw HTML omitted -->빈도론적 가설검정 자체는 문제가 없지만, 이런 유혹과 오해 때문에 빈도론적 가설검정 자체의 신뢰성에 큰 문제가 생기고 있는 실정입니다. (사실 제가 통계학 공부를 처음 시작한 이유도 이에 대한 의구심 때문이었습니다.) 통계적으로 유의한 결과를 보고한 논문들을 다시 재현해봤더니 보고된 대로 유의한 결과가 다시 나온 논문이 거의 없다고 하네요. 자세한 사항은 Replication Crisis를 한번 검색해보면 알 수 있습니다. 빈도론적 추론의 병폐에 대해서는 이후에 자세히 알아보겠습니다.</p>
-<p><!-- raw HTML omitted -->*(제 생각이지만 이런 문제가 발생한 이유는 애초에 전제를 모 아니면 도, 즉 무적권 백퍼센트 모수가 $\mathcal{H}_0$이거나 $\mathcal{H}_1$이라고 전제를 했기 때문입니다. 사실 자료를 모으는 사람이 관심이 있는 거는 &ldquo;신약의 효과가 없을 때 데이터가 얼마나 레어하나&quot;같은 에둘른 말보다는 &ldquo;그래서 신약 효과가 없을 확률이 얼마나 되냐&quot;가 아닐까 싶습니다. 이를 확률로 쓰면 $p(\mathcal{H}_0\mid D)$로 쓸 수 있겠죠. 그러나 빈도론적 세계관에서는 이 확률을 구할 방법이 없습니다. 애초에 모수가 확률변수가 아니기 때문입니다. 이런 게 불가능하고 오로지 &ldquo;채택&rdquo;, &ldquo;기각&rdquo; 같은 극단적인 선택만 해야하는데, 그 선택의 근거가 p-value이고, 결과에 따라 내 모가지가 왔다리갔다리하면, 당연히 p-value를 손보고 싶은 유혹이 생기지 않을까요? 이런 이유로 빈도론적 가설검정을 &ldquo;trigger-happy&quot;하다 (그러니까 깊이 고민 안 해보고 p-value 낮으면 무조건 무조건 응 기각~ 해버린다), 그리고 &ldquo;p-hacking&quot;이다라는 비판이 있습니다.)*</p>
+<p><!-- raw HTML omitted --><em>(제 생각이지만 이런 문제가 발생한 이유는 애초에 전제를 모 아니면 도, 즉 무적권 백퍼센트 모수가 $\mathcal{H}_0$이거나 $\mathcal{H}_1$이라고 전제를 했기 때문입니다. 사실 자료를 모으는 사람이 관심이 있는 거는 &ldquo;신약의 효과가 없을 때 데이터가 얼마나 레어하나&quot;같은 에둘른 말보다는 &ldquo;그래서 신약 효과가 없을 확률이 얼마나 되냐&quot;가 아닐까 싶습니다. 이를 확률로 쓰면 $p(\mathcal{H}_0\mid D)$로 쓸 수 있겠죠. 그러나 빈도론적 세계관에서는 이 확률을 구할 방법이 없습니다. 애초에 모수가 확률변수가 아니기 때문입니다. 이런 게 불가능하고 오로지 &ldquo;채택&rdquo;, &ldquo;기각&rdquo; 같은 극단적인 선택만 해야하는데, 그 선택의 근거가 p-value이고, 결과에 따라 내 모가지가 왔다리갔다리하면, 당연히 p-value를 손보고 싶은 유혹이 생기지 않을까요? 이런 이유로 빈도론적 가설검정을 &ldquo;trigger-happy&quot;하다 (그러니까 깊이 고민 안 해보고 p-value 낮으면 무조건 무조건 응 기각~ 해버린다), 그리고 &ldquo;p-hacking&quot;이다라는 비판이 있습니다.)</em></p>
 <p><!-- raw HTML omitted -->지금까지 본 예시는 검정통계량을 중심극한정리로 얻은 경우였습니다. 모평균에 대한 추정만 예시를 들었는데, 이 외에도 모평균의 차이에 대한 검정에도 적용이 가능하고, 이항분포의 정규근사를 이용하면 모비율 차이 검정이나 분할표의 독립성 검정 문제에서도 중심극한정리로 검정통계량을 얻을 수 있습니다. 하지만 많은 경우 중심극한정리로는 검정통계량을 얻을 수 없는데, 다음에 살펴볼 MLE와 LRT는 데이터 형성 과정을 Likelihood로 세운 모든 경우에 해당하는 빈도론적 추정 방법입니다. 중심극한정리의 일반화라고 볼 수 있겠습니다.</p>
 <h2 id="brreferences"><!-- raw HTML omitted -->References</h2>
 <ol>
@@ -294,7 +294,7 @@ $$
 		<img alt="Kang Gyeonghun avatar" src="/mypic1.jpg" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name">About Kang Gyeonghun</span>
+		<span class="authorbox__name"></span>
 	</div>
 	<div class="authorbox__description">
 		I study statistics, machine learning, data science or whatever that concerns making inference on infinitie dimension from a limited sample in fintie dimension. This blog is an archive of my journey of study.
@@ -424,7 +424,7 @@ $$
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2020 Kang Gyeonghun.
+			&copy; 2021 Kang Gyeonghun.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>

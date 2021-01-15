@@ -6,11 +6,7 @@
     <description>Recent content in Intro to Statistical Learning on Hun Learning</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 26 Jan 2020 11:00:00 +0900</lastBuildDate>
-    
-	<atom:link href="/tags/intro-to-statistical-learning/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 26 Jan 2020 11:00:00 +0900</lastBuildDate><atom:link href="/tags/intro-to-statistical-learning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ISL 09 Support Vector Machine</title>
       <link>/posts/2020-01-26-isl-09-support-vector-machine/</link>

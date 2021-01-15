@@ -6,11 +6,7 @@
     <description>Recent content in Linear Adjoint on Hun Learning</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 25 Mar 2020 09:30:00 +0900</lastBuildDate>
-    
-	<atom:link href="/tags/linear-adjoint/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 25 Mar 2020 09:30:00 +0900</lastBuildDate><atom:link href="/tags/linear-adjoint/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>02 Matrix as a Linear Operator</title>
       <link>/posts/2020-03-25-02-matrix-as-a-linear-operator/</link>

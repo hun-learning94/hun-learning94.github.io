@@ -213,27 +213,27 @@ $$</p>
 \end{align*}
 $$</p>
 <h3 id="brlagrange-dual-geometric-intuition"><!-- raw HTML omitted -->Lagrange Dual: Geometric Intuition</h3>
-<p>$d^*,p^*$의 관계를 그림으로 나타내면 다음과 같다. 여기에서 $t$는 목적함수 $f_0(\mathbf{x})$, $u$는 부등호 조건식 $f_1(\mathbf{x})$를 의미하며, 이 두 값을 결정하는 $\mathbf{x}$는 그래프에 나오지 않은 매개변수로 생각할 수 있다. $\mathcal{G}$는 $\mathbf{x}$의 도메인에서 목적함수와 조건식이 가질 수 있는 모든 값의 영역을 나타내며, feasible한 $\mathbf{x}$에 대해서는 $u\leq 0$이 되어야 하므로 feasible한 영역은 노란색으로 표시한 부분이다.</p>
+<p>$d^<em>,p^</em>$의 관계를 그림으로 나타내면 다음과 같다. 여기에서 $t$는 목적함수 $f_0(\mathbf{x})$, $u$는 부등호 조건식 $f_1(\mathbf{x})$를 의미하며, 이 두 값을 결정하는 $\mathbf{x}$는 그래프에 나오지 않은 매개변수로 생각할 수 있다. $\mathcal{G}$는 $\mathbf{x}$의 도메인에서 목적함수와 조건식이 가질 수 있는 모든 값의 영역을 나타내며, feasible한 $\mathbf{x}$에 대해서는 $u\leq 0$이 되어야 하므로 feasible한 영역은 노란색으로 표시한 부분이다.</p>
 <p><img src="https://raw.githubusercontent.com/YonseiESC/ESC20-SPRING/master/%EC%84%B8%EC%85%98%20%EC%9E%90%EB%A3%8C/week4/snip01.PNG" alt="fig"></p>
 <p>(출처: <a href="http://web.stanford.edu/class/ee364a/lectures/duality.pdf">http://web.stanford.edu/class/ee364a/lectures/duality.pdf</a>)</p>
-<p>조건식을 만족하면서 (feasible하면서) 목적함수의 값 $t$를 최소화하는 지점은 노란색 영역의 가장 왼쪽 아래 끄트머리 지점이며, 이 지점에서의 매개변수가 $\mathbf{x^*}$일 것이고, 이 때의 목적함수의 값이 $p^*$가 될 것이다.</p>
+<p>조건식을 만족하면서 (feasible하면서) 목적함수의 값 $t$를 최소화하는 지점은 노란색 영역의 가장 왼쪽 아래 끄트머리 지점이며, 이 지점에서의 매개변수가 $\mathbf{x^<em>}$일 것이고, 이 때의 목적함수의 값이 $p^</em>$가 될 것이다.</p>
 <p>$\lambda$의 값이 주어졌다면 라그랑지안 듀얼 
 $$
-g(\lambda)= \inf _{\mathbf{x}\in \mathcal{D}^*}L(\mathbf{x,\lambda}) = \inf _{\mathbf{x}\in \mathcal{D}^*}[f_0(\mathbf{x}) + \lambda f_1(\mathbf{x})] = \inf _{\mathbf{x}\in \mathcal{D}^*}[t+\lambda u] 
+g(\lambda)= \inf _{\mathbf{x}\in \mathcal{D}^<em>}L(\mathbf{x,\lambda}) = \inf _{\mathbf{x}\in \mathcal{D}^</em>}[f_0(\mathbf{x}) + \lambda f_1(\mathbf{x})] = \inf _{\mathbf{x}\in \mathcal{D}^*}[t+\lambda u] 
 $$
-은,  $(t,u)$  좌표평면에서 $t+\lambda u = g(\lambda)$를 만족하는 모든 점들의 집합으로, 직선으로 나타날 것이다. 이 직선을 **Supporting Hyperplane**이라고 한다.</p>
+은,  $(t,u)$  좌표평면에서 $t+\lambda u = g(\lambda)$를 만족하는 모든 점들의 집합으로, 직선으로 나타날 것이다. 이 직선을 <strong>Supporting Hyperplane</strong>이라고 한다.</p>
 <p>Supporting Hyperplane이 가지는 중요한 특성은 다음과 같다.</p>
 <ol>
 <li>Supporting Hyperplane은 직선이다. 이건 당연하지.</li>
 <li>Supporting Hyperplane은 항상 $\mathcal{G}$보다 아래에 있어야한다. $u$축의 값을 하나 고정하여 그린 수직선과 $\mathcal{G}$가 만나는 지점들의 $t$값들은, 조건식 $u=f_1(\mathbf{x})$의 값이 주어졌을때의 목적함수 $t= f_0(\mathbf{x})$가 가질 수 있는 값들의 범위와 같다. 이때 라그랑지 듀얼은 첫 번째 성질 **&ldquo;모든 feasible한 $\mathbf{x}$에 대해 $g(\lambda, \nu)$는 목적함수 $f_0(\mathbf{x})$의 Lower Bound이다.&quot;**에 의하여, $u$축에서 그은 수직선 위에서 항상 $\mathcal{G}$보다 아래에 있어야한다.</li>
-<li>Supporting Hyperplane의 위치는 $\lambda$가 결정한다. 우선 기울기가 $\lambda$에 따라 결정되며, $\lambda$가 바뀌면 $g(\lambda)= \inf _{\mathbf{x}\in \mathcal{D}^*}L(\mathbf{x,\lambda})$를 만족하면 $\mathbf{x^*}$의 값도 다를 것이므로 직선의 위치도 바뀐다.</li>
+<li>Supporting Hyperplane의 위치는 $\lambda$가 결정한다. 우선 기울기가 $\lambda$에 따라 결정되며, $\lambda$가 바뀌면 $g(\lambda)= \inf _{\mathbf{x}\in \mathcal{D}^<em>}L(\mathbf{x,\lambda})$를 만족하면 $\mathbf{x^</em>}$의 값도 다를 것이므로 직선의 위치도 바뀐다.</li>
 <li>Supporting Hyperplane은 항상  feasible한 도메인에 접해야 한다. 때문에 왼쪽 그림에서 그려진 직선은 엄밀히 말하면 $\mathbf{x}$의 feasible한 도메인 밖에 있기 때문에 그릴 수 없는 직선이다.</li>
 </ol>
 <p>이를 모두 종합해 고려하면, <strong>$g(\lambda)$를 최대화하는 $\lambda$를 고르는 Dual 문제는 $\mathcal{G}$의 feasible한 영역 중 한 점을 골라 $\mathcal{G}$를 떠받드는 supporting hyperplane을 그리는 문제</strong>로 볼 수 있다. 또한 오른쪽 그림을 보면, $\lambda$의 값에 따라 그릴 수 있는 수많은 supporting hyperplane중에서, 위 네 가지 성질을 만족하면서 $t$축에서의 값 $g(\lambda)$가 최대가 되는 직선은 하나이며, 거기에서의 값이 $d^*$임을 알 수 있다.</p>
 <p>위 사례는 목적함수 $f_0(\mathbf{x})$이 concave한 경우에 해당한다. 만일 $f_0(\mathbf{x})$이 convex하다면 그려지는 $\mathcal{G}$도 그 모양이 아래로 볼록하며, 그 결과 $p^<em>=d^</em>$가 될 것임을 어렵지 않게 짐작할 수 있다. 즉 <strong>Convex optimization 문제에서는 Primal Problem을 Dual Problem으로 바꿔서 풀 수 있다는 것이다.</strong></p>
 <p>그러나 이 조건만으로는 Dual Problem을 풀기에 부족하다. Convex하지만 $d^* &lt; p^*$일 수도 있고,  convex하지 않은데 $d^* = p^*$일 수도 있다. 때문에 좀 더 일반적인 조건이 필요하다.</p>
 <h3 id="brcomplementary-slackness"><!-- raw HTML omitted -->Complementary Slackness</h3>
-<p>문제의 방향을 거꾸로 틀어, 일단 <strong>Strong Duality가 성립한다</strong>고 가정해보자. 이때 $\mathbf{x}^<em>$를 Primal 문제의 해라고 해서 Primal Optimal이라고, $(\lambda^</em>, \nu^*)$를 Dual 문제의 해라고 해서 Dual Optimal이라고 부른다. $d^*=p^*$이므로 다음과 같이 쓸 수 있다.</p>
+<p>문제의 방향을 거꾸로 틀어, 일단 <strong>Strong Duality가 성립한다</strong>고 가정해보자. 이때 $\mathbf{x}^<em>$를 Primal 문제의 해라고 해서 Primal Optimal이라고, $(\lambda^</em>, \nu^<em>)$를 Dual 문제의 해라고 해서 Dual Optimal이라고 부른다. $d^</em>=p^*$이므로 다음과 같이 쓸 수 있다.</p>
 <p>$$
 \begin{align*}
 p^*=f_0(\mathbf{x}^*) = d^* &amp;= \inf_{\mathbf{x}\in \mathcal{D}^*} L(\mathbf{x, \lambda^*, \nu^*})\\\<br>
@@ -245,7 +245,7 @@ $$</p>
 <p>첫 번째 줄과 두 번째 줄은 정의를 그대로 적었을 뿐이다. 핵심은 (1) 두 번째에서 세 번째로 내려가는 부분과, (2) 세 번째에서 막줄로 가는 부분이다. 만일 $d^<em>=p^</em>$가 성립한다고 하면 맨 처음과 맨 마지막이 다 똑같으니 중간에 있는 모든 부등호도 등호로 바뀌어야 한다. 때문에 다음이 성립한다.</p>
 <ol>
 <li>
-<p>Dual 문제를 풀어서 $(\lambda^*, \nu^*)$를 구했다고 치자. 이걸 라그랑지에 넣어서 $L(\mathbf{x, \lambda^*, \nu^*})$를 구했다고 하자. 이때 이 식을 최소화하는 $\mathbf{x}$는 바로 Primal의 해 $\mathbf{x^*}$이다. 때문에 Primal Problem을 풀 필요 없이 Dual Problem을 풀어 라그랑지 식을 $\mathbf{x}$에 대해 최소화하면 된다.</p>
+<p>Dual 문제를 풀어서 $(\lambda^<em>, \nu^</em>)$를 구했다고 치자. 이걸 라그랑지에 넣어서 $L(\mathbf{x, \lambda^<em>, \nu^</em>})$를 구했다고 하자. 이때 이 식을 최소화하는 $\mathbf{x}$는 바로 Primal의 해 $\mathbf{x^*}$이다. 때문에 Primal Problem을 풀 필요 없이 Dual Problem을 풀어 라그랑지 식을 $\mathbf{x}$에 대해 최소화하면 된다.</p>
 </li>
 <li>
 <p>$\lambda_i \geq 0$이고 , $f_i(\mathbf{x})\leq0$임을 기억하자. (2)이 의미하는 바는 다음과 같다. 
@@ -253,14 +253,14 @@ $$
 f_0(\mathbf{x^*}) + \sum_{i=1}^m \lambda_i^* f_i(\mathbf{x^*}) + \sum_{i=1}^p \nu_i^* h_i(\mathbf{x^*})= f_0(\mathbf{x^*})
 $$
 $h_i(\mathbf{x})$는 어차피 feasible한 $\mathbf{x}$에 대해서는 $0$이 되니 무시하자. 문제는 $f_i(\mathbf{x})$인데, 위 식이 성립하려면 모든 조건식에 대해 $\lambda_i f_i(\mathbf{x}) \leq 0$이어야만 한다. 즉 $\lambda_i^*=0$이면 조건식이 음수든 뭐든 상관이 없지만, $\lambda_i^*\ne 0$으로 살아있다면 조건식은 무조건 $0$이 되어야 한다는 것이다. 이 조건을 **Complementary Slackness**라고 부른다.</p>
-<p>이를 벡터로 생각해본다면, Primal optimal $\mathbf{x^*}$가 주어졌을 때 두 벡터 $\lambda$와 $f_i(\mathbf{x^*})$는 complementary sparse해야한다는 것. 즉 어떤 행에서 한 놈이 0이 아니면 다른 놈이 0이 되어야 한다는 것이다. 쉽게 말하면 **람다가 살아있는 부등호 조건식은 프라이멀 옵티멀에서 $0$이 되어야 한다**로 생각할 수 있겠다.</p>
+<p>이를 벡터로 생각해본다면, Primal optimal $\mathbf{x^<em>}$가 주어졌을 때 두 벡터 $\lambda$와 $f_i(\mathbf{x^</em>})$는 complementary sparse해야한다는 것. 즉 어떤 행에서 한 놈이 0이 아니면 다른 놈이 0이 되어야 한다는 것이다. 쉽게 말하면 <strong>람다가 살아있는 부등호 조건식은 프라이멀 옵티멀에서 $0$이 되어야 한다</strong>로 생각할 수 있겠다.</p>
 </li>
 </ol>
 <h3 id="brkarush-kuhn-tucker-conditions"><!-- raw HTML omitted -->Karush-Kuhn-Tucker conditions</h3>
-<p>지금까지의 논의를 종합해보자. 만일 어떤 Primal Problem에 대해 Strong duality가 성립한다면, $\mathbf{x}^<em>$ Primal Optimal, $(\lambda^</em>, \nu^*)$ Dual Optimal은 다음의 조건을 만족해야 하는데, 이를 통틀어 **KKT conditions**이라고 한다.</p>
+<p>지금까지의 논의를 종합해보자. 만일 어떤 Primal Problem에 대해 Strong duality가 성립한다면, $\mathbf{x}^<em>$ Primal Optimal, $(\lambda^</em>, \nu^*)$ Dual Optimal은 다음의 조건을 만족해야 하는데, 이를 통틀어 <strong>KKT conditions</strong>이라고 한다.</p>
 <p><img src="https://raw.githubusercontent.com/YonseiESC/ESC20-SPRING/master/%EC%84%B8%EC%85%98%20%EC%9E%90%EB%A3%8C/week4/snip02.PNG" alt=""></p>
 <p>(출처: <a href="http://web.stanford.edu/class/ee364a/lectures/duality.pdf">http://web.stanford.edu/class/ee364a/lectures/duality.pdf</a>)</p>
-<p>1번은 primal feasibility, 2번은 dual feasibility라고도 부르는데, 이는 $\mathbf{x}^{star}$가 Primal Optimal, $(\lambda^{star}, \nu^{star})$가 Dual Optimal이 되기 위한 조건이므로 Strong duality와는 상관이 없다. 여기서 중요한 것은 앞서 살펴본 3번 complementary slackness와 4번 $\nabla{\mathbf{x}}{L}=0$이다. 4번이 &quot; Dual을 풀어서 나온 $L(\mathbf{x, \lambda^{star}, \nu^{star}})$을  최소화하는 $\mathbf{x}$는 바로 Primal Optimal $\mathbf{x^{star}}$&quot;라는 말이다.</p>
+<p>1번은 primal feasibility, 2번은 dual feasibility라고도 부르는데, 이는 $\mathbf{x}^{star}$가 Primal Optimal, $(\lambda^{star}, \nu^{star})$가 Dual Optimal이 되기 위한 조건이므로 Strong duality와는 상관이 없다. 여기서 중요한 것은 앞서 살펴본 3번 complementary slackness와 4번 $\nabla{\mathbf{x}}{L}=0$이다. 4번이 &quot; Dual을 풀어서 나온 $L(\mathbf{x, \lambda^{star}, \nu^{star}})$을  최소화하는 $\mathbf{x}$는 바로 Primal Optimal $\mathbf{x^{star}}$&ldquo;라는 말이다.</p>
 <p>지금까지 본 것은 <strong>Strong Duality $\rightarrow$ KKT Conditions</strong>이다. 이는 Primal의 목적함수가 convex이든 concave이든 항상 성립한다. 그러나 만일 <strong>Primal이 convex이면 Strong Duality $\leftarrow$ KKT Conditions</strong>가 성립한다. 왜 그런지는슬라이드에서 안 알랴줘서 나도 모르겠는데, 위의 geometric interpretation을 보면 대충 감이 오지 않을까? 때문에 만일 내가 푸는 최적화 문제가 부등호 조건이 들어갔는데, 이 놈의 Dual을 풀어보니 KKT condition을 만족하는 $(\lambda^{star}, \nu^{star})$이 존재하면, 그냥 Dual 문제를 풀어 나온 $(\lambda^{star}, \nu^{star})$를 대입한 라그랑지를 최소화하는 $\mathbf{x^{stsr}}$를 구하면 된다는 것.</p>
 <p>이제 이걸 SVM에 적용해보자.</p>
 <h2 id="brapplications-support-vector-machines"><!-- raw HTML omitted -->Applications: Support Vector Machines</h2>
@@ -317,11 +317,11 @@ $$</p>
 \nabla_{\mathbf{w}}L|_{(\mathbf{w=}\mathbf{w^*})} = \mathbf{w^*} - \sum_{i=1}^n \lambda_i t_i \mathbf{x}_i = 0
 $$</p>
 <p>$$
-\dfrac{\partial L}{\partial b}|_{b=b^*} = \sum_{i=1}^n \lambda_it_i=0
+\dfrac{\partial L}{\partial b}|<em>{b=b^*} = \sum</em>{i=1}^n \lambda_it_i=0
 $$</p>
-<p>이를 라그랑지안 $L(\mathbf{w},b,\lambda)$에 대입하면 Dual의 목적함수 $L(\mathbf{w^*}, \mathbf{b^*}, \lambda)$를 구할 수 있다.</p>
+<p>이를 라그랑지안 $L(\mathbf{w},b,\lambda)$에 대입하면 Dual의 목적함수 $L(\mathbf{w^<em>}, \mathbf{b^</em>}, \lambda)$를 구할 수 있다.</p>
 <p>$$
-L(\mathbf{w^*}, \mathbf{b^*}, \lambda)= \sum^n \lambda_i - \frac{1}{2} \sum_{i,j}^n t_it_j\lambda_i\lambda_j \langle \mathbf{x}_i,\mathbf{x}_j\rangle
+L(\mathbf{w^<em>}, \mathbf{b^</em>}, \lambda)= \sum^n \lambda_i - \frac{1}{2} \sum_{i,j}^n t_it_j\lambda_i\lambda_j \langle \mathbf{x}_i,\mathbf{x}_j\rangle
 $$</p>
 <p>이렇게 해서 Dual Problem을 써보면</p>
 <p>$$
@@ -388,7 +388,7 @@ $$</p>
 		<img alt="Kang Gyeonghun avatar" src="/mypic1.jpg" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name">About Kang Gyeonghun</span>
+		<span class="authorbox__name"></span>
 	</div>
 	<div class="authorbox__description">
 		I study statistics, machine learning, data science or whatever that concerns making inference on infinitie dimension from a limited sample in fintie dimension. This blog is an archive of my journey of study.
@@ -518,7 +518,7 @@ $$</p>
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2020 Kang Gyeonghun.
+			&copy; 2021 Kang Gyeonghun.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>

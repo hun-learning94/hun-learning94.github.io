@@ -363,7 +363,7 @@ ax1<span style="color:#f92672">.</span>contour(R1, R2, Z, cmap<span style="color
 데이터의 형성 과정까지 추정하는 것은 욕심이라는 것을 인정하고, 애초 목적인 분류에 충실하게 $p(C_k|\mathbf{x})$, 데이터가 주어졌을 때 이게 어느 범주에 속할 지에 대한 분포 이 자체를 아주 그냥 직설적으로 딱 추정해버리는 방법이다.</p>
 <p>두 범주만 있는 데이터를 보자. Generative Approach에서 생각한다면 다음과 같이 쓸 수 있겠다.</p>
 <p>$$
-\begin{align}
+\begin{align} 
 p(C_1|\mathbf{x}) &amp;= \dfrac{p(\mathbf{x}|C_1)p(C_1)}{p(\mathbf{x}|C_1)p(C_1)+p(\mathbf{x}|C_2)p(C_2)} \\\<br>
 &amp;= \dfrac{1}{1+ \dfrac{p(\mathbf{x}|C_2)p(C_2)}{p(\mathbf{x}|C_1)p(C_1)}}\\\<br>
 &amp;= \dfrac{1}{1+ \exp (-a_1)}\\\<br>
@@ -412,7 +412,7 @@ $$</p>
 <h3 id="br2-3-1-logistic-regression-iterative-reweighted-least-squares-irls"><!-- raw HTML omitted -->2-3-1. Logistic Regression: Iterative Reweighted Least Squares (IRLS)</h3>
 <p><strong>지적 호기심이 왕성하고 시간이 남아돌며 두통을 좋아하는게 아니라면 IRLS는 SKIP</strong></p>
 <p>Binary 데이터 ($t_n\in{0,1}$)에서 Logistic Regression에서의 Likelihood는 다음과 같이 쓸 수 있다.</p>
-<p>$$ Joint;Likelihood;(Binary)\quad p(\mathbf{t}|\mathbf{w}) = \prod_{i=1}^N p_1^{t_n}(1-p_1)^{1-t_n} =
+<p>$$ Joint;Likelihood;(Binary)\quad p(\mathbf{t}|\mathbf{w}) = \prod_{i=1}^N p_1^{t_n}(1-p_1)^{1-t_n} = 
 \prod_{i=1}^N \sigma(\mathbf{w^Tx})^{t_n}(1-\sigma(\mathbf{w^Tx}))^{1-t_n} $$</p>
 <p>로그를 취해 미분하면 다음과 같은 형태가 되는데, 이걸 Cross Entropy Error이라고 한다.</p>
 <p>$$ Err(\mathbf{w}):= -\log p(\mathbf{t}|\mathbf{w}) = -\sum_{i=1}^N(t_i \log \sigma(\mathbf{w^Tx_i}) + (1-t_i)\log (1-\log \sigma(\mathbf{w^Tx_i}))$$</p>
@@ -626,7 +626,7 @@ Multinomial Naive Bayes Classifier로 본인이 직접 인터넷에서 텍스트
 		<img alt="Kang Gyeonghun avatar" src="/mypic1.jpg" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name">About Kang Gyeonghun</span>
+		<span class="authorbox__name"></span>
 	</div>
 	<div class="authorbox__description">
 		I study statistics, machine learning, data science or whatever that concerns making inference on infinitie dimension from a limited sample in fintie dimension. This blog is an archive of my journey of study.
@@ -756,7 +756,7 @@ Multinomial Naive Bayes Classifier로 본인이 직접 인터넷에서 텍스트
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2020 Kang Gyeonghun.
+			&copy; 2021 Kang Gyeonghun.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>

@@ -155,7 +155,7 @@ $$
 <p>Some points worth mentioned;</p>
 <ol>
 <li>Computational cost of K-means clustering is roughly $O(NK)$, since at each iteration we have to compute Euclidean distances of $N$ data vectors to each of $K$ cluster centers. This takes quite a toll on the computing power, so there are a few alternatives to mediate this problem. (Refer to PRML p.427)</li>
-<li>Euclidean distance might not be applicable to some data types. In that case, we can come up with some other dissimilarity measure (a sort of metric) such as $V(\mathbf{x, x&rsquo;})$ and substitute into $J$.</li>
+<li>Euclidean distance might not be applicable to some data types. In that case, we can come up with some other dissimilarity measure (a sort of metric) such as $V(\mathbf{x, x'})$ and substitute into $J$.</li>
 <li>K-means is a &ldquo;hard&rdquo; classifier as each data vector is assigned to exactly one cluster. But in practice, many data vectors lie in between cluster centers, so we might want to assign probabilities of assignment. Such is a motivation behind a &ldquo;soft&rdquo; classifier which we would see about shortly.</li>
 </ol>
 <h2 id="brk-means-in-r"><!-- raw HTML omitted -->K-means in R</h2>
@@ -252,7 +252,7 @@ df <span style="color:#f92672">=</span> <span style="color:#a6e22e">data.matrix<
 		<img alt="Kang Gyeonghun avatar" src="/mypic1.jpg" class="avatar" height="90" width="90">
 	</figure>
 	<div class="authorbox__header">
-		<span class="authorbox__name">About Kang Gyeonghun</span>
+		<span class="authorbox__name"></span>
 	</div>
 	<div class="authorbox__description">
 		I study statistics, machine learning, data science or whatever that concerns making inference on infinitie dimension from a limited sample in fintie dimension. This blog is an archive of my journey of study.
@@ -382,7 +382,7 @@ df <span style="color:#f92672">=</span> <span style="color:#a6e22e">data.matrix<
 	<div class="container footer__container flex">
 		
 		<div class="footer__copyright">
-			&copy; 2020 Kang Gyeonghun.
+			&copy; 2021 Kang Gyeonghun.
 			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
 		</div>
 	</div>

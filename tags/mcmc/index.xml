@@ -6,11 +6,7 @@
     <description>Recent content in MCMC on Hun Learning</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 03 Aug 2020 07:00:00 +0900</lastBuildDate>
-    
-	<atom:link href="/tags/mcmc/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 03 Aug 2020 07:00:00 +0900</lastBuildDate><atom:link href="/tags/mcmc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>(MCMC) 베이지안 사후분포 근사를 위한 MCMC 방법론</title>
       <link>/posts/bayesian-ml/week3/02-mcmc-approximation-for-bayesian-posterior/</link>

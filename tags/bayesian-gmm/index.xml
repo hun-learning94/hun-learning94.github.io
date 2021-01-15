@@ -6,11 +6,7 @@
     <description>Recent content in Bayesian GMM on Hun Learning</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 25 Aug 2020 10:00:00 +0900</lastBuildDate>
-    
-	<atom:link href="/tags/bayesian-gmm/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 25 Aug 2020 10:00:00 +0900</lastBuildDate><atom:link href="/tags/bayesian-gmm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Variational Inference and Bayesian Gaussian Mixture Model</title>
       <link>/posts/2020-08-25-variational-inference/</link>

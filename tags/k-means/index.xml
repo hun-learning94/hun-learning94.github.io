@@ -6,11 +6,7 @@
     <description>Recent content in K-means on Hun Learning</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Aug 2020 06:00:00 +0900</lastBuildDate>
-    
-	<atom:link href="/tags/k-means/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 10 Aug 2020 06:00:00 +0900</lastBuildDate><atom:link href="/tags/k-means/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>K-means clustering</title>
       <link>/posts/bayesian-ml/week5/01-k-means-clustering/</link>
