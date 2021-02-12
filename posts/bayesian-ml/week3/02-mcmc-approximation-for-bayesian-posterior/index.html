@@ -18,7 +18,7 @@
 <meta itemprop="description" content="Example article description">
 <meta itemprop="datePublished" content="2020-08-03T07:00:00+09:00" />
 <meta itemprop="dateModified" content="2020-08-03T07:00:00+09:00" />
-<meta itemprop="wordCount" content="3505">
+<meta itemprop="wordCount" content="3521">
 
 
 
@@ -153,21 +153,21 @@
 \begin{align*}
 \text{Likelihood}\quad&amp; p(D|\theta)\\\<br>
 \text{Prior Belief}\quad&amp; p(\theta)\\\<br>
-(Evidence \quad&amp; p(D) = \int p(D|\theta)p(\theta) d\theta;)\\\<br>
+(Evidence \quad&amp; p(D) = \int p(D|\theta)p(\theta) d\theta\;)\\\<br>
 \text{Updated Belief} \quad &amp;p(\theta|D) = \dfrac{p(D|\theta)p(\theta)}{p(D)}
 \end{align*}
 $$
 <!-- raw HTML omitted --></p>
 <p>베이지안 데이터 분석의 필수 요소는 딱 두 가지이다. 먼저 데이터에 대하여 Likelihood 모델을 세우고 (Model Specification), 그 다음 모델의 모수에 대한 불확실성을 확률분포로 특정한다 (Prior Specification). 그렇게 하면 베이즈 정리를 통해 사후분포가 완전히 특정이 되며, 베이즈 추론은 끝난다. 다만 문제는 특정이 된 사후분포의 형태인데, 분모에 있는 Evidence를 구하기 위해서는 데이터의 모델을 모델의 모수에 대한 사전 가중치로 적분해야 하지만, prior-posterior conjucay가 없을 경우 대개 적분이 불가능하다. 때문에 우리는 그 형태를 수치적인 방법으로 근사를 해야한다.</p>
-<p>분포를 근사하는 가장 직관적인 방법은 그 분포를 따르는 샘플을 무수히 많이 생성하여, 그 샘플이 이루는 경험분포를 보는 것이다. 이때 우리가 근사하는 사후분포는 분모인 Evidence를 모르기 때문에 정확한 식은 모르지만, Likelihood와 Prior Belief의 곱에 비례하는 것만큼은 안다. 즉 우리는 확률분포를 어떤 상수배까지 알고 있을 때(&ldquo;upto a multiplicative constant&rdquo;) 이 분포를 따르는 샘플을 생성해야 하는 것이다. 이를 어떻게 해결할 수 있을까?</p>
+<p>분포를 근사하는 가장 직관적인 방법은 그 분포를 따르는 샘플을 무수히 많이 생성하여, 그 샘플이 이루는 경험분포를 보는 것이다. 이때 우리가 근사하는 사후분포는 분모인 Evidence를 모르기 때문에 정확한 식은 모르지만, Likelihood와 Prior Belief의 곱에 비례하는 것만큼은 안다. 즉 우리는 확률분포를 어떤 상수배까지 알고 있을 때(&quot;<strong>upto a multiplicative constant</strong>&quot;) 이 분포를 따르는 샘플을 생성해야 하는 것이다. 이를 어떻게 해결할 수 있을까?</p>
 <h3 id="br1-1-grid-approximation"><!-- raw HTML omitted -->1-1. Grid Approximation</h3>
 <p>가장 단순한 방법은 일단 모든 가능한 경우의 수에 대하여 Likelihood와 Prior Belief의 곱을 구하는 것이다. 즉 연속형인 모수 공간을 마치 Grid처럼 촘촘한 이산형으로 나누고, 모든 모수의 조합에 대해 Likelihood와 Prior Belief의 곱을 계산하는 것이다. 이를 수식으로 나타내면 다음과 같다. 편의를 위해 모수가 2개인 정규분포 Likelihood를 가정해보자. 여기서 세타는 평균을, 틸다 시그마 제곱은 분산의 역수인 precision을 나타낸다.</p>
 <p>다음과 같이 데이터의 분포를 정규분포로 모델링하고, 정규분포의 평균에 대한 믿음을 정규분포로, precision에 대한 미음을 감마분포로 준다고 하자.</p>
 <!-- raw HTML omitted -->
 <p>$$
 \begin{align}
-Model;Specification:&amp;\quad D \sim N(\theta, \tilde\sigma^2)\\\<br>
-Prior;Specication:&amp;\quad \tilde\sigma^2 \sim \Gamma(\nu_0/2, \nu_0\sigma_0^2/2)\\\<br>
+\text{Model Specification:}&amp;\quad D \sim N(\theta, \tilde\sigma^2)\\\<br>
+\text{Prior Specication:}&amp;\quad \tilde\sigma^2 \sim \Gamma(\nu_0/2, \nu_0\sigma_0^2/2)\\\<br>
 &amp;\quad \theta \sim N(\mu_0, \tau_0^2)
 \end{align}
 $$
@@ -187,7 +187,7 @@ $$
 <p>MCMC를 직관적으로 이해하는 가장 좋은 방법은 등고선을 예시로 드는 것이다. 산을 상상해보자. 확률분포의 정확한 식을 안다는 것은 산의 모든 지점에서의 정확한 해발고도를 안다는 것이다. 그러나 확률분포를 어떤 상수배까지 아는 것은, 모든 지점에서의 정확한 해발고도를 알 수는 없지만, 지금 서있는 지점이 주위에 비해 높고 낮은지는 알고 있다는 것이다. 우리는 지도 없이, 마치 게임 스타크래프트에서 시야가 1인 유닛처럼, 전후와 좌우의 높이만 알고 있으며, 우리의 목적은 최대한 산의 개략적인 모습을 등고선으로 그리는 것이다. 산의 개형을 잘 파악하려면 어느 한 곳에 머물지 않고 산의 구석구석을 누벼야 하며, 그 중에서도 특히 높은 곳을 위주로 가야할 것이다. 이러한 &ldquo;스캔&quot;을 가능하게 해주는 방법이 바로 MCMC이다.</p>
 <p>이처럼 MCMC 방법의 핵심은 산의 한 지점에서 다른 지점으로 이동하는 메커니즘이고, 이 메커니즘을 어떻게 하냐에 따라 MCMC에는 대표적인 두 가지 방법 Metropolis-Hastings 알고리즘과 Gibbs Sampler 알고리즘이 있다. 그 전에 먼저 Markov Chain에 대해 간략히 이해하는 것이 중요하다. 어떤 확률변수가 Markov Chain을 따를 때, 어떻게 하여 그 확률변수의 분포를 근사할 수 있는지 공부해보자.</p>
 <h3 id="br2-1-마코브-체인이란"><!-- raw HTML omitted -->2-1. 마코브 체인이란?</h3>
-<p>이 부분은 이전 자료 &ldquo;Discrete-Time Markov Chain with Finite State Space for MCMC&quot;으로 대체한다. 핵심은 타겟 분포 $p(x)$에 대해서 다음의 detailed balance equation을 만족하는 transiton operator $T(x, x')$을 찾는 것이다.</p>
+<p>이 부분은 이전 자료 &ldquo;Discrete-Time Markov Chain with Finite State Space for MCMC&quot;으로 대체한다. 핵심은 타겟 분포 $[Math Processing Error]p(x)$에 대해서 다음의 detailed balance equation을 만족하는 transiton operator $[Math Processing Error]T(x, x')$을 찾는 것이다.</p>
 <!-- raw HTML omitted -->
 <p>$$
 p(x)T(x, x') = p(x')T(x',x) \quad ^\forall x, x'\in S\<br>
@@ -198,7 +198,7 @@ $$</p>
 <p>우리가 하고자 하는 바는 다음과 같다. 어떤 분포 f를 따르는 확률변수 X에 대해, 그 pdf에서 어떤 상수 C를 계산하기가 굉장히 곤란하다고 해보자.</p>
 <!-- raw HTML omitted -->
 <p>$$
-X \sim f(X=j) = C;b(j)
+X \sim f(X=j) = C\;b(j)
 $$</p>
 <!-- raw HTML omitted -->
 <p>먼저 다음과 같이 Proposal Distribution을 만든다. (우리는 지금 state space가 finite하다고 가정했음을 상기하자.)</p>
@@ -207,16 +207,16 @@ $$</p>
 \begin{align}
 \text{Proposal probability matrix} \quad Q_{N,N} &amp;= 
 \begin{pmatrix}
-q_{1,1} &amp; q_{1,2} &amp; \cdots &amp; q_{1,N}\<br>
-q_{2,1} &amp; q_{2,2} &amp; \cdots &amp; q_{2,N}\<br>
-\vdots &amp; \vdots &amp; \ddots &amp;\vdots\<br>
+q_{1,1} &amp; q_{1,2} &amp; \cdots &amp; q_{1,N}\\\<br>
+q_{2,1} &amp; q_{2,2} &amp; \cdots &amp; q_{2,N}\\\<br>
+\vdots &amp; \vdots &amp; \ddots &amp;\vdots\\\<br>
 q_{N,1} &amp; q_{N,2} &amp; \cdots &amp; q_{N,N}\<br>
 \end{pmatrix}\\\<br>
 \text{Proposal proability}\quad q_{i,j}&amp; = p(X_t=j|X_{t-1}=i)
 \end{align}
 $$</p>
 <!-- raw HTML omitted -->
-<p>예컨대 임의의 초기치로 주어진 현재 상태가 $i$라고 해보자. 이때 위의 transtion probability에 따라 다른 sample 다음 상태 $j$를 추출하는 것이다. 하지만 여기서 끝이 아니다. 우리의 목적은 $\pi_i p_{ij} =  \pi_j p_{ji}$를 만족하는 transition probability를 만드는 것이며, 이를 위해서는 하나의 조건이 더 필요하다. 예컨대 생성된 다음 상태가 $j$일때, $\alpha_{i,j}$의 확률로 그 상태를 받아들인다고 하자. 즉 **일종의 Accecpt Probability를 인위적으로 만드는 것**이다. 이렇게 해서 만들어진 transiton probability를 쓰면 다음과 같다.</p>
+<p>예컨대 임의의 초기치로 주어진 현재 상태가 $[Math Processing Error]i$라고 해보자. 이때 위의 transtion probability에 따라 다른 sample 다음 상태 $[Math Processing Error]j$를 추출하는 것이다. 하지만 여기서 끝이 아니다. 우리의 목적은 $[Math Processing Error]\pi_i p_{ij} =  \pi_j p_{ji}$를 만족하는 transition probability를 만드는 것이며, 이를 위해서는 하나의 조건이 더 필요하다. 예컨대 생성된 다음 상태가 $[Math Processing Error]j$일때, $[Math Processing Error]\alpha_{i,j}$의 확률로 그 상태를 받아들인다고 하자. 즉 일종의 Accecpt Probability를 인위적으로 만드는 것이다. 이렇게 해서 만들어진 transiton probability를 쓰면 다음과 같다.</p>
 <!-- raw HTML omitted -->
 <p>$$
 \begin{align}

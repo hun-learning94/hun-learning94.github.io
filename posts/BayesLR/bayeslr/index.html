@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title> - Hun Learning</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="" />
+<meta property="og:description" content="Bayesian Linear Regression (FCB CH09, Hoff) Gyeonghun Kang @hun_learning, Yonsei ESC, Feb 06, 2021
+Linear Regression Revisited   Data: a target column $y\in(n\times 1)$, a design matrix $X=[x^{(1)}, x^{(2)}, &hellip;, x^{(p)}] \in (n\times p)$
+  Essence of LR Model = LINEAR CONDITIONAL MEAN $E[y\mid x]$ $$ E[y_i \mid x_i] = \int y ,p(y\mid x),dx =\beta^Tx_i $$ Normal LR model = linear $E[y\mid x]$ &#43; NORMAL ERROR $\epsilon_i\sim N(0, \sigma^2)$ $$ y_i \sim N(\beta^Tx_i, \sigma^2) $$" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/posts/bayeslr/bayeslr/" />
+
+
+		<meta itemprop="name" content="">
+<meta itemprop="description" content="Bayesian Linear Regression (FCB CH09, Hoff) Gyeonghun Kang @hun_learning, Yonsei ESC, Feb 06, 2021
+Linear Regression Revisited   Data: a target column $y\in(n\times 1)$, a design matrix $X=[x^{(1)}, x^{(2)}, &hellip;, x^{(p)}] \in (n\times p)$
+  Essence of LR Model = LINEAR CONDITIONAL MEAN $E[y\mid x]$ $$ E[y_i \mid x_i] = \int y ,p(y\mid x),dx =\beta^Tx_i $$ Normal LR model = linear $E[y\mid x]$ &#43; NORMAL ERROR $\epsilon_i\sim N(0, \sigma^2)$ $$ y_i \sim N(\beta^Tx_i, \sigma^2) $$">
+
+<meta itemprop="wordCount" content="1467">
+
+
+
+<meta itemprop="keywords" content="" />
+
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo logo--mixed">
+		<a class="logo__link" href="/" title="Hun Learning" rel="home">
+			<div class="logo__item logo__imagebox">
+					<img class="logo__img" src="/mypic2.jpg">
+				</div><div class="logo__item logo__text">
+					<div class="logo__title">Hun Learning</div>
+					<div class="logo__tagline">In Search Of The Truth Projected Onto A Finite Dimension</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/about/">
+				
+				<span class="menu__text">Author</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+	<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$','$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+  };
+
+  window.addEventListener('load', (event) => {
+      document.querySelectorAll("mjx-container").forEach(function(x){
+        x.parentElement.classList += 'has-jax'})
+    });
+
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+    });
+</script>
+<script type="text/javascript" async src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    TeX: { equationNumbers: { autoNumber: "all" } }
+  });
+</script>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title"></h1>
+			<div class="post__meta meta"><div class="meta__item-author meta__item">
+	<svg class="meta__icon icon icon-author" width="16" height="16" viewBox="0 0 12 16"><path d="M6 1c2.2 0 3.5 2 3.5 4.5C9.5 7 8.9 8.2 8 9c2.9.8 4 2.5 4 5v1H0v-1c0-2.5 1.1-4.2 4-5-.9-.8-1.5-2-1.5-3.5C2.5 3 3.8 1 6 1z"/></svg><span class="meta__text">Kang Gyeonghun</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#bayesian-linear-regression-fcb-ch09-hoff">Bayesian Linear Regression (FCB CH09, Hoff)</a>
+      <ul>
+        <li><a href="#linear-regression-revisited">Linear Regression Revisited</a></li>
+        <li><a href="#conjugacy-nearly-all-you-need-to-know">Conjugacy: (nearly) all you need to know..</a></li>
+        <li><a href="#bayesian-treatment-of-linear-regression">Bayesian Treatment of Linear Regression</a></li>
+        <li><a href="#posterior-for-semi-conjugate-prior">Posterior for semi-conjugate prior</a></li>
+        <li><a href="#code-example">Code example</a></li>
+        <li><a href="#posterior-for-full-conjugate-prior">Posterior for full-conjugate prior</a></li>
+        <li><a href="#bayesian-model-selection-">Bayesian Model Selection (*)</a></li>
+        <li><a href="#gibbs-sampler-for-bayesian-model-selection">Gibbs Sampler for Bayesian Model Selection</a></li>
+        <li><a href="#code-example-a-bit-tricky">Code Example: a bit tricky?</a></li>
+        <li><a href="#gibbs-sampler-for-bayesian-model-selection-ex">Gibbs Sampler for Bayesian Model Selection (Ex.)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<h2 id="bayesian-linear-regression-fcb-ch09-hoff">Bayesian Linear Regression (FCB CH09, Hoff)</h2>
+<p>Gyeonghun Kang @hun_learning, Yonsei ESC, Feb 06, 2021</p>
+<h3 id="linear-regression-revisited">Linear Regression Revisited</h3>
+<ul>
+<li>
+<p>Data: a target column $y\in(n\times 1)$, a design matrix $X=[x^{(1)}, x^{(2)}, &hellip;, x^{(p)}] \in (n\times p)$</p>
+</li>
+<li>
+<p>Essence of LR Model =  <strong>LINEAR CONDITIONAL MEAN</strong> $E[y\mid x]$ 
+$$
+E[y_i \mid x_i] = \int y ,p(y\mid x),dx =\beta^Tx_i
+$$
+Normal LR model = linear $E[y\mid x]$ + <strong>NORMAL ERROR</strong> $\epsilon_i\sim N(0, \sigma^2)$
+$$
+y_i \sim N(\beta^Tx_i, \sigma^2)
+$$</p>
+</li>
+<li>
+<p><strong>Likelihood:</strong> in MVN form,
+$$
+y \mid \beta,\sigma^2 \sim N(X\beta, \sigma^2I_n)\quad(\text{ith row of};X\beta=E[y_i \mid x_i])
+$$
+in a full density form,
+$$
+\begin{align}
+p(y\mid \beta, \sigma^2) &amp;=\prod N(y_i;\beta, \sigma^2)=(\frac{1}{2\pi})^{n/2}(\frac{1}{\sigma^2})\exp \Big(-\dfrac{1}{2\sigma^2}|y-X\beta|^2_2\Big)
+\end{align}
+$$</p>
+</li>
+<li>
+<p><strong>Frequentist inference:</strong> A single $\hat{\beta}$ optimized to the data (OLS = MLE for LR)</p>
+<p>Either by a vector derivative rule ($\frac{\partial}{\partial x}y^TAx=y^TA$, $\frac{\partial}{\partial x}x^TAx=x^T(A+A^T)$) or a projection theorem (LS sol to$Ax=y$ $\Leftrightarrow$ Sol to $A^TAx=A^Ty$), we have
+$$
+\hat{\beta}=\arg\max_\beta p(y\mid \beta,\sigma^2)=(X^TX)^{-1}X^Ty
+$$
+Since $\hat{\beta}$ a linear combination of $y \sim N()$, it is also $\sim N()$, and a bit of algebra reveals that the **sampling distribution** is
+$$
+\hat{\beta}\sim N(\beta, \sigma^2 (X^TX)^{-1} )
+$$
+with which we do inference such as interval estimation, hypothesis test and etc.</p>
+</li>
+</ul>
+<h3 id="conjugacy-nearly-all-you-need-to-know">Conjugacy: (nearly) all you need to know..</h3>
+<ol>
+<li>
+<p><strong>Matching trick</strong> for Normal family: $y\sim N(\mu,\Sigma)$, then
+$$
+\begin{align}
+p(y\mid \mu,\Sigma) &amp;\propto \exp\Big(-\frac{1}{2}(y-\mu)^T\Sigma^{-1}(y-\mu)\Big)\<br>
+&amp;\propto \cdots\<br>
+&amp;\propto \exp\Big(-\frac{1}{2} y^T\Sigma^{-1}y + y^T\Sigma^{-1}\mu \Big)
+\end{align}
+$$
+so if $p(y) \propto \exp\Big(-\frac{1}{2} y^TAy + y^Tb \Big)$, then $E(y)=A^{-1}b,V(y)=A^{-1}$.</p>
+</li>
+<li>
+<p><strong>Inverse Gamma pdf</strong>: $\sigma^2 \sim \Gamma^{-1}(\nu_0/2, \sigma_0^2/2) = \chi^{-2}(\nu_0, \nu_0\sigma_0^2)$ then,
+$$
+p(\sigma^2 \mid \nu_0, \sigma_0^2) = \dfrac{(\nu_0 \sigma_0^2/2)^{\nu_0/2}}{\Gamma(\nu_0/2)}(\dfrac{1}{\sigma^2})^{\nu_0+1}\exp\Big(-\dfrac{\nu_0\sigma_0^2}{2\sigma^2}\Big)
+$$</p>
+</li>
+</ol>
+<h3 id="bayesian-treatment-of-linear-regression">Bayesian Treatment of Linear Regression</h3>
+<p>Full prob. model: $p(y,\beta,\sigma^2)=\underbrace{p(\beta,\sigma^2)}_{how?}p(y \mid \beta,\sigma^2)$</p>
+<p><!-- raw HTML omitted --></p>
+<ol>
+<li>
+<p>Semi-conjugate, independent prior: 
+$$
+\begin{align}
+p(y,\beta,\sigma^2)&amp;=\Big[p(\beta)p(\sigma^2)\Big]p(y \mid \beta,\sigma^2)\<br>
+\beta &amp;\sim N(\beta_0, \Sigma_0)\<br>
+\sigma^2 &amp;\sim \Gamma^{-1}(\nu_0/2, \nu_0\sigma_0^2/2)
+\end{align}
+$$</p>
+</li>
+<li>
+<p>Full-conjugate, dependent prior: 
+$$
+\begin{align}
+p(y,\beta,\sigma^2)&amp;=\Big[p(\sigma^2)p(\beta\mid \sigma^2)\Big]p(y \mid \beta,\sigma^2)\<br>
+\beta\mid \sigma^2 &amp;\sim N(0, g\sigma^2(X^TX)^{-1}) \quad \textbf{g-prior!}\<br>
+\sigma^2 &amp;\sim \Gamma^{-1}(\nu_0/2, \nu_0\sigma_0^2/2)
+\end{align}
+$$</p>
+</li>
+</ol>
+<h3 id="posterior-for-semi-conjugate-prior">Posterior for semi-conjugate prior</h3>
+<p><strong>Slopes posterior</strong> $\beta\mid y,\sigma^2 \sim N(\beta_n, \Sigma_n)$</p>
+<p>With $\beta \sim N(\beta_0, \Sigma_0)$ prior and $y\mid \beta, \sigma^2 \sim N(X\beta, \sigma^2)$ likelihood, and <strong>known $\sigma^2$,</strong> we have 
+$$
+\begin{align}
+p(\beta\mid y,\sigma^2) &amp;\propto p(y\mid \beta, \sigma^2)p(\beta)\<br>
+&amp;\propto\exp\Big(-\dfrac{1}{2\sigma^2}(y^Ty-2\beta^TX^Ty+\beta^TX^TX\beta) -\dfrac{1}{2}(\beta^T\Sigma_0^{-1}\beta - 2\beta^T\Sigma_0^{-1}\beta_0)\Big)\<br>
+&amp;\propto\exp\Big( -\frac{1}{2}\beta^T \underbrace{\big(X^TX/\sigma^2 + \Sigma_0^{-1}\big)}<em>{\Sigma_n^{-1}}\beta + \beta^T\underbrace{\big(X^Ty/\sigma^2+\Sigma_0^{-1}\beta_0\big)}</em>{\Sigma_n^{-1} \beta_n} \Big)\<br>
+\therefore \Sigma_n^{-1}&amp;= \underbrace{X^TX/\sigma^2}<em>{\text{data precision}} + \underbrace{\Sigma_0^{-1}}</em>{\text{prior precision}},\quad\beta_n = \Sigma_n(X^Ty \underbrace{/\sigma^2}<em>\text{data weight}+\underbrace{\Sigma_0^{-1}}</em>\text{prior weight}\beta_0)
+\end{align}
+$$
+for $|\Sigma_0^{-1}|&lt;\epsilon$ (weak prior), $\beta_n \approx \hat{\beta}<em>{mle}$. Don&rsquo;t want the bias from $\beta_0$? Choose $\beta_0=0,\Sigma_0=g\sigma^2(X^TX)^{-1}$, then $\beta\mid y,\sigma^2 \sim N\Big(\frac{g}{g+1}\hat{\beta}</em>{mle}, \frac{g}{g+1}V(\hat{\beta}_{mle})\Big)$ $\to$ <strong>g-prior!</strong> (Higher g means a weaker prior)</p>
+<p><strong>Error Variance posterior</strong> $\sigma^2\mid y, \beta \sim \chi^{-2}(\nu_n, \sigma_n^2)$</p>
+<p>Let $SSR(\beta)=|y-X\beta|_2^2$ (sum of squares incurred by $\beta$), then
+$$
+\begin{align}
+p(\sigma^2 \mid y, \beta)&amp;\propto p(\sigma^2)p(y \mid \beta, \sigma^2)\<br>
+&amp;\propto (\dfrac{1}{\sigma^2})^{\nu_0/2+1}\exp(-\dfrac{\nu_0\sigma_0^2}{2\sigma^2})
+(\dfrac{1}{\sigma^2})^{n/2}\exp(-\frac{SSR(\beta)}{2\sigma^2})\<br>
+&amp;=(\dfrac{1}{\sigma^2})^{(\nu_0+n)/2+1}\exp(-\dfrac{\nu_0\sigma_0^2+SSR(\beta)}{2\sigma^2})\<br>
+\therefore\quad&amp; \nu_n =\nu_0+n \quad \text{prior+data (pooled) sample size}\<br>
+&amp; \sigma_n^2=(\nu_0\sigma_0^2+SSR(\beta))/\nu_n \quad \text{pooled variance}
+\end{align}
+$$
+<strong>Joint posterior $\beta, \sigma^2\mid y$ ?</strong></p>
+<p>Analytically intractable, but with full conditional posteriors, we can use Gibbs sampler!</p>
+<ol>
+<li>with initial estimate, sample $\sigma^2 \sim \chi^{-2}(\nu_n, \sigma_n^2)$</li>
+<li>with the sample from 1, sample $\beta \sim N\Big(\frac{g}{g+1}\hat{\beta}<em>{mle}, \frac{g}{g+1}V(\hat{\beta}</em>{mle})\Big)$</li>
+<li>Repeat 1~2 a lot, ditch the first half, use the rest for posterior inference</li>
+</ol>
+<h3 id="code-example">Code example</h3>
+<pre><code class="language-{r}" data-lang="{r}">DF = dget('http://www2.stat.duke.edu/~pdh10/FCBS/Inline/yX.o2uptake')
+y = DF[,1]; X = DF[,-1]; inv = solve
+### set prior and get necessary statistics
+g = length(y) # g-prior for beta
+nu0 = 1; s20 = summary(lm(y~-1+X))$sigma^2 # prior for sig^2
+n = length(y); p = ncol(X)
+### MCMC setup
+S = 10000; set.seed(0827)
+BETA = matrix(NA, nrow=S, ncol=p)
+sigma2 = matrix(NA, nrow=S, ncol=1)
+BETA[1,] = inv(t(X) %*% X) %*% t(X) %*% y # initial estimate
+sigma2[1,] = s20 # initial estimate
+### gibbs sampling
+nun = nu0 + n
+betan = (g/(g+1)) * inv(t(X) %*% X) %*% t(X) %*% y
+for(s in 2:S){
+  s2n = nu0*s20 + t(y- X %*% BETA[s-1,]) %*% (y- X %*% BETA[s-1,])
+  sigma2[s,] = 1/rgamma(1, shape = nun/2, rate = s2n/2)
+  
+  Sigman = (g/(g+1)) * sigma2[s,] * inv(t(X) %*% X)
+  BETA[s,] = MASS::mvrnorm(n=1,betan, Sigman) }
+</code></pre><p><!-- raw HTML omitted --></p>
+<h3 id="posterior-for-full-conjugate-prior">Posterior for full-conjugate prior</h3>
+<p>$$
+p(\beta,\sigma^2\mid y)=\underbrace{p(\sigma^2\mid y)}<em>\text{??}, \underbrace{p(\beta\mid \sigma^2, y)}</em>\text{posterior of g-prior}
+$$</p>
+<p>where $p(\sigma^2\mid y)\propto p(\sigma^2) p(y\mid \sigma^2)$.</p>
+<p>Let $m, V$ be post. mean and var. of $\beta\mid \sigma^2, y$  $(m=\frac{g}{g+1}(X^TX)^{-1}X^Ty, , V=\frac{g}{g+1}\sigma^2(X^TX)^{-1})$
+$$
+\begin{align}
+p(y\mid \sigma^2) &amp;\propto \int p(y\mid \beta, \sigma^2)p(\beta \mid \sigma^2),d\beta\<br>
+&amp;\propto (\frac{1}{\sigma^2})^{n/2}\dfrac{1}{|g\sigma^2(X^TX)^{-1}|^{1/2}} \int 
+\exp\Big[-\frac{1}{2\sigma^2}\big(|y-X\beta|^2\big)-\frac{1}{2g\sigma^2}\beta^TX^TX\beta\Big],d\beta\<br>
+&amp;= (\frac{1}{\sigma^2})^{n/2}\dfrac{1}{|g\sigma^2(X^TX)^{-1}|^{1/2}} \exp\big[-\frac{1}{2\sigma^2}y^Ty\big]
+\int \exp\Big[ \frac{1}{\sigma^2}\beta^TX^Ty -\frac{1+1/g}{2\sigma^2}\underbrace{\beta^TX^TX\beta}<em>{\text{subtract } m\text{ from }\beta\text{, use V}}\Big],d\beta\<br>
+&amp;= (\frac{1}{\sigma^2})^{n/2}\dfrac{1}{|g\sigma^2(X^TX)^{-1}|^{1/2}} \exp\Big[-\frac{1}{2\sigma^2}\big(y^Ty -\sigma^2m^TV^{-1}m\big)\Big]
+\int \exp\Big[ -\frac{1}{2}(\beta -m)^TV^{-1}(\beta-m) \Big],d\beta\<br>
+&amp;\propto (\frac{1}{2\pi})^{n/2}(1+g)^{-p/2}  (\frac{1}{\sigma^2})^{n/2}\exp\Big[-\frac{1}{2\sigma^2}SSR(g)\Big]\<br>
+\end{align}
+$$
+where $SSR(g) = y^Ty -\sigma^2m^TV^{-1}m = y^T\big(I - \frac{g}{g+1}X(X^TX)^{-1}X^T\big)y$ is a sum of squares, over all possible $\beta \mid \sigma^2,y$, incurred by g. Note that as $g\to \infty$ (weak prior), $SSR(g)\to SSR(\hat{\beta}</em>{mle})$.</p>
+<p>Therefore, with $\sigma^2 \sim \chi^{-2}(\nu_0, \sigma_0^2)$, we have $\sigma^2 \mid y \sim \chi^{-2}(\nu_0+n,\frac{\nu_0\sigma_0^2+SSR(g)}{\nu_0+n})$
+$$
+\begin{align}
+p(\sigma^2\mid y)&amp;\propto p(\sigma^2) p(y\mid \sigma^2)\<br>
+&amp;\propto (\frac{1}{\sigma^2})^{(\nu_0+n)/2+1}\exp\Big(-\frac{\nu_0\sigma_0^2+SSR(g)}{2\sigma^2}\Big)
+\end{align}
+$$
+With the full conjugate posterior, sampling $\beta,\sigma^2 \mid y$ is DIRECT and straightforward;</p>
+<ol>
+<li>sample $\sigma^2 \sim \chi^{-2}(\nu_0+n,\frac{\nu_0\sigma_0^2+SSR(g)}{\nu_0+n})$</li>
+<li>sample $\beta\mid \sigma^2 \sim N\Big(\frac{g}{g+1}\hat{\beta}<em>{mle}, \frac{g}{g+1}V(\hat{\beta}</em>{mle})\Big)$</li>
+<li>use sampled $(\sigma^2,\beta)$ for posterior inference directly.</li>
+</ol>
+<p><!-- raw HTML omitted --><strong>CONJUGACY SEEMS MUCH HAIRY, BUT STILL FAR BETTER THAN MCMC!</strong><!-- raw HTML omitted --></p>
+<h3 id="bayesian-model-selection-">Bayesian Model Selection (*)</h3>
+<p>(Frequentist MS? Combinatorial Optimization using a single metric e.g. AIC.)</p>
+<p><strong>IDEA</strong>: introduce $z_j\in{0,1}$ which decides whether $\beta_j=z_i\cdot b_j\neq0$ (i.e. included) or not.
+$$
+\begin{align}
+\text{Single data model} &amp;\quad y_i = z_1b_1x_{i,1} + z_2b_2x_{i,2} + &hellip; + z_pb_px_{i,p}+\epsilon_i\<br>
+\text{Full prob. model} &amp;\quad p(y,\beta,\sigma^2,z)=p(z)p(\sigma^2)p(\beta\mid \sigma^2,z)p(y\mid \beta,\sigma^2)
+\end{align}
+$$
+<!-- raw HTML omitted --></p>
+<p>Bayesian Model Selection is to get a dist. of the &ldquo;switch&rdquo; variable $z$ given $y$. <!-- raw HTML omitted -->Remember, Bayes MS does NOT give a <strong>single</strong> optimal model, but <strong>many</strong> &ldquo;probable&rdquo; models!<!-- raw HTML omitted --> How do we get a posterior for $z$? Bayes rule always!</p>
+<p>$$
+p(z\mid y) = \dfrac{p(z)p(y\mid z)}{\sum_zp(z)p(y\mid z)} \quad \textit{intractable denominator}
+$$
+Note that $p(z\mid y) \propto p(z)p(y\mid z)$ is $\propto p(y\mid z)$ with uniform $p(z)$, so we only need $p(y\mid z)$. Let $\beta_z$ be $\beta_j$s with $z_j=1$, likewise for $X_z, p_z$ , and $p(\sigma^2)\propto 1/\sigma^2$.</p>
+<p>$$
+\begin{align}
+p(y\mid z)&amp;= \int \int p(y, \beta, \sigma^2\mid z),d\beta , d\sigma^2\<br>
+&amp;= \int p(\sigma^2) \underbrace{\int p(y\mid \beta_z, \sigma^2)p(\beta_z\mid \sigma^2) ,d\beta}_{p(y\mid \sigma^2, z)} , d\sigma^2\<br>
+&amp;\propto (1+g)^{-p_z/2}\int  (\frac{1}{\sigma^2})^{n/2+1}\exp\Big[-\frac{SSR(g,z)}{2\sigma^2}\Big] , d\sigma^2\<br>
+&amp;\propto (1+g)^{-p_z/2}SSR(g,z)^{-n/2}\<br>
+&amp;\quad \Big(\because p(y\mid \sigma^2)\propto (\frac{1}{2\pi})^{n/2}(1+g)^{-p/2}  (\frac{1}{\sigma^2})^{n/2}\exp\Big[-\frac{1}{2\sigma^2}SSR(g)\Big]\Big)
+\end{align}
+$$
+The Bayes factor is as below, which shows that Bayesian MS 1) favors a model that explains the data well (SSR) but 2) penalizes a complex model (p) at the same time.
+$$
+\dfrac{p(y\mid z_1)}{p(y\mid z_2)}=(1+g)^{(p_2-p_1)/2}\Big(\frac{SSR(g,z_2)}{SSR(g,z_1)}\Big)^{n/2}
+$$</p>
+<h3 id="gibbs-sampler-for-bayesian-model-selection">Gibbs Sampler for Bayesian Model Selection</h3>
+<p>G.Sampler for $p(z\mid y)$ requires full conditional distribution
+$$
+\begin{align}
+p(z_j=1\mid y, z_{-j}) &amp;= \dfrac{p(z_j=1\mid y, z_{-j})}{p(z_j=1\mid y, z_{-j})+(z_j=0 \mid y, z_{-j})}= \dfrac{1}{1+o_j}
+\end{align}
+$$
+where $o_j = \frac{p(z_j=0\mid y, z_{-j})}{p(z_j=1 \mid y, z_{-j})}$ is the conditional odds that $z_j=1$ , which is a ratio of $p(y\mid z)$;
+$$
+o_j = \dfrac{p(z_j=0\mid y, z_{-j})}{p(z_j=1 \mid y, z_{-j})} = \dfrac{p(z_j=0)}{p(z_j=1)}\times
+\dfrac{p(y\mid z_{-j}, z_j=0)}{p(y\mid z_{-j}, z_j=1)}=\dfrac{p(y\mid z_{-j}, z_j=0)}{p(y\mid z_{-j}, z_j=1)}
+$$
+The Gibbs sampler for Bayesian MS is, given initial ${z^{(s)}, \sigma^{(s)}, \beta^{(s)}}$,</p>
+<ol>
+<li>Update $z$: for each $j$, replace $z_j = 1-z_j$ with probability $1/(1+o_j)$.</li>
+<li>Given $z$, draw $\sigma^2\sim p(\sigma^2 \mid z, y)$ and $\beta \sim p(\beta \mid \sigma^2, y)$</li>
+</ol>
+<p><strong>Code example</strong></p>
+<pre><code class="language-{r}" data-lang="{r}">lpy = function(y, X, g = length(y), nu0 = 1, s20 = try(summary(lm(y~-1+ X))$sigma^2, silent=T)){
+  n = nrow(X); p = ncol(X);
+  if(p==0) Hg = 0; s20 = mean(y^2) # null model
+  if(p &gt; 0) Hg = (g/(g+1)) * X %*% inv(t(X) %*% X) %*% t(X)
+  SSRg = t(y) %*% (diag(1, n) - Hg) %*% y
+  return( -p/2 * log(1+g) - n/2 * log(SSRg) ) } # log p(y \mid z)
+z = rep(1, ncol(X)) # MCMC setup
+lpy.c = lpy(y, X[, z==1, drop=F])
+S = 1000; Z = matrix(NA, S, ncol(X))
+for(s in 1:S){# Gibbs sampler
+  for(j in sample(1:ncol(X))){ # iterate over variables randomly
+    zp = z; zp[j] = 1-zp[j]
+    lpy.p = lpy(y, X[, zp==1, drop=F])
+    o = (lpy.p - lpy.c) * (-1)^(zp[j] == 1)
+    z[j] = rbinom(1, 1, 1/(1+exp(o))) # full cond. dist of zj
+    if(z[j] == zp[j]) lpy.c = lpy.p }
+  Z[s,] = z; if(s %% 100 == 0) cat(s, &quot;\t&quot;) }
+</code></pre><h3 id="code-example-a-bit-tricky">Code Example: a bit tricky?</h3>
+<p>The Gibbs sampling part for the previous code block is a bit tricky to understand, so here is what is going on under the hood.</p>
+<p>With <code>for(j in sample(1:ncol(X)))</code>, we would select an element  of $z$, say $z_j$, which could be either $z_j=0, 1$. <code>zp</code> is a copy of the current model of which $z_j$ would be switched, i.e. $z_j=1 \to 0$ or $z_j=0\to1$, by the code <code>zp[j]=1-zp[j]</code>.</p>
+<p><code>lpy.p</code> is the log likelihood of the model whose $z_j$ is switched, and we would compare this with the unswitched one <code>lpy.c</code>, to determine $o_j = \frac{p(y\mid z_{-j}, z_j=0)}{p(y\mid z_{-j}, z_j=1)}$. The catch is that, for each case, the variables <code>lpy.c</code> and <code>lpy.p</code> takes on opposing values, so we need <code>o = (lpy.p - lpy.c) * (-1)^(zp[j] == 1)</code> to adjust this difference.</p>
+<ol>
+<li>
+<p>$z_j=1 \to 0$ <code>zp[j]==0</code>
+$$
+\begin{cases}
+lpy.c=p(y\mid z_j=1)\<br>
+lpy.p=p(y\mid z_j=0) 
+\end{cases} \quad \therefore
+p(z_j=1\mid y,z_{-j})=\dfrac{1}{1+\frac{p(y\mid z_{-j}, z_j=0)}{p(y\mid z_{-j}, z_j=1)}}=\dfrac{1}{1+\exp(lpy.p-lpy.c)}
+$$</p>
+</li>
+<li>
+<p>$z_j=0\to1$ <code>zp[j]==1</code>
+$$
+\begin{cases}
+lpy.c=p(y\mid z_j=0)\<br>
+lpy.p=p(y\mid z_j=1) 
+\end{cases} \quad \therefore
+p(z_j=1\mid y,z_{-j})=\dfrac{1}{1+\frac{p(y\mid z_{-j}, z_j=0)}{p(y\mid z_{-j}, z_j=1)}}=\dfrac{1}{1+\exp(lpy.c-lpy.p)}
+$$</p>
+</li>
+</ol>
+<!-- raw HTML omitted -->
+<h3 id="gibbs-sampler-for-bayesian-model-selection-ex">Gibbs Sampler for Bayesian Model Selection (Ex.)</h3>
+<p><img src="fig04.png" alt=""></p>
+<p><img src="fig05.png" alt=""></p>
+<p><img src="fig06.png" alt=""></p>
+
+		</div>
+	</article>
+</main>
+
+<div class="authorbox clearfix">
+	<figure class="authorbox__avatar">
+		<img alt="Kang Gyeonghun avatar" src="/mypic1.jpg" class="avatar" height="90" width="90">
+	</figure>
+	<div class="authorbox__header">
+		<span class="authorbox__name"></span>
+	</div>
+	<div class="authorbox__description">
+		I study statistics, machine learning, data science or whatever that concerns making inference on infinitie dimension from a limited sample in fintie dimension. This blog is an archive of my journey of study.
+	</div>
+</div>
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/posts/2020-01-20-isl-02-statistical-learning/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">ISL 02 Statistical Learning</p>
+		</a>
+	</div>
+</nav>
+
+<section class="comments">
+	<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hun-learning94" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2021 Kang Gyeonghun.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>

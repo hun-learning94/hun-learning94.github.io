@@ -473,5 +473,16 @@ $$ Classification;Error:; I(t_i \neq \hat{t_i}) = \begin{cases} 0 &amp;amp; \tex
       <description>훈러닝 채널에 ISL 전 범위 유투브 강의 있습니다!</description>
     </item>
     
+    <item>
+      <title></title>
+      <link>/posts/bayeslr/bayeslr/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/posts/bayeslr/bayeslr/</guid>
+      <description>Bayesian Linear Regression (FCB CH09, Hoff) Gyeonghun Kang @hun_learning, Yonsei ESC, Feb 06, 2021
+Linear Regression Revisited   Data: a target column $y\in(n\times 1)$, a design matrix $X=[x^{(1)}, x^{(2)}, &amp;hellip;, x^{(p)}] \in (n\times p)$
+  Essence of LR Model = LINEAR CONDITIONAL MEAN $E[y\mid x]$ $$ E[y_i \mid x_i] = \int y ,p(y\mid x),dx =\beta^Tx_i $$ Normal LR model = linear $E[y\mid x]$ + NORMAL ERROR $\epsilon_i\sim N(0, \sigma^2)$ $$ y_i \sim N(\beta^Tx_i, \sigma^2) $$</description>
+    </item>
+    
   </channel>
 </rss>
